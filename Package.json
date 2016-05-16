@@ -1,6 +1,9 @@
 {
   "name": "nwen304group6",
   "version": "0.0.0",
+  "engines":{
+    "node": "5.9.1"
+  },
   "description": "Online shopping app project",
   "keywords": [
     "example",
@@ -17,7 +20,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
-  }
+  },
   
   "dependencies": {
     "body-parser": "^1.13.2",
