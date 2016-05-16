@@ -4,7 +4,7 @@
 error_reporting(1);
  include("index1.php");
 ?>
-<title>Company name - title</title>
+<title>index.php</title>
 
 <meta http-equiv="Content-language" content="cs">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
