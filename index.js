@@ -12,6 +12,10 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static(__dirname + '/'));
 
+// views is directory for all template files
+app.set('views', __dirname + '/');
+app.set('view engine', 'ejs');
+
 app.get('/', function(req, res){
 	res.render('index');
 });
