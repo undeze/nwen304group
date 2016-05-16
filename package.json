@@ -17,7 +17,7 @@
     "passport-facebook": "^2.0.0"
   },
   "engines":{
-    "node": "5.9.1"
+    "node": "0.10.45"
   },
   "description": "Online shopping app project",
   "keywords": [
