@@ -57,8 +57,8 @@ app.set('port', process.env.PORT);
 app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
-app.set('views', __dirname + '/views');
-//app.set('nwen304group6', __dirname);
+//app.set('views', __dirname + '/views');
+app.set('nwen304group6', __dirname);
 
 app.set('view engine', 'ejs');
 
@@ -68,7 +68,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/indexhtml', function(req,res){
-  res.render(__dirname + 'index.html');
+  res.render('index.html');
 });
 
 app.get('/', function(req,res){
