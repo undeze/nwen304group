@@ -60,7 +60,7 @@ app.use(express.static(__dirname + '/public'));
 //app.set('views', __dirname + '/views');
 app.set('nwen304group6', __dirname);
 
-app.set('view engine', 'ejs');
+//app.set('view engine', 'ejs');
 
 
 // Initialize Passport and restore authentication state, if any, from the session.
