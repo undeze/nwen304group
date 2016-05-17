@@ -70,7 +70,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/indexhtml', function(req,res){
-  res.render('pages/index');
+  res.render('index');
 });
 
 app.get('/', function(req,res){
