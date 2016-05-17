@@ -69,8 +69,8 @@ app.set('view engine', 'ejs');
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/indexejs', function(req,res){
-  res.render('index');
+app.get('/indexhtml', function(req,res){
+  res.render('index.html');
 });
 
 app.get('/', function(req,res){
