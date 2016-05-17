@@ -68,7 +68,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', function(req,res){
-  res.render('home');
+  res.render('index');
 });
 /*
 app.get('/', function(req,res){
@@ -102,19 +102,7 @@ app.get('/profile',
     res.render('pages/profile', { user: req.user });
   });
 
-app.get('/gb',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('pages/gbpicture', { user: req.user });
-  });
 
-app.get('/hi', function(request, response) {
-  response.render('pages/hi');
-});
-
-app.get('/cool', function(req, res){
-	res.send(cool());
-});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
