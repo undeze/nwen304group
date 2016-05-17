@@ -74,7 +74,7 @@ app.get('/indexhtml', function(req,res){
 });
 
 app.get('/', function(req,res){
-  res.render('pages/home',{user: req.user});
+  res.render('views/pages/home',{user: req.user});
 });
 
 
