@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<title>nwen304group6</title>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+  
+<div class="jumbotron text-center">
+  <div class="container">
+    <a href="/" class="lang-logo">
+      <!--<img src="/lang-logo.png">-->
+      <img src="/gb.jpg">
+      
+      
+    </a>
+    
+    <p>Name: <%= user.displayName %><p/>
+
+  </div>
+</div>
+<div class="container">
+  
+  <hr>
+  
+  
+</div>
+
+
+</body>
+</html>
