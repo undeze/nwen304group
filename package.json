@@ -1,41 +1,35 @@
 {
-  "name": "nwen304group6",
-  "version": "0.0.0",
+  "name": "node-js-getting-started",
+  "version": "0.1.5",
+  "description": "A sample Node.js app using Express 4",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "body-parser": "^1.13.2",
-    "connect-ensure-login": "^0.1.1",
-    "cookie-parser": "^1.3.5",
-    "ejs": "^2.3.3",
-    "express": "^4.13.1",
-    "express-session": "^1.11.3",
-    "morgan": "^1.6.1",
+    "cool-ascii-faces": "1.3.4",
+    "ejs": "2.3.3",
     "passport": "^0.2.2",
-    "passport-facebook": "^2.0.0"
+    "passport-facebook": "^2.0.0",
+    "morgan": "^1.6.1",
+    "cookie-parser": "^1.3.5",
+    "body-parser": "^1.13.2",
+    "express-session": "^1.11.3",
+    "express": "4.13.3",
+    "connect-ensure-login": "^0.1.1"
   },
-  "engines":{
-    "node": "0.10.45"
+  "engines": {
+    "node": "0.12.7"
   },
-  "description": "Online shopping app project",
-  "keywords": [
-    "example",
-    "express",
-    "passport",
-    "node",
-    "heroku"
-  ],
-  "author": "Bilal, Brendan, Chris",
-  "license": "Unlicense",
-  "homepage": "https://github.com/undeze/nwen304group6.git",
   "repository": {
     "type": "git",
-    "url": "git://github.com/undeze/nwen304group6"
-  }
-  
-  
-  
-  
+    "url": "https://github.com/heroku/node-js-getting-started"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "passport"
+  ],
+  "license": "MIT"
 }
