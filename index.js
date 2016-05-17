@@ -68,7 +68,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/indexhtml', function(req,res){
-  res.render('index.html');
+  res.render(__dirname + 'index.html');
 });
 
 app.get('/', function(req,res){
