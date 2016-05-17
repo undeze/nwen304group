@@ -69,7 +69,7 @@ app.set('view engine', 'ejs');
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('indexejs', function(req,res){
+app.get('/indexejs', function(req,res){
   res.render('index');
 });
 
