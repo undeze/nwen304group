@@ -96,6 +96,12 @@ app.get('/index',
     res.render('pages/index', { user: req.user });
   });
 
+app.get('/banner.jpg',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    res.render('pages/banner.jpg', { user: req.user });
+  });
+
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
