@@ -6,8 +6,8 @@ var app = express();
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 
-/* To support the database 
-var pg = require('pg'); */
+/* To support the database */
+var pg = require('pg'); 
 
 // Configure the Facebook strategy for use by Passport.
 //
@@ -109,7 +109,7 @@ app.get('/profile',
 
 
 
-/*
+
 app.get('/db', function (request, response) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     client.query('SELECT * FROM people', function(err, result) {
@@ -122,7 +122,7 @@ app.get('/db', function (request, response) {
   });
 })
 
-*/
+
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
