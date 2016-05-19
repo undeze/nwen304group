@@ -122,6 +122,30 @@ app.get('/db', function (request, response) {
   });
 })
 
+app.get('/db2', function(req, res){
+  pg.connect(process.env.DATABASE_URL, function(err, client, done){
+    if(err){
+      console.error('Could not connect to the database');
+      console.error(err);
+      return;
+    }
+    var query = client.query("SELECT * FROM people;", function(error, result){
+        done();
+        if(error){
+        }
+    });
+    var results = [];
+      // Stream results back one row at a time
+      query.on('row',function(row){
+        results.push(row);
+      });
+      // After all data is returned, close connection and return results
+      query.on('end',function(){
+        client.end();
+        res.json(results);
+      });
+    });
+})
 
 
 app.listen(app.get('port'), function() {
