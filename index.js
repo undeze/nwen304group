@@ -58,12 +58,6 @@ passport.deserializeUser(function(obj, cb) {
 app.set('port', process.env.PORT);
 
 app.use(express.static(__dirname + '/public'));
-//app.use(express.static(__dirname + '/');
-
-// views is directory for all template files
-//app.set('views', __dirname + '/views');
-//app.set('views', __dirname + '/');
-//app.set('nwen304group6', __dirname);
 
 app.set('view engine', 'ejs');
 
@@ -107,22 +101,7 @@ app.get('/profile',
     res.render('pages/profile', { user: req.user });
   });
 
-
-
-
-app.get('/db', function (request, response) {
-  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-    client.query('SELECT * FROM people', function(err, result) {
-      done();
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-       { response.render('pages/db', {results: result.rows} ); }
-    });
-  });
-})
-
-app.get('/db2', function(req, res){
+app.get('/db', function(req, res){
   pg.connect(process.env.DATABASE_URL, function(err, client, done){
     if(err){
       console.error('Could not connect to the database');
