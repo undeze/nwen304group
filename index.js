@@ -6,6 +6,9 @@ var app = express();
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 
+/* To support the database */
+var pg = require('pg');
+
 // Configure the Facebook strategy for use by Passport.
 //
 // OAuth 2.0-based strategies require a `verify` function which receives the
@@ -103,6 +106,21 @@ app.get('/profile',
   function(req, res){
     res.render('pages/profile', { user: req.user });
   });
+
+
+
+
+app.get('/db', function (request, response) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query('SELECT * FROM people', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { response.render('pages/db', {results: result.rows} ); }
+    });
+  });
+})
 
 
 
