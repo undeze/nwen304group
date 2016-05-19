@@ -6,8 +6,8 @@ var app = express();
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 
-/* To support the database */
-var pg = require('pg');
+/* To support the database 
+var pg = require('pg'); */
 
 // Configure the Facebook strategy for use by Passport.
 //
