@@ -9,6 +9,8 @@ var Strategy = require('passport-facebook').Strategy;
 /* To support the database */
 var pg = require('pg'); 
 
+var fb = require('connect-ensure-login');
+
 // Configure the Facebook strategy for use by Passport.
 //
 // OAuth 2.0-based strategies require a `verify` function which receives the
@@ -93,6 +95,12 @@ app.get('/index',
     res.render('pages/index', { user: req.user });
   });
 
+app.get('/logout/facebook', fb.ensureLoggedIn,
+  function(req, res){
+    fb.ensureLoggedIn
+    req.logout();
+    res.redirect('/');
+});
 
 
 app.get('/profile',
