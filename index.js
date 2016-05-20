@@ -1,7 +1,7 @@
 //var cool = require('cool-ascii-faces');
 var express = require('express');
 var app = express();
-
+var port = process.env.PORT || 8080;
 /* To support login with facebook */
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
@@ -144,6 +144,6 @@ app.get('/db', function(req, res){
 })
 
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+app.listen(port, function() {
+  console.log('Node app is running on port: '+port);
 });
