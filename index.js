@@ -5,11 +5,13 @@ var app = express();
 /* To support login with facebook */
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
+var fb = require('connect-ensure-login');
 
 /* To support the database */
 var pg = require('pg'); 
 
-var fb = require('connect-ensure-login');
+const crypto = require('crypto');
+
 
 // Configure the Facebook strategy for use by Passport.
 //
@@ -97,7 +99,6 @@ app.get('/index',
 
 app.get('/logout/facebook', fb.ensureLoggedIn(),
   function(req, res){
-    
     req.logout();
     res.redirect('/');
 });
