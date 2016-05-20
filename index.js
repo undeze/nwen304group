@@ -95,9 +95,9 @@ app.get('/index',
     res.render('pages/index', { user: req.user });
   });
 
-app.get('/logout/facebook', fb.ensureLoggedIn,
+app.get('/logout/facebook', fb.ensureLoggedIn(),
   function(req, res){
-    fb.ensureLoggedIn();
+    
     req.logout();
     res.redirect('/');
 });
