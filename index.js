@@ -91,6 +91,14 @@ app.get('/login/facebook/return',
     res.redirect('/index');
   });
 
+
+app.get('/login/local',
+  function(req,res){
+    res.render('pages/local');
+});
+
+
+
 app.get('/index',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
