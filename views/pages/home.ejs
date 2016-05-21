@@ -9,6 +9,10 @@
 
 <% if (!user) { %>
 	<p>Welcome! Please <a href="login">log in</a>.</p>
+	<br><br>
+	<?php
+	echo "My first PHP script!";
+	?>
 <% } else { %>
 	
 	<p>Hello, <%= user.username %>. View your <a href="/profile">profile</a>.</p>
@@ -16,9 +20,7 @@
 <% } %>
 
 
-<?php
-echo "My first PHP script!";
-?>
+
 
 <div class="container">
     <a href="/" class="lang-logo">
