@@ -9,7 +9,8 @@
 <script>
 $(document).ready(function(){
     $("button").click(function(){
-    	/login/local
+    	$("p").hide();
+
         $.post('https://nwen304group6.herokuapp.com/signup', { username: "micky",
      						email: "a@b.com",
      						password: "monkey123"},
@@ -26,6 +27,7 @@ $(document).ready(function(){
 <body>
 
 <button id="button">Click</button>
+<p>hide me</p>
 
 
 <form>
