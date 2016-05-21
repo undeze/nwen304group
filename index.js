@@ -3,9 +3,11 @@ var express = require('express');
 var app = express();
 var port = process.env.PORT || 8080;
 /* To support login with facebook */
-var passport = require('passport');
+//var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var fb = require('connect-ensure-login');
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
 
 /* To support the database */
 var pg = require('pg'); 
