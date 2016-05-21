@@ -168,7 +168,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 			}
 			hash.update(password);
 			var encrypted = hash.digest('hex');
-			var query = client.query("insert into members values (9,'" + username + 
+			var query = client.query("insert into members values (10,'" + username + 
 				"','" + encrypted + "','" + email + "');", function(error, result){
 					done();
 					if(error){}
