@@ -11,7 +11,7 @@ $(document).ready(function(){
     $("button").click(function(){
     	$("p").hide();
 
-        $.post('https://nwen304group6.herokuapp.com/signup', { username: "micky",
+        $.post('/signup', { username: "micky",
      						email: "a@b.com",
      						password: "monkey123"},
      		function(data, status){
