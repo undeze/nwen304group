@@ -30,9 +30,9 @@ $(document).ready(function(){
     $("button1").click(function(){
     	$("p2").hide();
 
-        $.post('/signup', { username: $("l2").username,
-     						email: $("l2").email,
-     						password: $("l2").password},
+        $.post('/signup', { username: $("l2").text(username),
+     						email: $("l2").text(email),
+     						password: $("l2").(password)},
      		function(data, status){
      		}
      	);
@@ -70,7 +70,7 @@ $(document).ready(function(){
 <input type="password" name="password" id="password">
 <label>Email :</label>
 <input type="email" name="email" id="email">
-
+<input type="submit" value="Submit">
 </form>
 <br>
 <button id="button1">Submit</button>
