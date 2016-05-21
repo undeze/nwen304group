@@ -142,7 +142,7 @@ app.get('/db', function(req, res){
       });
     });
 })
-
+/*
 app.post('/signup', urlencodedparser, function(req,res){
     console.log('here, signing up');
     var username = req.body.username;
@@ -152,7 +152,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 
     console.log('email: ' + email);
     console.log('passwork: ' + password);
-});
+}); */
 
 
 app.listen(port, function() {
