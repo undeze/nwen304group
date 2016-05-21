@@ -143,6 +143,17 @@ app.get('/db', function(req, res){
     });
 })
 
+app.post('/signup', urlencodedparser, function(req,res){
+    console.log('here, signing up');
+    var username = req.body.username;
+    var email = req.body.email;
+    var password = req.body.password;
+    console.log('username: ' + username);
+
+    console.log('email: ' + email);
+    console.log('passwork: ' + password);
+});
+
 
 app.listen(port, function() {
   console.log('Node app is running on port: '+port);
