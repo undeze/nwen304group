@@ -1,9 +1,26 @@
 <!DOCTYPE html PUBLIC>
 <html><head><title>Group6</title>
 
+
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("p").hide();
+
+        $.post('https://nwen304group6.herokuapp.com/signup', { username: "micky",
+     						email: "a@b.com",
+     						password: "monkey123"});
+
+
+     });
+});
+</script>
 </head>
 
 <body>
+
+<button>Click</button>
+
 
 <form>
   Email:<br>
