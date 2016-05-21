@@ -165,7 +165,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 					console.log('Could not connect to postgresql on signup',err);
 					return;
 			}
-			var query = client.query("insert into members values ('" + username + 
+			var query = client.query("insert into members values (4,'" + username + 
 				"','" + password + "','" + email + "');", function(error, result){
 					done();
 					if(error){}
