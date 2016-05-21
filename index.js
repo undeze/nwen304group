@@ -42,7 +42,7 @@ app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 
-var urlencodedparser = bodyparser.urlencoded({extended: false});
+var urlencodedparser = require('body-parser').urlencoded({extended: false});
 
 // Configure Passport authenticated session persistence.
 //
