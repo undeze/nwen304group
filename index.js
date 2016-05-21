@@ -25,18 +25,18 @@ var client = new pg.Client(connectionString);
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
 passport.use(new Strategy({
-    clientID: 874576735997925, //process.env.CLIENT_ID,
-    clientSecret: '0e8803d67c827a86c9f4cb470c79f8ed', //process.env.CLIENT_SECRET,
-    callbackURL: 'https://nwen304group6.herokuapp.com/login/facebook/return'
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    // In this example, the user's Facebook profile is supplied as the user
-    // record.  In a production-quality application, the Facebook profile should
-    // be associated with a user record in the application's database, which
-    // allows for account linking and authentication with other identity
-    // providers.
-    return cb(null, profile);
-  }));
+		clientID: 874576735997925, //process.env.CLIENT_ID,
+		clientSecret: '0e8803d67c827a86c9f4cb470c79f8ed', //process.env.CLIENT_SECRET,
+		callbackURL: 'https://nwen304group6.herokuapp.com/login/facebook/return'
+	},
+	function(accessToken, refreshToken, profile, cb) {
+		// In this example, the user's Facebook profile is supplied as the user
+		// record.  In a production-quality application, the Facebook profile should
+		// be associated with a user record in the application's database, which
+		// allows for account linking and authentication with other identity
+		// providers.
+		return cb(null, profile);
+	}));
 
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
@@ -58,11 +58,11 @@ var urlencodedparser = require('body-parser').urlencoded({extended: false});
 // example does not have a database, the complete Twitter profile is serialized
 // and deserialized.
 passport.serializeUser(function(user, cb) {
-  cb(null, user);
+	cb(null, user);
 });
 
 passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
+	cb(null, obj);
 });
 
 
@@ -80,88 +80,106 @@ app.use(passport.session());
 
 
 app.get('/', function(req,res){
-  res.render('pages/home',{user: req.user});
+	res.render('pages/home',{user: req.user});
 });
 
 
 app.get('/login',
-  function(req, res){
-    res.render('pages/login');
-  });
+	function(req, res){
+		res.render('pages/login');
+	});
 
 app.get('/login/facebook',
-  passport.authenticate('facebook'));
+	passport.authenticate('facebook'));
 
 app.get('/login/facebook/return', 
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/index');
-  });
+	passport.authenticate('facebook', { failureRedirect: '/login' }),
+	function(req, res) {
+		res.redirect('/index');
+	});
 
 
 app.get('/login/local',
-  function(req,res){
-    res.render('pages/local');
+	function(req,res){
+		res.render('pages/local');
 });
 
 
 
 app.get('/index',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('pages/index', { user: req.user });
-  });
+	require('connect-ensure-login').ensureLoggedIn(),
+	function(req, res){
+		res.render('pages/index', { user: req.user });
+	});
 
 app.get('/logout/facebook', fb.ensureLoggedIn(),
-  function(req, res){
-    req.logout();
-    res.redirect('/');
+	function(req, res){
+		req.logout();
+		res.redirect('/');
 });
 
 
 app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('pages/profile', { user: req.user });
-  });
+	require('connect-ensure-login').ensureLoggedIn(),
+	function(req, res){
+		res.render('pages/profile', { user: req.user });
+	});
 
 app.get('/db', function(req, res){
-  pg.connect(process.env.DATABASE_URL, function(err, client, done){
-    if(err){
-      console.error('Could not connect to the database');
-      console.error(err);
-      return;
-    }
-    var query = client.query("SELECT * FROM people;", function(error, result){
-        done();
-        if(error){
-        }
-    });
-    var results = [];
-      // Stream results back one row at a time
-      query.on('row',function(row){
-        results.push(row);
-      });
-      // After all data is returned, close connection and return results
-      query.on('end',function(){
-        client.end();
-        res.json(results);
-      });
-    });
+	pg.connect(process.env.DATABASE_URL, function(err, client, done){
+		if(err){
+			console.error('Could not connect to the database');
+			console.error(err);
+			return;
+		}
+		var query = client.query("SELECT * FROM people;", function(error, result){
+				done();
+				if(error){
+				}
+		});
+		var results = [];
+			// Stream results back one row at a time
+			query.on('row',function(row){
+				results.push(row);
+			});
+			// After all data is returned, close connection and return results
+			query.on('end',function(){
+				client.end();
+				res.json(results);
+			});
+		});
 })
 
 app.post('/signup', urlencodedparser, function(req,res){
-    console.log('here, signing up');
-    var username = req.body.username;
-    var email = req.body.email;
-    var password = req.body.password;
-    console.log('username: ' + username);
+		console.log('here, signing up');
+		var username = req.body.username;
+		var email = req.body.email;
+		var password = req.body.password;
+		console.log('username: ' + username);
 
-    console.log('email: ' + email);
-    console.log('passwork: ' + password);
+		console.log('email: ' + email);
+		console.log('passwork: ' + password);
+
+		var signup_client = new pg.Client(db_connection);
+		signup_client.connect(function (err){
+		if(err){
+		console.log('Could not connect to postgresql on signup',err);
+		}else{
+		signup_client.query('INSERT INTO members(username,password,email) VALUES ($1,$2,$3)',
+		[username,email,password], function (err){
+		if(err){
+		 console.log('Insert error in signup', err);
+		}else{
+		 console.log('Signup Success');
+		 //res.redirect('/');
+		 signup_client.end();
+		 }
+		});
+		 }
+		});
 }); 
 
 
 app.listen(port, function() {
-  console.log('Node app is running on port: '+port);
+	console.log('Node app is running on port: '+port);
 });
