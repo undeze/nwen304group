@@ -160,23 +160,18 @@ app.post('/signup', urlencodedparser, function(req,res){
 		console.log('email: ' + email);
 		console.log('passwork: ' + password);
 
-		var signup_client = new pg.Client(db_connection);
-		signup_client.connect(function (err){
-		if(err){
-		console.log('Could not connect to postgresql on signup',err);
-		}else{
-		signup_client.query('INSERT INTO members(username,password,email) VALUES ($1,$2,$3)',
-		[username,email,password], function (err){
-		if(err){
-		 console.log('Insert error in signup', err);
-		}else{
-		 console.log('Signup Success');
-		 //res.redirect('/');
-		 signup_client.end();
-		 }
-		});
-		 }
-		});
+		pg.connect(connectionString, function (err, client, done){
+			if(err){
+					console.log('Could not connect to postgresql on signup',err);
+					return;
+			}
+			var query = client.query("insert into members values (" + username + 
+				"," + password + "," + email + ");", function(error, result){
+					done();
+					if(error){}
+
+				});
+		 });
 }); 
 
 
