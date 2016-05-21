@@ -25,41 +25,13 @@ $(document).ready(function(){
 });
 </script>
 
-<script>
-$(document).ready(function(){
-    $("button1").click(function(){
-    	$("p2").hide();
 
-        $.post('/signup', { username: $("l2").text(username),
-     						email: $("l2").text(email),
-     						password: $("l2").(password)},
-     		function(data, status){
-     		}
-     	);
-
-
-     });
-});
-</script>
 </head>
 
 <body>
 
 <button id="button">Click</button>
 <p>hide me</p>
-
-
-<form>
-  Email:<br>
-  <input type="email" name="email">
-  <br>
-  <br>
-  Password:<br>
-  <input type="password" name="password">
-
-  <br><br>
-  <input type="submit" value="Submit">
-</form>
 
 
 <form class="form" id="l2" method="post" action="/signup">
