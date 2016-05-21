@@ -12,6 +12,10 @@ var pg = require('pg');
 
 const crypto = require('crypto');
 
+var connectionString = process.env.DATABASE_URL;
+var client = new pg.Client(connectionString);
+
+
 
 // Configure the Facebook strategy for use by Passport.
 //
