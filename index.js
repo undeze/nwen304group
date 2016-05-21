@@ -11,6 +11,7 @@ var fb = require('connect-ensure-login');
 var pg = require('pg'); 
 
 const crypto = require('crypto');
+const hash = crypto.createHash('sha256');
 
 var connectionString = process.env.DATABASE_URL;
 var client = new pg.Client(connectionString);
@@ -165,7 +166,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 					console.log('Could not connect to postgresql on signup',err);
 					return;
 			}
-			var query = client.query("insert into members values (4,'" + username + 
+			var query = client.query("insert into members values (5,'" + username + 
 				"','" + password + "','" + email + "');", function(error, result){
 					done();
 					if(error){}
