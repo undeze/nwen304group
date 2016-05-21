@@ -24,6 +24,23 @@ $(document).ready(function(){
      });
 });
 </script>
+
+<script>
+$(document).ready(function(){
+    $("button1").click(function(){
+    	$("p2").hide();
+
+        $.post('/signup', { username: $("l2").username,
+     						email: $("l2").email,
+     						password: $("l2").password},
+     		function(data, status){
+     		}
+     	);
+
+
+     });
+});
+</script>
 </head>
 
 <body>
@@ -45,7 +62,7 @@ $(document).ready(function(){
 </form>
 
 
-<form class="form" method="post" action="/signup">
+<form class="form" id="l2" method="post" action="/signup">
 <h2>Create Login Form Using jQuery</h2>
 <label>Username :</label>
 <input type="text" name="username" id="username">
@@ -53,9 +70,10 @@ $(document).ready(function(){
 <input type="password" name="password" id="password">
 <label>Email :</label>
 <input type="email" name="email" id="email">
-<input type="button" name="login" id="login" value="Login">
+
 </form>
-
-
+<br>
+<button id="button1">Submit</button>
+<p2>para2</p2>
 
 </body></html>
