@@ -158,15 +158,15 @@ app.post('/signup', urlencodedparser, function(req,res){
 		console.log('username: ' + username);
 
 		console.log('email: ' + email);
-		console.log('passwork: ' + password);
+		console.log('password: ' + password);
 
 		pg.connect(connectionString, function (err, client, done){
 			if(err){
 					console.log('Could not connect to postgresql on signup',err);
 					return;
 			}
-			var query = client.query("insert into members values (" + username + 
-				"," + password + "," + email + ");", function(error, result){
+			var query = client.query("insert into members values ('" + username + 
+				"','" + password + "','" + email + "');", function(error, result){
 					done();
 					if(error){}
 
