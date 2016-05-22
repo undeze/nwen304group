@@ -13,7 +13,7 @@ var passport = require('passport')
 var pg = require('pg'); 
 
 const crypto = require('crypto');
-const hash = crypto.createHash('sha256');
+//const hash = crypto.createHash('sha256');
 
 var connectionString = process.env.DATABASE_URL;
 var client = new pg.Client(connectionString);
@@ -193,6 +193,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 					console.log('Could not connect to postgresql on signup',err);
 					return;
 			}
+			const hash = crypto.createHash('sha256');
 			hash.update(password);
 			var encrypted = hash.digest('hex');
 			var query = client.query("insert into members values (default,'" + username + 
