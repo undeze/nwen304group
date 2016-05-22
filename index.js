@@ -213,9 +213,8 @@ app.post('/login', urlencodedparser, function(req,res){
 					console.log('Could not connect to postgresql on signup',err);
 					return;
 			}
-			hash.update(password);
-			var encrypted = hash.digest('hex');
-			var query = client.query("select password from members where email = '" + email + "';", function(error, result){
+			
+			var query = client.query("select * from members where email = '" + email + "';", function(error, result){
 					
 					done();
 					if(error){
