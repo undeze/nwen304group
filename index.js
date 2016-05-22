@@ -233,6 +233,14 @@ app.post('/login', urlencodedparser, function(req,res){
 			console.log('Here: ' + result.rows[0].password);
 
 
+		if(password == result.rows[0].password){
+			console.log('successful login');
+		} else {
+			console.log('unsuccessful login');
+		}
+
+
+
 			passwordHash = result.rows[0].password;
 			client.end();
 
