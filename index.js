@@ -222,10 +222,12 @@ app.post('/login', urlencodedparser, function(req,res){
 					return;
 			}
 
-			client.query("select * from members where email = '" + email + "' as 'pw';", function(error, result){
+			client.query("select password from members where email = '" + email + "';", function(error, result){
 				done();
-			if(error){}
-				console.log(result.rows[0].pw);
+			if(error){
+				console.log('error', error);
+			}
+				console.log(result.rows[0].password);
 			client.end();
 
 		});
