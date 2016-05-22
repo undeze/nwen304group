@@ -234,7 +234,7 @@ app.post('/login', urlencodedparser, function(req,res){
 			}
 
 
-			if(result.rows[0] != undefined){
+			if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
 				console.log(result.rows[0].password);
 
 				//console.log('Here: ' + result.rows[0].password);
@@ -249,6 +249,9 @@ app.post('/login', urlencodedparser, function(req,res){
 					console.log('unsuccessful login');
 					res.redirect('/login');
 				}
+			}
+			else {	// No match in the table
+				res.redirect('/login');
 			}
 
 
