@@ -220,10 +220,8 @@ app.post('/login', urlencodedparser, function(req,res){
 					if(error){
 					}
 					else {
-						query.on('password',function(row)){
-							var passwordHash = password;
-						}
-						console.log(passwordHash);
+
+						console.log(query);
 					}
 
 				});
