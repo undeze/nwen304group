@@ -236,7 +236,14 @@ app.post('/login', urlencodedparser, function(req,res){
 		});
 		
 		console.log(passwordHash);
+		hash.update(password);
+		var encrypted = hash.digest('hex');
 		
+		if(encrypted == passwordHash){
+			console.log('successful login');
+		} else {
+			console.log('unsuccessful login');
+		}
 			
 			
 			
@@ -244,7 +251,7 @@ app.post('/login', urlencodedparser, function(req,res){
 		});
 
 		
-		
+		res.redirect('/login');
 
 		
 });
