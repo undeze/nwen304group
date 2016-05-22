@@ -199,7 +199,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 				"','" + encrypted + "','" + email + "');", function(error, result){
 					done();
 					if(error){}
-
+						res.redirect('/login');
 				});
 		 });
 }); 
