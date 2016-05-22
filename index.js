@@ -216,13 +216,11 @@ app.post('/login', urlencodedparser, function(req,res){
 			hash.update(password);
 			var encrypted = hash.digest('hex');
 			var query = client.query("select password from members where email = '" + email + "';", function(error, result){
+					console.log(query.password);
 					done();
 					if(error){
 					}
-					else {
-
-						console.log(query);
-					}
+					
 
 				});
 			
