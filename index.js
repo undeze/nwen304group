@@ -232,21 +232,24 @@ app.post('/login', urlencodedparser, function(req,res){
 			if(error){
 				console.log('error', error);
 			}
-			console.log(result.rows[0].password);
 
-			//console.log('Here: ' + result.rows[0].password);
-			const hash1 = crypto.createHash('sha256');
-			hash1.update(password);
-			var passwordHash = hash1.digest('hex');
 
-			if(passwordHash == result.rows[0].password){
-				console.log('successful login');
-				res.redirect('/login');
-			} else {
-				console.log('unsuccessful login');
-				res.redirect('/login');
+			if(result.rows[0].password){
+				console.log(result.rows[0].password);
+
+				//console.log('Here: ' + result.rows[0].password);
+				const hash1 = crypto.createHash('sha256');
+				hash1.update(password);
+				var passwordHash = hash1.digest('hex');
+
+				if(passwordHash == result.rows[0].password){
+					console.log('successful login');
+					res.redirect('/login');
+				} else {
+					console.log('unsuccessful login');
+					res.redirect('/login');
+				}
 			}
-
 
 
 			client.end();
