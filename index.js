@@ -214,14 +214,14 @@ app.post('/login', urlencodedparser, function(req,res){
 					return;
 			}
 			
-			var query = client.query("select * from members where email = '" + email + "';", function(error, result){
-					
+			var query = client.query("select password from members where email = '" + email + "';", function(error, result){
+					console.log(query);
 					done();
 					if(error){
 					}
 			});
 			
-			console.log(query);
+			
 			
 		});
 
