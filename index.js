@@ -215,7 +215,7 @@ app.post('/login', urlencodedparser, function(req,res){
 		console.log('email: ' + email);
 		console.log('password: ' + password);
 		
-		var passwordHash;
+		var passwordHash = 'not updated';
 
 		pg.connect(connectionString, function (err, client, done){
 			if(err){
@@ -229,6 +229,9 @@ app.post('/login', urlencodedparser, function(req,res){
 				console.log('error', error);
 			}
 			console.log(result.rows[0].password);
+
+			console.log('Here: ' + result.rows[0].password);
+
 
 			passwordHash = result.rows[0].password;
 			client.end();
