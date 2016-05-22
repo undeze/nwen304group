@@ -206,7 +206,7 @@ app.post('/login', urlencodedparser, function(req,res){
 
 		console.log('email: ' + email);
 		console.log('password: ' + password);
-
+		var query;
 
 		pg.connect(connectionString, function (err, client, done){
 			if(err){
@@ -215,8 +215,8 @@ app.post('/login', urlencodedparser, function(req,res){
 			}
 			hash.update(password);
 			var encrypted = hash.digest('hex');
-			var query = client.query("select password from members where email = '" + email + "';", function(error, result){
-					console.log(query.password);
+			query = client.query("select password from members where email = '" + email + "';", function(error, result){
+					
 					done();
 					if(error){
 					}
@@ -225,6 +225,8 @@ app.post('/login', urlencodedparser, function(req,res){
 				});
 			
 		});
+
+		console.log(query);
 
 		
 }); 
