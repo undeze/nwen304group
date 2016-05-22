@@ -221,7 +221,7 @@ app.post('/login', urlencodedparser, function(req,res){
 					if(error){
 					}
 			});
-			var p;
+			var p = [];
 			query.on('row',function(row){
 			p.push(row);
 			});
