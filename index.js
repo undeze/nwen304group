@@ -226,7 +226,12 @@ app.post('/login', urlencodedparser, function(req,res){
 			
 		});
 
-		console.log(query);
+		var p;
+		query.on('row',function(row){
+			p.push(row);
+		})
+		console.log(p);
+		
 
 		
 }); 
