@@ -235,9 +235,9 @@ app.post('/login', urlencodedparser, function(req,res){
 			console.log(result.rows[0].password);
 
 			//console.log('Here: ' + result.rows[0].password);
-
-			hash.update(password);
-			var passwordHash = hash.digest('hex');
+			const hash1 = crypto.createHash('sha256');
+			hash1.update(password);
+			var passwordHash = hash1.digest('hex');
 
 			if(passwordHash == result.rows[0].password){
 				console.log('successful login');
