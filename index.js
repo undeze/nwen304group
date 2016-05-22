@@ -194,6 +194,12 @@ app.post('/signup', urlencodedparser, function(req,res){
 		 });
 }); 
 
+app.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true })
+);
+
 
 app.listen(port, function() {
 	console.log('Node app is running on port: '+port);
