@@ -215,12 +215,17 @@ app.post('/login', urlencodedparser, function(req,res){
 			}
 			hash.update(password);
 			var encrypted = hash.digest('hex');
-			var passwordHash = client.query("select password from members where email = '" + email + "';", function(error, result){
+			var query = client.query("select password from members where email = '" + email + "';", function(error, result){
 					done();
-					if(error){}
+					if(error){
+					}
+					else {
+						var passwordHash = result;
+						console.log(passwordHash);
+					}
 
 				});
-			console.log(passwordHash);
+			
 		});
 
 		
