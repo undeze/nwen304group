@@ -202,29 +202,9 @@ app.post('/signup', urlencodedparser, function(req,res){
 
 
 
-app.post('/login', urlencodedparser, function(req,res){
-		console.log('/login called');
-		//var username = req.body.username;
-		var email = req.body.email;
-		var password = req.body.password;
-		//console.log('username: ' + username);
-
-		console.log('email: ' + email);
-		console.log('password: ' + password);
 
 
-		db.one("select password from members where email = '" + email + "';")
-    .then(function (data) {
-        console.log("DATA:", data.value);
-    })
-    .catch(function (error) {
-        console.log("ERROR:", error);
-    });
 
-		
-});
-
-/*
 app.post('/login', urlencodedparser, function(req,res){
 		console.log('/login called');
 		//var username = req.body.username;
@@ -242,12 +222,12 @@ app.post('/login', urlencodedparser, function(req,res){
 					return;
 			}
 			
-			var query = client.query("select password from members where email = '" + email + "';", function(error, result){
-					console.log(query);
-					done();
-					if(error){
-					}
-			});
+			var passwordHash = client.query("select password from members where email = '" + email + "';", function(error, result){
++					done();
++					if(error){}
++
++				});
++			console.log(passwordHash);
 			
 			
 			
@@ -257,9 +237,8 @@ app.post('/login', urlencodedparser, function(req,res){
 		
 
 		
-}); 
+});
 
-*/
 
 
 
