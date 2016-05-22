@@ -8,22 +8,6 @@
 
 
 
-<script>
-$(document).ready(function(){
-    $("button").click(function(){
-    	$("p").hide();
-
-        $.post('/signup', { username: "micky",
-     						email: "a@b.com",
-     						password: "monkey133"},
-     		function(data, status){
-     		}
-     	);
-
-        $("form").reset();
-     });
-});
-</script>
 
 
 </head>
@@ -32,8 +16,8 @@ $(document).ready(function(){
 
 <form action="/login" method="post">
     <div>
-        <label>Username:</label>
-        <input type="text" name="username"/>
+        <label>Email:</label>
+        <input type="email" name="email"/>
     </div>
     <div>
         <label>Password:</label>
@@ -47,21 +31,6 @@ $(document).ready(function(){
 <br><br><br><br><br><br><br><br><br>
 
 
-<button id="button">Click</button>
-<p>hide me</p>
 
-
-<form class="form" id="l2" method="post" action="/signup">
-<h2>Create Login Form Using jQuery</h2>
-<label>Username :</label>
-<input type="text" name="username" id="username">
-<label>Password :</label>
-<input type="password" name="password" id="password">
-<label>Email :</label>
-<input type="email" name="email" id="email">
-<input type="submit" value="Submit">
-</form>
-<br>
-</p2>
 
 </body></html>
