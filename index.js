@@ -239,7 +239,7 @@ app.post('/login', urlencodedparser, function(req,res){
 		hash.update(password);
 		var encrypted = hash.digest('hex');
 		
-		if(password == passwordHash){
+		if(password === passwordHash){
 			console.log('successful login');
 		} else {
 			console.log('unsuccessful login');
