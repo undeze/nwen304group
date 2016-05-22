@@ -212,8 +212,8 @@ app.post('/login', urlencodedparser, function(req,res){
 		console.log('email: ' + email);
 		console.log('password: ' + password);
 
-		
-		db.one("select password from members where email = '" + email + "';", 123)
+
+		db.one("select password from members where email = '" + email + "';")
     .then(function (data) {
         console.log("DATA:", data.value);
     })
