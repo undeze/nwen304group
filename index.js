@@ -230,40 +230,34 @@ app.post('/login', urlencodedparser, function(req,res){
 			}
 			console.log(result.rows[0].password);
 
-			console.log('Here: ' + result.rows[0].password);
+			//console.log('Here: ' + result.rows[0].password);
 
 
-		if(password == result.rows[0].password){
-			console.log('successful login');
-		} else {
-			console.log('unsuccessful login');
-		}
+			if(password == result.rows[0].password){
+				console.log('successful login');
+				res.redirect('/login');
+			} else {
+				console.log('unsuccessful login');
+				res.redirect('/login');
+			}
 
 
 
-			passwordHash = result.rows[0].password;
 			client.end();
 
-		});
+			});
 		
-		console.log(passwordHash);
-		hash.update(password);
-		var encrypted = hash.digest('hex');
-		/*
-		if(password === passwordHash){
-			console.log('successful login');
-		} else {
-			console.log('unsuccessful login');
-		}
-			*/
+			//console.log(passwordHash);
+			//hash.update(password);
+			//var encrypted = hash.digest('hex');
 			//e48443929f57ec4cb965d358a825849155b2828873c4ed2929fd711bc9f01347
 			
 			
 		});
 
-		console.log('password: ' + password + '.      passwordHash: ' + passwordHash);
+		//console.log('password: ' + password + '.      passwordHash: ' + passwordHash);
 		
-		res.redirect('/login');
+		//res.redirect('/login');
 
 		
 });
