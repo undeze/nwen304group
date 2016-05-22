@@ -234,7 +234,7 @@ app.post('/login', urlencodedparser, function(req,res){
 			}
 
 
-			if(result.rows[0].password != undefined){
+			if(result.rows[0] != undefined){
 				console.log(result.rows[0].password);
 
 				//console.log('Here: ' + result.rows[0].password);
