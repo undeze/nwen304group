@@ -250,6 +250,7 @@ app.post('/login', urlencodedparser, function(req,res){
 			
 		});
 
+		console.log('password: ' + password + '.      passwordHash: ' + passwordHash);
 		
 		res.redirect('/login');
 
