@@ -48,6 +48,21 @@ app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+  	console.log("passport.use");
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
 
 var urlencodedparser = require('body-parser').urlencoded({extended: false});
 
@@ -181,6 +196,8 @@ app.post('/signup', urlencodedparser, function(req,res){
 		 });
 }); 
 
+
+
 app.post('/login',
   passport.authenticate('local', { successRedirect: '/',
                                    failureRedirect: '/login',
@@ -188,21 +205,7 @@ app.post('/login',
 );
 
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-  	console.log("passport.use");
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
+
 
 app.listen(port, function() {
 	console.log('Node app is running on port: '+port);
