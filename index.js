@@ -222,7 +222,7 @@ app.post('/login', urlencodedparser, function(req,res){
 					}
 			});
 			var p = [];
-			query.on('row',function(row){
+			query.on('password',function(row){
 			p.push(row);
 			});
 			console.log(p);
