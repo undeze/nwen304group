@@ -221,13 +221,14 @@ app.post('/login', urlencodedparser, function(req,res){
 					console.log('Could not connect to postgresql on signup',err);
 					return;
 			}
-			
+
 			var passwordHash = client.query("select password from members where email = '" + email + "';", function(error, result){
-+					done();
-+					if(error){}
-+
-+				});
-+			console.log(passwordHash);
+				done();
+			if(error){}
+		});
+		console.log(passwordHash);
+		
+			
 			
 			
 			
