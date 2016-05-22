@@ -18,8 +18,8 @@ const crypto = require('crypto');
 var connectionString = process.env.DATABASE_URL;
 var client = new pg.Client(connectionString);
 
-var pgp = require("pg-promise")(/*options*/);
-var db = pgp(process.env.DATABASE_URL);
+//var pgp = require("pg-promise")(/*options*/);
+//var db = pgp(process.env.DATABASE_URL);
 
 
 
