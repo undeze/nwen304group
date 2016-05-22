@@ -237,8 +237,9 @@ app.post('/login', urlencodedparser, function(req,res){
 
 			//console.log('Here: ' + result.rows[0].password);
 
+			hash.update(password);
 
-			if(password == result.rows[0].password){
+			if(hash.digest('hex') == result.rows[0].password){
 				console.log('successful login');
 				res.redirect('/login');
 			} else {
