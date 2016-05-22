@@ -16,8 +16,8 @@
     "body-parser": "^1.13.2",
     "express-session": "^1.11.3",
     "express": "4.13.3",
-    "connect-ensure-login": "^0.1.1"
-    //"pg":"4.x",
+    "connect-ensure-login": "^0.1.1",
+    "pg":"4.x"
     //"pg-promise":"^4.2.5"
   },
   "engines": {
