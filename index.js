@@ -222,11 +222,15 @@ app.post('/login', urlencodedparser, function(req,res){
 					return;
 			}
 
-			var passwordHash = client.query("select password from members where email = '" + email + "';", function(error, result){
+			client.query("select password from members where email = '" + email + "' as 'pw';", function(error, result){
 				done();
 			if(error){}
+				console.log(result.rows[0].pw);
+			client.end();
+
 		});
-		console.log(passwordHash);
+		
+
 		
 			
 			
