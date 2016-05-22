@@ -197,13 +197,26 @@ app.post('/signup', urlencodedparser, function(req,res){
 }); 
 
 
+app.post('/login'urlencodedparser, function(req,res){
+		console.log('/login called');
+		var username = req.body.username;
+		//var email = req.body.email;
+		var password = req.body.password;
+		console.log('username: ' + username);
 
+		//console.log('email: ' + email);
+		console.log('password: ' + password);
+
+		
+}); 
+
+/*
 app.post('/login',
   passport.authenticate('local', { successRedirect: '/',
                                    failureRedirect: '/login',
                                    failureFlash: true })
 );
-
+*/
 
 
 
