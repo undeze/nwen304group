@@ -238,13 +238,13 @@ app.post('/login', urlencodedparser, function(req,res){
 		console.log(passwordHash);
 		hash.update(password);
 		var encrypted = hash.digest('hex');
-		
+		/*
 		if(password === passwordHash){
 			console.log('successful login');
 		} else {
 			console.log('unsuccessful login');
 		}
-			
+			*/
 			//e48443929f57ec4cb965d358a825849155b2828873c4ed2929fd711bc9f01347
 			
 			
