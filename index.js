@@ -197,7 +197,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 }); 
 
 
-app.post('/login'urlencodedparser, function(req,res){
+app.post('/login',urlencodedparser, function(req,res){
 		console.log('/login called');
 		var username = req.body.username;
 		//var email = req.body.email;
