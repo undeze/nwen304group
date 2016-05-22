@@ -127,6 +127,11 @@ app.get('/login/local',
 		res.render('pages/local');
 });
 
+app.get('/signup',
+	function(req,res){
+		res.render('pages/signup');
+});
+
 
 
 app.get('/index',
