@@ -202,9 +202,9 @@ app.post('/login', urlencodedparser, function(req,res){
 		//var username = req.body.username;
 		var email = req.body.email;
 		var password = req.body.password;
-		console.log('username: ' + username);
+		//console.log('username: ' + username);
 
-		//console.log('email: ' + email);
+		console.log('email: ' + email);
 		console.log('password: ' + password);
 
 
