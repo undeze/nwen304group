@@ -13,15 +13,9 @@ var passport = require('passport')
 var pg = require('pg'); 
 
 const crypto = require('crypto');
-//const hash = crypto.createHash('sha256');
 
 var connectionString = process.env.DATABASE_URL;
 var client = new pg.Client(connectionString);
-
-//var pgp = require("pg-promise")(/*options*/);
-//var db = pgp(process.env.DATABASE_URL);
-
-
 
 // Configure the Facebook strategy for use by Passport.
 //
@@ -97,9 +91,6 @@ app.set('view engine', 'ejs');
 // Initialize Passport and restore authentication state, if any, from the session.
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
 
 
 app.get('/', function(req,res){
@@ -178,6 +169,7 @@ app.get('/db', function(req, res){
 		});
 })
 
+/* Currently inputs data into members table in db and then returns to /login page. */
 app.post('/signup', urlencodedparser, function(req,res){
 		console.log('here, signing up');
 		var username = req.body.username;
@@ -206,20 +198,18 @@ app.post('/signup', urlencodedparser, function(req,res){
 }); 
 
 
-
-
-
+/* Currently prints to console result of login attempt and returns to /login page. */
+/* The result of the login attempt will have to be coordinated with passport... */
+/* Yet to be done. */
 app.post('/login', urlencodedparser, function(req,res){
 		console.log('/login called');
-		//var username = req.body.username;
+
 		var email = req.body.email;
 		var password = req.body.password;
-		//console.log('username: ' + username);
 
 		console.log('email: ' + email);
 		console.log('password: ' + password);
 		
-
 		pg.connect(connectionString, function (err, client, done){
 			if(err){
 					console.log('Could not connect to postgresql on signup',err);
@@ -232,11 +222,9 @@ app.post('/login', urlencodedparser, function(req,res){
 				console.log('error', error);
 			}
 
-
 			if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
 				console.log(result.rows[0].password);
 
-				//console.log('Here: ' + result.rows[0].password);
 				const hash1 = crypto.createHash('sha256');
 				hash1.update(password);
 				var passwordHash = hash1.digest('hex');
