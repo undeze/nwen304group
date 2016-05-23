@@ -12,6 +12,8 @@ var passport = require('passport')
 /* To support the database */
 var pg = require('pg'); 
 
+var http = require('http');
+
 const crypto = require('crypto');
 
 var connectionString = process.env.DATABASE_URL;
@@ -71,8 +73,6 @@ passport.use('local-signup',new LocalStrategy({
 
             	// all is well, return successful user
             	return done(null, user);
-
-
 			}
 		  );
 		});
