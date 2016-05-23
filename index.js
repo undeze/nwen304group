@@ -44,10 +44,8 @@ passport.use(new FacebookStrategy({
 /* https://scotch.io/tutorials/easy-node-authentication-setup-and-local
   This method is currently not working...  */
 passport.use(new LocalStrategy({
-
 		usernameField: 'username',
-		passwordField: 'password',
-		
+		passwordField: 'password',		
 	},
 
 	function(username, password, done){
@@ -59,7 +57,6 @@ passport.use(new LocalStrategy({
 					console.log('Could not connect to postgresql on signup',err);
 					return;
 			}
-
 			client.query("select password from members where username = '" + username + "';", function(error, result){
 				done1();
 			if(error){
@@ -88,14 +85,10 @@ passport.use(new LocalStrategy({
 				return done(null, false);//, req.flash('loginMessage', 'No user found.'));
 				//res.redirect('/login');
 			}
-
 			client.end();
-
 			});	
 		});	
 	}
-
-
 ));
 
 
@@ -138,13 +131,11 @@ passport.deserializeUser(function(obj, cb) {
 	cb(null, obj);
 });
 
-
 app.set('port', process.env.PORT);
 
 app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'ejs');
-
 
 // Initialize Passport and restore authentication state, if any, from the session.
 app.use(passport.initialize());
@@ -167,15 +158,12 @@ function loginPost(req, res, next) {
 	console.log('loginPost');
   // ask passport to authenticate
   passport.authenticate('local', function(err, username){//, info) {
-
   	console.log('loginPost passport.auth');
-
     if (err) {
       // if error happens
       console.log('loginPost err');
       return next(err);
-    }
-    
+    }    
     if (!username) {
       // if authentication fail, get the error message that we set
       // from previous (info.message) step, assign it into to
@@ -184,7 +172,6 @@ function loginPost(req, res, next) {
       console.log('loginPost !username');
       return res.redirect('/login');
     }
-
     // if everything's OK
     req.logIn(username, function(err) {
       if (err) {
@@ -192,13 +179,11 @@ function loginPost(req, res, next) {
         console.log('loginPost Error');
         return next(err);
       }
-
       // set the message
       //req.session.messages = "Login successfully";
       console.log('loginPost successful');
       return res.redirect('/index');
-    });
-    
+    });    
   })(req, res, next);
 }
 
@@ -222,7 +207,6 @@ app.get('/signup',
 	function(req,res){
 		res.render('pages/signup');
 });
-
 
 
 app.get('/index',

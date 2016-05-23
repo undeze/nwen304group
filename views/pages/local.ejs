@@ -14,8 +14,21 @@
 
 <body>
 
+<br>
+<p>Login without Facebook</p>
+
+<!-- submit to /login -->
+<p>Attempt with the new method</p>
+<form action="/loginnew" method="post">
+    <lable>Username</lable><br>
+    <input type="text" id="username" name="username">
+    <lable>Password</lable><br>
+    <input type="password" id="password" name="password">
     <br>
-    <p>Login without Facebook</p>
+    <button type="submit">Submit</button>
+</form>
+
+<br><br><br><br><br><br>
 
 <form action="/login" method="post">
     <div>
@@ -33,18 +46,6 @@
         <input type="submit" value="Log In"/>
     </div>
 </form>
-
-<br><br><br>
-
-<!-- submit to /login -->
-<p>Attempt with the new method</p>
-<form action="/loginnew" method="post">
-    <input type="text" id="username" name="username">
-    <input type="password" id="password" name="password">
-    <button type="submit">Submit</button>
-</form>
-
-
 
 
 </body></html>
