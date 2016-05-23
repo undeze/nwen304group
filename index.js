@@ -322,9 +322,9 @@ app.put('/cart/add', function(req, res){
 	var query = client.query("INSERT INTO ShoppingCart(memberid,itemid,Quantity) VALUES(10,1,5);");
 
 	//Error checking for adding to shopping cart
-	query.on('error',function(){
-		return response.status(500).send('Error updating shopping cart');
-	});
+	// query.on('error',function(){
+	// 	return response.status(500).send('Error updating shopping cart');
+	// });
 	res.send("Item has been added to cart");
 });
 
