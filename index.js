@@ -180,43 +180,34 @@ app.get('/login',
 app.post('/loginnew', loginPost);
 
 function loginPost(req, res, next) {
-	console.log('loginPost');
   // ask passport to authenticate
-  passport.authenticate('local', function(err, username){//, info) {
-
-
-  	//console.log('loginPost passport.auth');
-
+  passport.authenticate('local', function(err, user, info) {
     if (err) {
       // if error happens
-      console.log('loginPost err');
       return next(err);
     }
     
-    if (!username) {
+    if (!user) {
       // if authentication fail, get the error message that we set
       // from previous (info.message) step, assign it into to
       // req.session and redirect to the login page again to display
-      //req.session.messages = info.message;
-      console.log('loginPost !username');
+      req.session.messages = info.message;
       return res.redirect('/login');
     }
 
     // if everything's OK
-    req.logIn(username, function(err) {
+    req.logIn(user, function(err) {
       if (err) {
-        //req.session.messages = "Error";
-        console.log('loginPost Error');
+        req.session.messages = "Error";
         return next(err);
       }
 
       // set the message
-      //req.session.messages = "Login successfully";
-      console.log('loginPost successful');
-      return res.redirect('/index');
+      req.session.messages = "Login successfully";
+      return res.redirect('/');
     });
     
-  }) (req, res, next);
+  })(req, res, next);
 
 
 app.get('/login/facebook',
