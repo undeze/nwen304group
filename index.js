@@ -184,6 +184,10 @@ function loginPost(req, res, next) {
   // ask passport to authenticate
   passport.authenticate('local', function(err, username){//, info) {
 
+
+  	console.log('loginPost passport.authenticate');
+  }}
+/*
   	console.log('loginPost passport.auth');
 
     if (err) {
@@ -216,7 +220,7 @@ function loginPost(req, res, next) {
     });
     
   })(req, res, next);
-}
+}*/
 
 app.get('/login/facebook',
 	passport.authenticate('facebook'));
