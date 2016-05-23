@@ -38,7 +38,7 @@ passport.use(new FacebookStrategy({
 		return cb(null, profile);
 	}
 ));
-/*
+
 // https://scotch.io/tutorials/easy-node-authentication-setup-and-local
 passport.use(new LocalStrategy({
 		usernameField: 'email',
@@ -68,11 +68,11 @@ passport.use(new LocalStrategy({
 
 
 			}
-			})
-		})
+			});
+		});
 
 	}
-));*/
+));
 
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
