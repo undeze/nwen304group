@@ -186,13 +186,13 @@ app.post('/loginnew', loginPost);
 
 function loginPost(req, res, next) {
   // ask passport to authenticate
-  passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('local', function(err, username, info) {
     if (err) {
       // if error happens
       return next(err);
     }
     
-    if (!user) {
+    if (!username) {
       // if authentication fail, get the error message that we set
       // from previous (info.message) step, assign it into to
       // req.session and redirect to the login page again to display
@@ -201,7 +201,7 @@ function loginPost(req, res, next) {
     }
 
     // if everything's OK
-    req.logIn(user, function(err) {
+    req.logIn(username, function(err) {
       if (err) {
         req.session.messages = "Error";
         return next(err);
@@ -209,7 +209,7 @@ function loginPost(req, res, next) {
 
       // set the message
       req.session.messages = "Login successfully";
-      return res.redirect('/');
+      return res.redirect('/index');
     });
     
   })(req, res, next);
@@ -425,8 +425,8 @@ app.post('/Locallogin', passport.authenticate('local-login', {
         successRedirect : '/index', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
-})
-	consonle.log('Locallogin...');
+	})
+	
 );
 
 
