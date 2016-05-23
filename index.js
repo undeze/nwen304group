@@ -56,6 +56,47 @@ passport.use(new LocalStrategy({
 
 	function(username, password, done){
 
+
+		pg.connect(connectionString, function (err, client, done){
+			if(err){
+					console.log('Could not connect to postgresql on signup',err);
+					return;
+			}
+
+			client.query("select password from members where username = '" + username + "';", function(error, result){
+				done();
+			if(error){
+				console.log('error', error);
+			}
+
+			if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
+				console.log(result.rows[0].password);
+
+				const hash1 = crypto.createHash('sha256');
+				hash1.update(password);
+				var passwordHash = hash1.digest('hex');
+
+				if(passwordHash == result.rows[0].password){
+					console.log('successful login');
+					return done(null, user);
+					//res.redirect('/login');
+				} else {
+					console.log('unsuccessful login');
+					return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+					//res.redirect('/login');
+				}
+			}
+			else {	// No match in the table
+				console.log('  email not found in database');
+				return done(null, false, req.flash('loginMessage', 'No user found.'));
+				//res.redirect('/login');
+			}
+
+			client.end();
+
+			});	
+		});	
+
 		/*
 			//Query database
 				
