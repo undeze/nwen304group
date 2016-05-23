@@ -41,7 +41,8 @@ passport.use(new FacebookStrategy({
 	}
 ));
 
-// https://scotch.io/tutorials/easy-node-authentication-setup-and-local
+/* https://scotch.io/tutorials/easy-node-authentication-setup-and-local
+  This method is currently not working...  */
 passport.use(new LocalStrategy({
 
 		usernameField: 'username',
