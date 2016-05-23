@@ -319,13 +319,12 @@ app.put('/cart/add', function(req, res){
 	var insert = "INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT "+memberid+", "+itemid+", 1";
 	var update = "UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = "+memberid+" AND itemid = "+itemid+" ";
 	var finalQuery = "WITH upsert AS ("+update+"RETURNING *)"+ insert + "WHERE NOT EXISTS (SELECT * FROM upsert);";
-	var query = client.query(finalQuery);
+	var query = client.query("ISNERT INTO ShoppingCart(memberid,itemid,Quantity) VALUES(10,1,5);");
 
 	//Error checking for adding to shopping cart
 	query.on('error',function(){
 		return response.status(500).send('Error updating shopping cart');
 	});
-
 	res.send("Item has been added to cart");
 });
 
