@@ -318,14 +318,14 @@ app.put('/cart/add', function(req, res){
 	var itemid = 1; //For testing purposes needs to be changed later
 	var insert = "INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT "+memberid+", "+itemid+", 1";
 	var update = "UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = "+memberid+" AND itemid = "+itemid+" ";
-	var query = client.query("WITH upsert AS ("+update+"RETURNING *)"+ insert + "WHERE NOT EXISTS (SELECT * FROM upsert);",
-		function(error, results){
-			if(error){
-				console.error(error);
-				return;
-			}
-			done();
-		});
+	var query = client.query("WITH upsert AS ("+update+"RETURNING *)"+ insert + "WHERE NOT EXISTS (SELECT * FROM upsert);");
+
+	//Error checking for adding to shopping cart
+	query.on('error',function(){
+		return response.status(500).send('Error updating shopping cart');
+	});
+
+	res.send("Item has been added to cart");
 });
 
 /* Currently inputs data into members table in db and then returns to /login page. */
