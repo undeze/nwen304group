@@ -77,7 +77,7 @@ passport.use(new LocalStrategy({
 				var passwordHash = hash1.digest('hex');
 
 				if(passwordHash == result.rows[0].password){
-					console.log('successful login 2');
+					console.log('successful login 2, username:' + username);
 					return done(null, username);
 					//res.redirect('/login');
 				} else {
