@@ -4,7 +4,7 @@ var app = express();
 var port = process.env.PORT || 8080;
 /* To support login with facebook */
 //var passport = require('passport');
-var Strategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var fb = require('connect-ensure-login');
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
@@ -24,7 +24,7 @@ var client = new pg.Client(connectionString);
 // behalf, along with the user's profile.  The function must invoke `cb`
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
-passport.use(new Strategy({
+passport.use(new FacebookStrategy({
 		clientID: 874576735997925, //process.env.CLIENT_ID,
 		clientSecret: '0e8803d67c827a86c9f4cb470c79f8ed', //process.env.CLIENT_SECRET,
 		callbackURL: 'https://nwen304group6.herokuapp.com/login/facebook/return'
