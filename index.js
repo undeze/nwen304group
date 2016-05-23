@@ -265,8 +265,6 @@ app.get('/cart', function(req, res){
 		var memberid = 8;
 		var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
 		function(error, result){
-		//var query =  client.query("SELECT * FROM ShoppingCart WHERE memberID = '"+ memberid +"';", function(error, result){
-			if(error){
 				console.error(error);
 				return;
 			}
@@ -312,6 +310,15 @@ app.get('/store', function(req, res){
 			res.json(results);
 		});
 	});
+});
+
+//Adds items to a members shopping cart
+app.put('/cart/add', function(req, res){
+	var memberid = 8; //This needs to be passed in later using req.body.memberid
+	var itemid = 1; //For testing purposes needs to be changed later
+	var insert = "INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT "+memberid+", "+itemid+", 1";
+	var update = "UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = "+memberid+" AND itemid = "+itemid+" ";
+	var query = client.query("WITH upsert AS ("+update+"RETURNING *)"+ insert + "WHERE NOT EXISTS (SELECT * FROM upsert);");
 });
 
 /* Currently inputs data into members table in db and then returns to /login page. */
