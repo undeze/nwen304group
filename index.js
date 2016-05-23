@@ -105,6 +105,15 @@ passport.use(new LocalStrategy(
   }
 ));*/
 
+
+/* Redirect http to https */
+app.get('*',function(req,res,next){
+  if(req.headers['x-forwarded-proto']!='https'&&process.env.NODE_ENV === 'production')
+    res.redirect('https://'+req.hostname+req.url)
+  else
+    next() /* Continue to other routes if we're not redirecting */
+});
+
 var urlencodedparser = require('body-parser').urlencoded({extended: false});
 
 // Configure Passport authenticated session persistence.
