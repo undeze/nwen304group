@@ -40,7 +40,7 @@ passport.use(new FacebookStrategy({
 ));
 
 // https://scotch.io/tutorials/easy-node-authentication-setup-and-local
-passport.use(new LocalStrategy({
+passport.use('local-signup',new LocalStrategy({
 		usernameField: 'email',
 		passwordField: 'password',
 		passReqToCallback: true
