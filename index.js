@@ -176,7 +176,7 @@ app.get('/login',
 	function(req, res){
 		res.render('pages/login');
 	});
-
+/*
 app.post('/loginnew', loginPost);
 
 function loginPost(req, res, next) {
@@ -205,7 +205,7 @@ function loginPost(req, res, next) {
     });
     
   })
-}(req, res, next);
+}(req, res, next); */
 
 
 app.get('/login/facebook',
