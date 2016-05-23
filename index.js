@@ -73,7 +73,7 @@ passport.use(new LocalStrategy({
 
 				if(passwordHash == result.rows[0].password){
 					console.log('successful login 2, username:' + username);
-					return done(null, username, null);
+					return done(null, username);
 					//res.redirect('/login');
 				} else {
 					console.log('unsuccessful login');
@@ -182,7 +182,7 @@ app.post('/loginnew', loginPost);
 function loginPost(req, res, next) {
 	console.log('loginPost');
   // ask passport to authenticate
-  passport.authenticate('local', function(err, username, info) {
+  passport.authenticate('local', function(err, username){//, info) {
 
   	console.log('loginPost passport.auth');
 
