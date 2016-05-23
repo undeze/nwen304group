@@ -318,7 +318,8 @@ app.put('/cart/add', function(req, res){
 	var itemid = 1; //For testing purposes needs to be changed later
 	var insert = "INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT "+memberid+", "+itemid+", 1";
 	var update = "UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = "+memberid+" AND itemid = "+itemid+" ";
-	var query = client.query("WITH upsert AS ("+update+"RETURNING *)"+ insert + "WHERE NOT EXISTS (SELECT * FROM upsert);");
+	var finalQuery = "WITH upsert AS ("+update+"RETURNING *)"+ insert + "WHERE NOT EXISTS (SELECT * FROM upsert);";
+	var query = client.query(finalQuery);
 
 	//Error checking for adding to shopping cart
 	query.on('error',function(){
