@@ -51,8 +51,8 @@ passport.use(new LocalStrategy({
 
 	function(username, password, done){
 
-		console.log('LocalStrategy');
-		
+		console.log('LocalStrategy: username: ' + username + '. password: ' + password);
+
 		pg.connect(connectionString, function (err, client, done){
 			if(err){
 					console.log('Could not connect to postgresql on signup',err);
