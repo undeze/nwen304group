@@ -68,7 +68,7 @@ passport.use(new LocalStrategy({
 			if(error){
 				console.log('error', error);
 			}
-
+			console.log('function');
 			if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
 				console.log(result.rows[0].password);
 
@@ -77,7 +77,7 @@ passport.use(new LocalStrategy({
 				var passwordHash = hash1.digest('hex');
 
 				if(passwordHash == result.rows[0].password){
-					console.log('successful login');
+					console.log('successful login 2');
 					return done(null, username);
 					//res.redirect('/login');
 				} else {
@@ -400,7 +400,7 @@ app.post('/login', urlencodedparser, function(req,res){
 				var passwordHash = hash1.digest('hex');
 
 				if(passwordHash == result.rows[0].password){
-					console.log('successful login');
+					console.log('successful login 1');
 					res.redirect('/login');
 				} else {
 					console.log('unsuccessful login');
