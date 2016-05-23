@@ -44,15 +44,10 @@ passport.use(new FacebookStrategy({
 // https://scotch.io/tutorials/easy-node-authentication-setup-and-local
 passport.use(new LocalStrategy({
 
-
-
 		usernameField: 'username',
 		passwordField: 'password',
 		
 	},
-
-	//console.log('local-signup'),
-
 
 	function(username, password, done){
 
@@ -68,7 +63,7 @@ passport.use(new LocalStrategy({
 			if(error){
 				console.log('error', error);
 			}
-			console.log('function');
+			console.log('function in passport.use(new LocalStrategy');
 			if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
 				console.log(result.rows[0].password);
 
@@ -187,8 +182,12 @@ app.post('/loginnew', loginPost);
 function loginPost(req, res, next) {
   // ask passport to authenticate
   passport.authenticate('local', function(err, username, info) {
+
+  	console.log('loginPost passport.auth');
+
     if (err) {
       // if error happens
+      console.log('loginPost err');
       return next(err);
     }
     
