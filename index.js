@@ -42,22 +42,22 @@ passport.use(new FacebookStrategy({
 ));
 
 // https://scotch.io/tutorials/easy-node-authentication-setup-and-local
-passport.use('local-signup',new LocalStrategy({
+passport.use(new LocalStrategy({
 
 
 
-		usernameField: 'email',
+		usernameField: 'username',
 		passwordField: 'password',
-		passReqToCallback: true
+		
 	},
 
 	//console.log('local-signup'),
 
 
-	function(req, email, password, done){
+	function(username, password, done){
 
-		process.nextTick(function(){
-			User.findOne({}, function(err,user){
+		
+			//Query database
 				
 				// if there are any errors, return the error before anything else
             	if (err)
@@ -74,8 +74,8 @@ passport.use('local-signup',new LocalStrategy({
             	// all is well, return successful user
             	return done(null, user);
 			}
-		  );
-		});
+		  
+		
 
 	}
 ));
@@ -88,22 +88,7 @@ app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
-/*
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-  	console.log("passport.use");
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));*/
+
 
 
 /* Redirect http to https */
@@ -156,6 +141,21 @@ app.get('/login',
 		res.render('pages/login');
 	});
 
+app.get('/loginnew', loginGet);
+
+	function loginGet(req, res){
+  	if(req.user){
+    	// already logged in
+    	res.redirect('/');
+  } else {
+    	// not logged in, show the login form, remember to pass the message
+    	// for displaying when error happens
+    	res.render('pages/login', { message: req.session.messages });
+    	// and then remember to clear the message
+    	req.session.messages = null;
+  }
+}
+
 app.get('/login/facebook',
 	passport.authenticate('facebook'));
 
@@ -164,14 +164,6 @@ app.get('/login/facebook/return',
 	function(req, res) {
 		res.redirect('/index');
 	});
-
-
-/*
-app.get('/login/local',
-	function(req,res){
-		res.render('pages/local');
-});
-*/
 
 
 app.get('/login/local',
