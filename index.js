@@ -186,7 +186,8 @@ function loginPost(req, res, next) {
 
 
   	console.log('loginPost passport.authenticate');
-  }}
+  });
+}
 /*
   	console.log('loginPost passport.auth');
 
