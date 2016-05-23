@@ -180,6 +180,7 @@ app.get('/login',
 app.post('/loginnew', loginPost);
 
 function loginPost(req, res, next) {
+	console.log('loginPost');
   // ask passport to authenticate
   passport.authenticate('local', function(err, username, info) {
 
