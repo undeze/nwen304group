@@ -185,8 +185,7 @@ function loginPost(req, res, next) {
     if (err) {
       // if error happens
       return next(err);
-    }
-    
+    }    
     if (!user) {
       // if authentication fail, get the error message that we set
       // from previous (info.message) step, assign it into to
@@ -194,20 +193,19 @@ function loginPost(req, res, next) {
       req.session.messages = info.message;
       return res.redirect('/login');
     }
-
     // if everything's OK
     req.logIn(user, function(err) {
       if (err) {
         req.session.messages = "Error";
         return next(err);
       }
-
       // set the message
       req.session.messages = "Login successfully";
       return res.redirect('/');
     });
     
-  })(req, res, next);
+  })
+}(req, res, next);
 
 
 app.get('/login/facebook',
