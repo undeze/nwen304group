@@ -93,6 +93,8 @@ passport.use(new LocalStrategy({
 			});	
 		});	
 	}
+
+
 ));
 
 
@@ -126,10 +128,12 @@ var urlencodedparser = require('body-parser').urlencoded({extended: false});
 // example does not have a database, the complete Twitter profile is serialized
 // and deserialized.
 passport.serializeUser(function(user, cb) {
+	console.log('serializeUser');
 	cb(null, user);
 });
 
 passport.deserializeUser(function(obj, cb) {
+	console.log('deserializeUser');
 	cb(null, obj);
 });
 
