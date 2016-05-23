@@ -44,7 +44,7 @@ app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
-
+/*
 passport.use(new LocalStrategy(
   function(username, password, done) {
   	console.log("passport.use");
@@ -59,7 +59,7 @@ passport.use(new LocalStrategy(
       return done(null, user);
     });
   }
-));
+));*/
 
 var urlencodedparser = require('body-parser').urlencoded({extended: false});
 
