@@ -254,34 +254,35 @@ app.get('/db', function(req, res){
 });
 
 //Gets all the data from a members shopping cart
-// app.get('/cart', function(req, res){
-// 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
-// 		if(err){
-// 			console.error('Could not connect to database');
-// 			console.error(err);
-// 			return;
-// 		}
-// 		//var memberid = req.body.memberid;
-// 		var memberid = 8;
-// 		var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
-// 		function(error, result){
-// 				console.error(error);
-// 				return;
-// 			}
-// 			done();
-// 		});
-// 		var results = [];
-// 		// Stream results back one row at a time
-// 		query.on('row', function(row){
-// 			results.push(row);
-// 		});
-// 		// After all data is returned, close connection and return results
-// 		query.on('end', function(){
-// 			client.end();
-// 			res.json(results);
-// 		});
-// 	});
-// });
+app.get('/cart', function(req, res){
+	pg.connect(process.env.DATABASE_URL, function(err, client, done){
+		if(err){
+			console.error('Could not connect to database');
+			console.error(err);
+			return;
+		}
+		//var memberid = req.body.memberid;
+		var memberid = 8;
+		var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
+		function(error, result){
+			if(err){
+				console.error(error);
+				return;
+			}
+			done();
+		});
+		var results = [];
+		// Stream results back one row at a time
+		query.on('row', function(row){
+			results.push(row);
+		});
+		// After all data is returned, close connection and return results
+		query.on('end', function(){
+			client.end();
+			res.json(results);
+		});
+	});
+});
 
 //Gets all the items for the store
 app.get('/store', function(req, res){
