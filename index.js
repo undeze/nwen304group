@@ -56,7 +56,7 @@ passport.use(new LocalStrategy({
 
 	function(username, password, done){
 
-		
+		/*
 			//Query database
 				
 				// if there are any errors, return the error before anything else
@@ -73,7 +73,7 @@ passport.use(new LocalStrategy({
 
             	// all is well, return successful user
             	return done(null, user);
-			}
+			}*/
 		  
 		
 
@@ -143,7 +143,7 @@ app.get('/login',
 
 app.get('/loginnew', loginGet);
 
-	function loginGet(req, res){
+function loginGet(req, res){
   	if(req.user){
     	// already logged in
     	res.redirect('/');
@@ -154,7 +154,7 @@ app.get('/loginnew', loginGet);
     	// and then remember to clear the message
     	req.session.messages = null;
   }
-}
+};
 
 app.get('/login/facebook',
 	passport.authenticate('facebook'));
