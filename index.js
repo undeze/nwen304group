@@ -300,13 +300,13 @@ app.post('/login', urlencodedparser, function(req,res){
 		});	
 });
 
-
+/*
 //https://scotch.io/tutorials/easy-node-authentication-setup-and-local
 app.post('/Locallogin', passport.authenticate('local-login', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
-}));
+}));*/
 
 
 
