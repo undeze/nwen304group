@@ -181,6 +181,7 @@ app.post('/loginnew', loginPost);
 
 function loginPost(req, res, next) {
   // ask passport to authenticate
+  console.log('loginPost');
   passport.authenticate('local', function(err, user, info) {
     if (err) {
       // if error happens
