@@ -197,6 +197,7 @@ function loginPost(req, res, next) {
       // from previous (info.message) step, assign it into to
       // req.session and redirect to the login page again to display
       req.session.messages = info.message;
+      console.log('loginPost !username');
       return res.redirect('/login');
     }
 
@@ -204,11 +205,13 @@ function loginPost(req, res, next) {
     req.logIn(username, function(err) {
       if (err) {
         req.session.messages = "Error";
+        console.log('loginPost Error');
         return next(err);
       }
 
       // set the message
       req.session.messages = "Login successfully";
+      console.log('loginPost successful');
       return res.redirect('/index');
     });
     
