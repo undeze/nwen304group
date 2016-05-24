@@ -76,13 +76,13 @@ passport.use(new LocalStrategy({
 						//res.redirect('/login');
 					} else {
 						console.log('unsuccessful login');
-						return done(null, false, {message: "unsuccessful login"});
+						return done(null, false, {message: "Message: unsuccessful login"});
 						//res.redirect('/login');
 					}
 				}
 				else {	// No match in the table
 					console.log('  email not found in database');
-					return done(null, false, {message: "email not found in database"});
+					return done(null, false, {message: "Message: email not found in database"});
 					//res.redirect('/login');
 				}
 				client.end();
@@ -349,7 +349,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 			hash.update(password);
 			var encrypted = hash.digest('hex');
 			var query = client.query("insert into members values (default,'" + username + 
-				"','" + encrypted + "','" + email + "');", function(error, result){
+				"','" + encrypted + "','" + email + "' false);", function(error, result){
 					done();
 					if(error){}
 						res.redirect('/login');
