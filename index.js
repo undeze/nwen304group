@@ -215,16 +215,17 @@ app.get('/login/facebook/return',
 						console.log(result.rows[i].username);
 						i++;
 					}
-					
-
-					
+				// Now retrieve the facebook user...?	
+				
 				}
 				
 				client.end();
 			});	
 		});	
 
-
+		var u = { user: req.user };
+		console.log('user------------------ ', u);
+					
 
 		res.redirect('/index');
 	});
