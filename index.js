@@ -210,7 +210,11 @@ app.get('/login/facebook/return',
 				console.log('function in passport.use(new LocalStrategy');
 				if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
 					console.log(result.rows[0].username);
-
+					var i = 0;
+					while(result.rows[i] != undefined){
+						console.log(result.rows[i].username);
+						i++;
+					}
 					
 
 					
