@@ -193,6 +193,7 @@ app.get('/login/facebook',
 
 app.get('/login/facebook/return', 
 	passport.authenticate('facebook', { failureRedirect: '/login' }),
+
 	function(req, res) {
 		console.log('need to check database here probably');
 		
@@ -207,7 +208,7 @@ app.get('/login/facebook/return',
 				if(error){
 					console.log('error', error);
 				}
-				console.log('function in passport.use(new LocalStrategy');
+				
 				if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
 					console.log(result.rows[0].username);
 					var i = 0;
@@ -223,12 +224,13 @@ app.get('/login/facebook/return',
 			});	
 		});	
 
-		var u = { user: req.user };
+		var u = user.displayName;
 		console.log('user------------------ ', u);
 					
 
 		res.redirect('/index');
-	});
+	}
+);
 
 
 app.get('/login/local',
