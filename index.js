@@ -199,28 +199,26 @@ app.get('/login/facebook/return',
 		/* Check with members table to see if facebook */
 		pg.connect(connectionString, function (err, client, completed){
 			if(err){
-				console.log('Could not connect to postgresql on signup',err);
-				return;
+					console.log('Could not connect to postgresql on signup',err);
+					return;
 			}
-			completed();
-			console.log('facebook user: ' + req.user);
-			
 			client.query("select * from members;", function(error, result){
 				completed();
 				if(error){
 					console.log('error', error);
 				}
-				if(result.rows[0] != undefined){
-					var i = 0;
-					while(result.rows[i] != undefined){
-						console.log('result: ' + result.rows[i].username);
-					}
-				}
-			});	
+				console.log('function in passport.use(new LocalStrategy');
+				if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
+					console.log(result.rows[0].username);
 
-			//follow undeze index.js	
-			client.end();
-		});
+					
+
+					
+				}
+				
+				client.end();
+			});	
+		});	
 
 
 
