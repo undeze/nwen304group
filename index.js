@@ -52,13 +52,13 @@ passport.use(new LocalStrategy({
 
 		console.log('LocalStrategy: username: ' + username + '. password: ' + password);
 
-		pg.connect(connectionString, function (err, client, done1){
+		pg.connect(connectionString, function (err, client, completed){
 			if(err){
 					console.log('Could not connect to postgresql on signup',err);
 					return;
 			}
 			client.query("select password from members where username = '" + username + "';", function(error, result){
-				done1();
+				completed();
 			if(error){
 				console.log('error', error);
 			}
