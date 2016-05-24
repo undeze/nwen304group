@@ -194,6 +194,7 @@ app.get('/login/facebook',
 app.get('/login/facebook/return', 
 	passport.authenticate('facebook', { failureRedirect: '/login' }),
 	function(req, res) {
+		console.log('need to check database here probably');
 		res.redirect('/index');
 	});
 
