@@ -208,7 +208,13 @@ app.get('/login/facebook/return',
 				}
 			});	
 			//follow undeze index.js		
-			client.end();
+			query.on('row',function(row){
+        		results.push(row);
+      		});
+      		// After all data is returned, close connection and return results
+      		query.on('end',function(){
+        		client.end();
+      		});
 			
 		});
 
