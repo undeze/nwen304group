@@ -196,11 +196,13 @@ app.get('/login/facebook/return',
 	function(req, res) {
 		console.log('need to check database here probably');
 		
+		/* Check with members table to see if facebook */
 		pg.connect(connectionString, function (err, client, completed){
 			if(err){
 				console.log('Could not connect to postgresql on signup',err);
 				return;
 			}
+			console.log('facebook user: ' + req.user);
 			var query = client.query("select * from members;", function(error, result){
 				completed();
 				if(error){
@@ -208,15 +210,7 @@ app.get('/login/facebook/return',
 				}
 			});	
 			//follow undeze index.js	
-			var results = [];	
-			query.on('row',function(row){
-        		results.push(row);
-      		});
-      		// After all data is returned, close connection and return results
-      		query.on('end',function(){
-        		client.end();
-      		});
-			console.log('results length: ' + results.length);
+			client.end();
 		});
 
 
