@@ -217,15 +217,16 @@ app.get('/login/facebook/return',
 						i++;
 					}
 				// Now retrieve the facebook user...?	
-				
+				var u = req.user;
+
+				console.log('req.user: ' + u.displayName);
 				}
 				
 				client.end();
 			});	
 		});	
 
-		var u = user.displayName;
-		console.log('user------------------ ', u);
+		
 					
 
 		res.redirect('/index');
@@ -260,6 +261,7 @@ app.get('/logout/facebook', fb.ensureLoggedIn(),
 app.get('/profile',
 	require('connect-ensure-login').ensureLoggedIn(),
 	function(req, res){
+
 		res.render('pages/profile', { user: req.user });
 });
 
