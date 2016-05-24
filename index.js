@@ -76,13 +76,13 @@ passport.use(new LocalStrategy({
 						//res.redirect('/login');
 					} else {
 						console.log('unsuccessful login');
-						return done(null, false);//, req.flash('loginMessage', 'Oops! Wrong password.'));
+						return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
 						//res.redirect('/login');
 					}
 				}
 				else {	// No match in the table
 					console.log('  email not found in database');
-					return done(null, false);//, req.flash('loginMessage', 'No user found.'));
+					return done(null, false, req.flash('loginMessage', 'No user found.'));
 					//res.redirect('/login');
 				}
 				client.end();
@@ -157,7 +157,7 @@ app.post('/loginnew', loginPost);
 function loginPost(req, res, next) {
 	console.log('loginPost');
   // Ask passport to authenticate.
-  passport.authenticate('local', function(err, username){//, info) {
+  passport.authenticate('local', function(err, username), info) {
   	console.log('loginPost passport.auth');
     if (err) {
       // if error happens
@@ -168,19 +168,19 @@ function loginPost(req, res, next) {
       // If authentication fails, get the error message that we set
       // from previous (info.message) step, assign it into to
       // req.session and redirect to the login page again to display
-      //req.session.messages = info.message;
+      req.session.messages = info.message;
       console.log('loginPost !username');
       return res.redirect('/login');
     }
     // If everything's OK
     req.logIn(username, function(err) {
       if (err) {
-        //req.session.messages = "Error";
+        req.session.messages = "Error";
         console.log('loginPost Error');
         return next(err);
       }
       // Set the message
-      //req.session.messages = "Login successfully";
+      req.session.messages = "Login successfully";
       console.log('loginPost successful');
       return res.redirect('/index');
     });    
