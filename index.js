@@ -208,7 +208,14 @@ app.get('/login/facebook/return',
 				if(error){
 					console.log('error', error);
 				}
+				if(result.rows[0] != undefined){
+					var i = 0;
+					while(result.rows[i] != undefined){
+						console.log('result: ' + result.rows[i].username);
+					}
+				}
 			});	
+
 			//follow undeze index.js	
 			client.end();
 		});
