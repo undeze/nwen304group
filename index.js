@@ -207,7 +207,8 @@ app.get('/login/facebook/return',
 					console.log('error', error);
 				}
 			});	
-			//follow undeze index.js		
+			//follow undeze index.js	
+			var results = [];	
 			query.on('row',function(row){
         		results.push(row);
       		});
