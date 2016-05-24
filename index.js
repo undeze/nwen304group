@@ -218,10 +218,10 @@ app.get('/login/facebook/return',
 					}
 				// Now retrieve the facebook user...?	
 				var u = req.user;
-
 				console.log('req.user: ' + u.displayName);
 				}
-				
+				// Now check to see if the user is in the members table. If not, add them. But, without a password?
+				// Perhaps add a facebook members table into the database...?
 				client.end();
 			});	
 		});	
