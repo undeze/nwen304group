@@ -216,7 +216,7 @@ app.get('/login/facebook/return',
       		query.on('end',function(){
         		client.end();
       		});
-			
+			console.log('results size: ' + results.size());
 		});
 
 
