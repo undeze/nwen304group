@@ -59,33 +59,33 @@ passport.use(new LocalStrategy({
 			}
 			client.query("select password from members where username = '" + username + "';", function(error, result){
 				completed();
-			if(error){
-				console.log('error', error);
-			}
-			console.log('function in passport.use(new LocalStrategy');
-			if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
-				console.log(result.rows[0].password);
+				if(error){
+					console.log('error', error);
+				}
+				console.log('function in passport.use(new LocalStrategy');
+				if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
+					console.log(result.rows[0].password);
 
-				const hash1 = crypto.createHash('sha256');
-				hash1.update(password);
-				var passwordHash = hash1.digest('hex');
+					const hash1 = crypto.createHash('sha256');
+					hash1.update(password);
+					var passwordHash = hash1.digest('hex');
 
-				if(passwordHash == result.rows[0].password){
-					console.log('successful login 2, username:' + username);
-					return done(null, username);
-					//res.redirect('/login');
-				} else {
-					console.log('unsuccessful login');
-					return done(null, false);//, req.flash('loginMessage', 'Oops! Wrong password.'));
+					if(passwordHash == result.rows[0].password){
+						console.log('successful login 2, username:' + username);
+						return done(null, username);
+						//res.redirect('/login');
+					} else {
+						console.log('unsuccessful login');
+						return done(null, false);//, req.flash('loginMessage', 'Oops! Wrong password.'));
+						//res.redirect('/login');
+					}
+				}
+				else {	// No match in the table
+					console.log('  email not found in database');
+					return done(null, false);//, req.flash('loginMessage', 'No user found.'));
 					//res.redirect('/login');
 				}
-			}
-			else {	// No match in the table
-				console.log('  email not found in database');
-				return done(null, false);//, req.flash('loginMessage', 'No user found.'));
-				//res.redirect('/login');
-			}
-			client.end();
+				client.end();
 			});	
 		});	
 	}
@@ -156,7 +156,7 @@ app.post('/loginnew', loginPost);
 
 function loginPost(req, res, next) {
 	console.log('loginPost');
-  // ask passport to authenticate
+  // Ask passport to authenticate.
   passport.authenticate('local', function(err, username){//, info) {
   	console.log('loginPost passport.auth');
     if (err) {
@@ -165,21 +165,21 @@ function loginPost(req, res, next) {
       return next(err);
     }    
     if (!username) {
-      // if authentication fail, get the error message that we set
+      // If authentication fails, get the error message that we set
       // from previous (info.message) step, assign it into to
       // req.session and redirect to the login page again to display
       //req.session.messages = info.message;
       console.log('loginPost !username');
       return res.redirect('/login');
     }
-    // if everything's OK
+    // If everything's OK
     req.logIn(username, function(err) {
       if (err) {
         //req.session.messages = "Error";
         console.log('loginPost Error');
         return next(err);
       }
-      // set the message
+      // Set the message
       //req.session.messages = "Login successfully";
       console.log('loginPost successful');
       return res.redirect('/index');
@@ -358,55 +358,6 @@ app.post('/signup', urlencodedparser, function(req,res){
 }); 
 
 
-/* Currently prints to console result of login attempt and returns to /login page. */
-/* The result of the login attempt will have to be coordinated with passport... */
-/* Yet to be done. */
-app.post('/login', urlencodedparser, function(req,res){
-		console.log('/login called');
-
-		var email = req.body.email;
-		var password = req.body.password;
-
-		console.log('email: ' + email);
-		console.log('password: ' + password);
-		
-		pg.connect(connectionString, function (err, client, done){
-			if(err){
-					console.log('Could not connect to postgresql on signup',err);
-					return;
-			}
-
-			client.query("select password from members where email = '" + email + "';", function(error, result){
-				done();
-			if(error){
-				console.log('error', error);
-			}
-
-			if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
-				console.log(result.rows[0].password);
-
-				const hash1 = crypto.createHash('sha256');
-				hash1.update(password);
-				var passwordHash = hash1.digest('hex');
-
-				if(passwordHash == result.rows[0].password){
-					console.log('successful login 1');
-					res.redirect('/login');
-				} else {
-					console.log('unsuccessful login');
-					res.redirect('/login');
-				}
-			}
-			else {	// No match in the table
-				console.log('  email not found in database');
-				res.redirect('/login');
-			}
-
-			client.end();
-
-			});	
-		});	
-});
 
 
 //https://scotch.io/tutorials/easy-node-authentication-setup-and-local
