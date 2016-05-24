@@ -202,8 +202,10 @@ app.get('/login/facebook/return',
 				console.log('Could not connect to postgresql on signup',err);
 				return;
 			}
+			completed();
 			console.log('facebook user: ' + req.user);
-			var query = client.query("select * from members;", function(error, result){
+			
+			client.query("select * from members;", function(error, result){
 				completed();
 				if(error){
 					console.log('error', error);
