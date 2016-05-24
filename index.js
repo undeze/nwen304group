@@ -76,13 +76,13 @@ passport.use(new LocalStrategy({
 						//res.redirect('/login');
 					} else {
 						console.log('unsuccessful login');
-						return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+						return done(null, false, 'message: unsuccessful login'));
 						//res.redirect('/login');
 					}
 				}
 				else {	// No match in the table
 					console.log('  email not found in database');
-					return done(null, false, req.flash('loginMessage', 'No user found.'));
+					return done(null, false, 'message: email not found in database'));
 					//res.redirect('/login');
 				}
 				client.end();
