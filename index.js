@@ -195,6 +195,25 @@ app.get('/login/facebook/return',
 	passport.authenticate('facebook', { failureRedirect: '/login' }),
 	function(req, res) {
 		console.log('need to check database here probably');
+		
+		pg.connect(connectionString, function (err, client, completed){
+			if(err){
+				console.log('Could not connect to postgresql on signup',err);
+				return;
+			}
+			var query = client.query("select * from members;", function(error, result){
+				completed();
+				if(error){
+					console.log('error', error);
+				}
+			});	
+			//follow undeze index.js		
+			client.end();
+			
+		});
+
+
+
 		res.redirect('/index');
 	});
 
