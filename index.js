@@ -103,7 +103,6 @@ passport.use(new LocalStrategy({
 // logging, parsing, and session handling.
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
-//app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 
@@ -360,7 +359,7 @@ app.get('/store', function(req, res){
 app.put('/cart/add', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		var memberid = req.body.member; //This needs to be passed in later using req.body.memberid
-		var itemid = 1; //For testing purposes needs to be changed later
+		var itemid = req.body.item; //For testing purposes needs to be changed later
 		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = '"+memberid+"' AND itemid = '"+itemid+"' RETURNING *) INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT '"+memberid+"','"+itemid+"',1  WHERE NOT EXISTS (SELECT * FROM upsert);");
 
 		//Error checking for adding to shopping cart
