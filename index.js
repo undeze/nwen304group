@@ -221,19 +221,40 @@ app.get('/login/facebook/return',
 						console.log(result.rows[i].username);
 						i++;
 					}
-				// Now retrieve the facebook user...?	
-				var u = req.user;
-				console.log('req.user: ' + u.displayName);
+					// Now retrieve the facebook user...?	
+					var u = req.user;
+					console.log('req.user: ' + u.displayName);
 				}
 				// Now check to see if the user is in the members table. If not, add them. But, without a password?
 				// Perhaps add a facebook members table into the database...?
 				client.end();
 			});	
+			
+			
+
 		});	
 
-		
-					
+		pg.connect(connectionString, function (err2, client2, completed2){
+			if(err){
+				console.log('Could not connect to postgresql on signup',err);
+				return;
+			}
 
+			//console.log('req.user: ' + u.displayName);
+			/* See if facebook user is in members table. If not, add */
+			var fbdetails = req.user;
+			client.query("select * from members where username = '" + fbdetails.user + "';", function(error2, result2){
+				completed2();
+				if(error2){
+					console.log('error', error2);
+				}
+				if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
+					console.log(result.rows[0].username);
+				} //else add to members
+			});
+
+		});
+		
 		res.redirect('/index');
 	}
 );
