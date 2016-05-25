@@ -231,15 +231,15 @@ app.get('/login/facebook/return',
 			});	
 		});	
 
+		var fbdetails = req.user;
+		var fbuserInDB = false;
+		/* See if facebook user is in members table. If not, add */
 		pg.connect(connectionString, function (err2, client2, completed2){
 			if(err2){
-				console.log('Could not connect to postgresql on signup',err);
+				console.log('Could not connect to postgresql on signup',err2);
 				return;
-			}
-
-			//console.log('req.user: ' + u.displayName);
-			/* See if facebook user is in members table. If not, add */
-			var fbdetails = req.user;
+			}			
+			
 			client2.query("select * from members where username = '" + fbdetails.user + "';", function(error2, result2){
 				completed2();
 				if(error2){
@@ -247,10 +247,30 @@ app.get('/login/facebook/return',
 				}
 				if(result2.rows[0] != undefined){ // check for the case where no match is found in the table.
 					console.log(result2.rows[0].username);
+					fbuserInDB = true;
 				} //else add to members
 				client2.end();
 			});
 		});
+
+		if (!fbuserInDB){
+			pg.connect(connectionString, function (err3, client3, completed3){
+			if(err3){
+				console.log('Could not connect to postgresql on signup',err3);
+				return;
+			}			
+			/* Put facebook user details into members table */
+			client3.query("insert into members values (default, '" + fbdetails.user + "'',''," + true + ",'');", function(error3, result3){
+				completed3();
+				if(error3){
+					console.log('error', error3);
+				}
+				client3.end();
+			});
+		});
+		}
+
+
 		
 		res.redirect('/index');
 	}
