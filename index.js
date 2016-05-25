@@ -263,7 +263,7 @@ app.get('/login/facebook/return',
 			}			
 			console.log('-----------------------------------6');
 			/* Put facebook user details into members table */
-			client3.query("insert into members values (default, '" + fbdetails.user + "'pw','fb'," + true + ",'1');", function(error3, result3){
+			client3.query("insert into members values (default, '" + fbdetails.displayName + "'pw','fb'," + true + ",'1');", function(error3, result3){
 				completed3();
 				if(error3){
 					console.log('error', error3);
