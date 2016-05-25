@@ -240,7 +240,7 @@ app.get('/login/facebook/return',
 				return;
 			}			
 			
-			client2.query("select * from members where username = '" + fbdetails.user + "';", function(error2, result2){
+			client2.query("select * from members where username = '" + fbdetails.displayName + "';", function(error2, result2){
 				completed2();
 				if(error2){
 					console.log('error', error2);
@@ -260,7 +260,7 @@ app.get('/login/facebook/return',
 				return;
 			}			
 			/* Put facebook user details into members table */
-			client3.query("insert into members values (default, '" + fbdetails.user + "'',''," + true + ",'');", function(error3, result3){
+			client3.query("insert into members values (default, '" + fbdetails.user + "'pw','fb'," + true + ",'1');", function(error3, result3){
 				completed3();
 				if(error3){
 					console.log('error', error3);
