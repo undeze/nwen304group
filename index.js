@@ -325,7 +325,7 @@ app.get('/cart', function(req, res){
 app.get('/store', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
-			console.error('Could not connect to database');
+			console.error('Could not connectexamples to database');
 			console.error(err);
 			return;
 		}
@@ -354,7 +354,7 @@ app.get('/store', function(req, res){
 app.put('/cart/add', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		var memberid = req.body.memberid; //This needs to be passed in later using req.body.memberid
-		var itemid = req.body.itemid; //For testing purposes needs to be changed later
+		var itemid = 1; //For testing purposes needs to be changed later
 		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = '"+memberid+"' AND itemid = '"+itemid+"' RETURNING *) INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT '"+memberid+"','"+itemid+"',1  WHERE NOT EXISTS (SELECT * FROM upsert);");
 
 		//Error checking for adding to shopping cart
