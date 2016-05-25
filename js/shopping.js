@@ -3,7 +3,7 @@
 $(document).ready(function() {
 	
 	var Arrays=new Array();
-	getData();
+	//getData();
 	
 	$('.add-to-cart-button').click(function(){
 		
@@ -153,10 +153,10 @@ function getpos(arr, obj) {
 
 //A GET request. If successful, this passes data to the 'refreshList' function
 function getData(){
-	// $.get("https://nwen304group6.herokuapp.com/cart",{ member: "8" })
-	// 	.done(function(data){
-	// 		refreshList(data);
-	// 	});
+	$.get('https://nwen304group6.herokuapp.com/cart',function(data){
+			alert(data);
+			//refreshList(data);
+		});
 	// });
 	// $.ajax({
 	// 	method: 'GET',
@@ -167,22 +167,22 @@ function getData(){
 	// 	contentType: "application/json",
 	// 	dataType: "json"
 	// }).then(refreshList,alert('hello'));//ERROR_LOG);
-	$.ajax({
-		method: 'GET',
-		url: 'https://nwen304group6.herokuapp.com/cart',
-		data: JSON.stringify({
-			member: 8
-		}),
-		contentType: "application/json",
-		dataType: "json",
-		success: function(data){
-			alert('No Error...');
-			refreshList(data);
-		},
-		error: function(){
-			alert('Error...');
-		}
-	});
+	// $.ajax({
+	// 	method: 'GET',
+	// 	url: 'https://nwen304group6.herokuapp.com/cart',
+	// 	data: JSON.stringify({
+	// 		member: 8
+	// 	}),
+	// 	contentType: "application/json",
+	// 	dataType: "json",
+	// 	success: function(data){
+	// 		alert('No Error...');
+	// 		refreshList(data);
+	// 	},
+	// 	error: function(){
+	// 		alert('Error...');
+	// 	}
+	// });
 };
 
 //Redraws the shopping cart for the client
