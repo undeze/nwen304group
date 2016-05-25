@@ -303,8 +303,7 @@ app.get('/cart', function(req, res){
 			console.error(err);
 			return;
 		}
-		//var memberid = req.body.memberid;
-		var memberid = 8;
+		var memberid = req.body.member;
 		var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
 		function(error, result){
 			if(err){
@@ -330,11 +329,10 @@ app.get('/cart', function(req, res){
 app.get('/store', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
-			console.error('Could not connectexamples to database');
+			console.error('Could not connect to database');
 			console.error(err);
 			return;
 		}
-		var memberid = req.body.memberid;
 		var query =  client.query("SELECT * FROM Items;", function(error, result){
 			if(error){
 				console.error(error);
