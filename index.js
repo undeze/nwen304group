@@ -229,13 +229,10 @@ app.get('/login/facebook/return',
 				// Perhaps add a facebook members table into the database...?
 				client.end();
 			});	
-			
-			
-
 		});	
 
 		pg.connect(connectionString, function (err2, client2, completed2){
-			if(err){
+			if(err2){
 				console.log('Could not connect to postgresql on signup',err);
 				return;
 			}
@@ -243,16 +240,16 @@ app.get('/login/facebook/return',
 			//console.log('req.user: ' + u.displayName);
 			/* See if facebook user is in members table. If not, add */
 			var fbdetails = req.user;
-			client.query("select * from members where username = '" + fbdetails.user + "';", function(error2, result2){
+			client2.query("select * from members where username = '" + fbdetails.user + "';", function(error2, result2){
 				completed2();
 				if(error2){
 					console.log('error', error2);
 				}
-				if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
-					console.log(result.rows[0].username);
+				if(result2.rows[0] != undefined){ // check for the case where no match is found in the table.
+					console.log(result2.rows[0].username);
 				} //else add to members
+				client2.end();
 			});
-
 		});
 		
 		res.redirect('/index');
