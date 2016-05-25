@@ -4,6 +4,7 @@ $(document).ready(function() {
 	
 	var Arrays=new Array();
 	//getData();
+	getWeather();
 	
 	$('.add-to-cart-button').click(function(){
 		
@@ -196,4 +197,18 @@ function refreshList(data){
 
 		$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+thisID+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>');
 	}
+};
+
+function getWeather(){
+	$.ajax({
+		url: 'https://query.yahooapis.com/v1/public/yql?q=select%20item.condition%20from%20weather.forecast%20where%20woeid%20%3D%2015021762&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
+		method: "GET",
+		dataType: "jsonp",
+		success: function(data){
+			alert(data.query.results.channel.item.condition.text);
+		},
+		error: function(){
+			alert('noob');
+		}
+	});
 };
