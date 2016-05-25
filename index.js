@@ -200,9 +200,9 @@ app.get('/login/facebook/return',
 	passport.authenticate('facebook', { failureRedirect: '/login' }),
 
 	function(req, res) {
-		console.log('need to check database here probably');
-		
+				
 		/* Check with members table to see if facebook */
+		/*
 		pg.connect(connectionString, function (err, client, completed){
 			if(err){
 					console.log('Could not connect to postgresql on signup',err);
@@ -230,11 +230,13 @@ app.get('/login/facebook/return',
 				client.end();
 			});	
 		});	
+		*/
 		console.log('-----------------------------------1');
 		var fbdetails = req.user;
 		console.log('-----------------------------------2');
 		var fbuserInDB = false;
 		/* See if facebook user is in members table. If not, add */
+		/*
 		pg.connect(connectionString, function (err2, client2, completed2){
 			if(err2){
 				console.log('Could not connect to postgresql on signup',err2);
@@ -254,24 +256,27 @@ app.get('/login/facebook/return',
 				client2.end();
 			});
 		});
+		*/
+
+
 		console.log('-----------------------------------5');
 		if (!fbuserInDB){
 			pg.connect(connectionString, function (err3, client3, completed3){
-			if(err3){
-				console.log('Could not connect to postgresql on signup',err3);
-				return;
-			}			
-			console.log('-----------------------------------6');
-			/* Put facebook user details into members table */
-			client3.query("insert into members values (default, '" + fbdetails.displayName + "'pw','fb'," + true + ",'1');", function(error3, result3){
-				completed3();
-				if(error3){
-					console.log('error', error3);
-				}
+				if(err3){
+					console.log('Could not connect to postgresql on signup',err3);
+					return;
+				}			
+				console.log('-----------------------------------6');
+				/* Put facebook user details into members table */
+				client3.query("insert into members values (default, '" + fbdetails.displayName + "'pw','fb'," + true + ",'1');", function(error3, result3){
+					completed3();
+					if(error3){
+						console.log('error', error3);
+					}
 				client3.end();
 			});
 			console.log('-----------------------------------7');
-		});
+			});
 		}
 
 
