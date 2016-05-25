@@ -1,15 +1,6 @@
 <!DOCTYPE html PUBLIC>
 <html><head><title>home.ejs</title>
 
-<script src="https://query.yahooapis.com/v1/public/yql?q=select%20item.condition%20from%20weather.forecast%20where%20woeid%20%3D%2015021762&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"></script>
-<script>
-  var callbackFunction = function(data) {
-    //var conditions = data.query.results.channel.wind;
-    var conditions = data.query.results.channel.item.condition.text;
-    alert(conditions);
-  };
-</script>
-
 </head>
 
 <body>
