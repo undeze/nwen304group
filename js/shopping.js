@@ -3,6 +3,7 @@
 $(document).ready(function() {
 	
 	var Arrays=new Array();
+	getData();
 	
 	$('.add-to-cart-button').click(function(){
 		
@@ -126,7 +127,7 @@ $(document).ready(function() {
 	
 	$('.closeCart').click(function() {
 		
-		$('#cart_wrapper').slideUp();
+		$('#cart_wrapper').slideUp('slow');
 		
 	});
 	
@@ -149,3 +150,50 @@ function getpos(arr, obj) {
     if (arr[i] == obj) return i;
   }
 }
+
+//A GET request. If successful, this passes data to the 'refreshList' function
+function getData(){
+	// $.get("https://nwen304group6.herokuapp.com/cart",{ member: "8" })
+	// 	.done(function(data){
+	// 		refreshList(data);
+	// 	});
+	// });
+	// $.ajax({
+	// 	method: 'GET',
+	// 	url: 'https://nwen304group6.herokuapp.com/cart',
+	// 	data: JSON.stringify({
+	// 		member: "8"
+	// 	}),
+	// 	contentType: "application/json",
+	// 	dataType: "json"
+	// }).then(refreshList,alert('hello'));//ERROR_LOG);
+	$.ajax({
+		method: 'GET',
+		url: 'https://nwen304group6.herokuapp.com/cart',
+		data: JSON.stringify({
+			member: 8
+		}),
+		contentType: "application/json",
+		dataType: "json",
+		success: function(data){
+			alert('No Error...');
+			refreshList(data);
+		},
+		error: function(){
+			alert('Error...');
+		}
+	});
+};
+
+//Redraws the shopping cart for the client
+function refreshList(data){
+	//Loop through all items in the cart database
+	alert(data.length);
+	for(items in data){
+		var itemName = data[items].name;
+		var price = data[items].price;
+		var quantity = data[items].quantity;
+
+		$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+thisID+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>');
+	}
+};
