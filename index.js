@@ -353,18 +353,8 @@ app.get('/store', function(req, res){
 //Adds items to a members shopping cart
 app.put('/cart/add', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
-		var memberid = 8; //This needs to be passed in later using req.body.memberid
-		var itemid = 1; //For testing purposes needs to be changed later
-
-		// var insert = "INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT 8,1,1";
-		// var update = "UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = 8 AND itemid = 1";
-		// var finalQuery = "WITH upsert AS ('"+update+"' RETURNING *) '"+insert+"' WHERE NOT EXISTS (SELECT * FROM upsert);";
-		// var query = client.query(finalQuery);
-
-		// var insert = "INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT '"+memberid+"', '"+itemid+"', 1";
-		// var update = "UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = '"+memberid+"' AND itemid = '"+itemid+"' ";
-		// var finalQuery = "WITH upsert AS ('"+update+"' RETURNING *) '"+insert+"' WHERE NOT EXISTS (SELECT * FROM upsert);";
-		//var query = client.query(finalQuery);
+		var memberid = req.body.memberid; //This needs to be passed in later using req.body.memberid
+		var itemid = req.body.itemid; //For testing purposes needs to be changed later
 		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = '"+memberid+"' AND itemid = '"+itemid+"' RETURNING *) INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT '"+memberid+"','"+itemid+"',1  WHERE NOT EXISTS (SELECT * FROM upsert);");
 
 		//Error checking for adding to shopping cart
