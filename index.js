@@ -353,7 +353,7 @@ app.get('/store', function(req, res){
 //Adds items to a members shopping cart
 app.put('/cart/add', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
-		var memberid = req.body.memberid; //This needs to be passed in later using req.body.memberid
+		var memberid = 8; //This needs to be passed in later using req.body.memberid
 		var itemid = 1; //For testing purposes needs to be changed later
 		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = '"+memberid+"' AND itemid = '"+itemid+"' RETURNING *) INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT '"+memberid+"','"+itemid+"',1  WHERE NOT EXISTS (SELECT * FROM upsert);");
 
