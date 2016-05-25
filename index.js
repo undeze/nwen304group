@@ -200,6 +200,9 @@ app.get('/login/facebook/return',
 	passport.authenticate('facebook', { failureRedirect: '/login' }),
 
 	function(req, res) {
+
+		console.log('-----------------------------------1');
+		var u = req.user;
 				
 		/* Check with members table to see if facebook */
 		/*
@@ -222,7 +225,7 @@ app.get('/login/facebook/return',
 						i++;
 					}
 					// Now retrieve the facebook user...?	
-					var u = req.user;
+					// var u = req.user;
 					console.log('req.user: ' + u.displayName);
 				}
 				// Now check to see if the user is in the members table. If not, add them. But, without a password?
@@ -231,32 +234,31 @@ app.get('/login/facebook/return',
 			});	
 		});	
 		*/
-		console.log('-----------------------------------1');
-		var u = req.user;
+		
 		console.log('-----------------------------------2');
 		var fbuserInDB = false;
 		/* See if facebook user is in members table. If not, add */
-		/*
+		
 		pg.connect(connectionString, function (err2, client2, completed2){
 			if(err2){
 				console.log('Could not connect to postgresql on signup',err2);
 				return;
 			}			
 			console.log('-----------------------------------3');
-			client2.query("select * from members where username = '" + fbdetails.displayName + "';", function(error2, result2){
+			client2.query("select * from members where username = '" + u.displayName + "';", function(error2, result2){
 				completed2();
 				if(error2){
 					console.log('error', error2);
 				}
 				console.log('-----------------------------------4');
 				if(result2.rows[0] != undefined){ // check for the case where no match is found in the table.
-					console.log(result2.rows[0].username);
+					console.log('------------ ' + result2.rows[0].username);
 					fbuserInDB = true;
 				} //else add to members
 				client2.end();
 			});
 		});
-		*/
+		
 
 
 		console.log('-----------------------------------5');
@@ -268,7 +270,7 @@ app.get('/login/facebook/return',
 				}			
 				console.log('-----------------------------------6');
 				/* Put facebook user details into members table */
-				client3.query("insert into members values (default, '" + u.displayName + "','pw','fb@c.com'," + true + ",'1');", function(error3, result3){
+				client3.query("insert into members values (default, '" + u.displayName + "','',''," + true + ",'1');", function(error3, result3){
 					completed3();
 					if(error3){
 						console.log('error3', error3);
