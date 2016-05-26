@@ -196,72 +196,16 @@ function loginPost(req, res, next) {
 app.get('/login/facebook',
 	passport.authenticate('facebook'));
 
-app.get('/login/facebook/return', 
-	passport.authenticate('facebook', { failureRedirect: '/login' }),
+app.get('/login/facebook/return', 	passport.authenticate('facebook', { failureRedirect: '/login' }), authenticateCallBack);
 
-	function(req, res) {
+	function authenticateCallBack(req, res) {
 
-		console.log('-----------------------------------1');
+		//console.log('-----------------------------------1');
 		var u = req.user;
 				
-		/* Check with members table to see if facebook */
-		/*
-		pg.connect(connectionString, function (err, client, completed){
-			if(err){
-					console.log('Could not connect to postgresql on signup',err);
-					return;
-			}
-			client.query("select * from members;", function(error, result){
-				completed();
-				if(error){
-					console.log('error', error);
-				}
-				
-				if(result.rows[0] != undefined){ // check for the case where no match is found in the table.
-					console.log(result.rows[0].username);
-					var i = 0;
-					while(result.rows[i] != undefined){
-						console.log(result.rows[i].username);
-						i++;
-					}
-					// Now retrieve the facebook user...?	
-					// var u = req.user;
-					console.log('req.user: ' + u.displayName);
-				}
-				// Now check to see if the user is in the members table. If not, add them. But, without a password?
-				// Perhaps add a facebook members table into the database...?
-				client.end();
-			});	
-		});	
-		*/
-		
-		console.log('-----------------------------------2');
-		//var fbuserInDB = false;
-		/* See if facebook user is in members table. If not, add */
-		/*
-		pg.connect(connectionString, function (err2, client2, completed2){
-			if(err2){
-				console.log('Could not connect to postgresql on signup',err2);
-				return;
-			}			
-			console.log('-----------------------------------3');
-			client2.query("select * from members where username = '" + u.displayName + "';", function(error2, result2){
-				completed2();
-				if(error2){
-					console.log('error', error2);
-				}
-				console.log('-----------------------------------4');
-				if(result2.rows[0] != undefined){ // check for the case where no match is found in the table.
-					console.log('------------ ' + result2.rows[0].username);
-					fbuserInDB = true;
-				} //else add to members
-				client2.end();
-			});
-		});*/
+		pg.connect(connectionString, connectCallBack);
 
-		pg.connect(connectionString, myCallBack);
-
-		function myCallBack(err2, client2){
+		function connectCallBack(err2, client2){
 			if(err2){
 				console.log('Could not connect to postgresql on signup',err2);
 				return;
@@ -288,63 +232,34 @@ app.get('/login/facebook/return',
 				client2.end();
 			}
 		}
-		/*
-		function completed2(){
-			console.log('----------completed2()---------    :)')
-		}*/
-		
-		/* The idea here was to have the previous pg.connect set fbuserInDB to true before the following if clause. */
-		/* This doesn't work properly because of the callback function not returning before the if clause is reached. */
-		/* This results in entries in the members table being entered unnecessarily. */
-		/* I have to somehow wait for the previous callback function before executing the following code. */
-		console.log('-----------------------------------5');
+
+		//console.log('-----------------------------------5');
 
 
 		function insertNewFacebookUserIntoMembers(){
 			console.log('insertNewFacebookUserIntoMembers');
-			pg.connect(connectionString, function (err3, client3){//S, completed3){
+			pg.connect(connectionString, function (err3, client3){
 			if(err3){
 				console.log('Could not connect to postgresql on signup',err3);
 				return;
 			}			
-			console.log('-----------------------------------6');
+			//console.log('-----------------------------------6');
 			/* Put facebook user details into members table */
 			client3.query("insert into members values (default, '" + u.displayName + "','',''," + true + ",'1');", function(error3, result3){
-				//completed3();
+				
 				if(error3){
 					console.log('error3', error3);
 				}
 			client3.end();
 			});
-			console.log('-----------------------------------7');
+			//console.log('-----------------------------------7');
 		});
 		}
 
-		//if (!fbuserInDB){
-			/*
-		pg.connect(connectionString, function (err3, client3, completed3){
-			if(err3){
-				console.log('Could not connect to postgresql on signup',err3);
-				return;
-			}			
-			console.log('-----------------------------------6');
-			/* Put facebook user details into members table 
-			client3.query("insert into members values (default, '" + u.displayName + "','',''," + true + ",'1');", function(error3, result3){
-				completed3();
-				if(error3){
-					console.log('error3', error3);
-				}
-			client3.end();
-			});
-			console.log('-----------------------------------7');
-		}); */
-		//}
 
-
-		
 		res.redirect('/index');
 	}
-);
+
 
 
 app.get('/login/local',
