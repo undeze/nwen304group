@@ -261,14 +261,14 @@ app.get('/login/facebook/return',
 
 		pg.connect(connectionString, myCallBack);
 
-		function myCallBack(err2, client2, completed2){
+		function myCallBack(err2, client2){
 			if(err2){
 				console.log('Could not connect to postgresql on signup',err2);
 				return;
 			}			
 			console.log('-----------------------------------3');
 			client2.query("select * from members where username = '" + u.displayName + "';", function(error2, result2){
-				completed2();
+				//completed2();
 				if(error2){
 					console.log('error', error2);
 				}
