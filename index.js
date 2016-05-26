@@ -196,69 +196,64 @@ function loginPost(req, res, next) {
 app.get('/login/facebook',
 	passport.authenticate('facebook'));
 
-app.get('/login/facebook/return', 	passport.authenticate('facebook', { failureRedirect: '/login' }), authenticateCallBack);
+app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/login' }), authenticateCallBack);
 
-	function authenticateCallBack(req, res) {
+function authenticateCallBack(req, res) {
 
-		//console.log('-----------------------------------1');
-		var u = req.user;
+	console.log('authenticateCallBack');
+	var u = req.user;
 				
-		pg.connect(connectionString, connectCallBack);
+	pg.connect(connectionString, connectCallBack);
 
-		function connectCallBack(err2, client2){
-			if(err2){
-				console.log('Could not connect to postgresql on signup',err2);
-				return;
-			}			
-			console.log('-----------------------------------3');
-			client2.query("select * from members where username = '" + u.displayName + "';", callBack2);
+	function connectCallBack(err2, client2){
+		console.log('connectCallBack');
+		if(err2){
+			console.log('Could not connect to postgresql on signup',err2);
+			return;
+		}			
+		console.log('-----------------------------------3');
+		client2.query("select * from members where username = '" + u.displayName + "';", callBack2);
 
-			function callBack2(error2, result2){
-
-				//completed2();
-
-				if(error2){
-					console.log('error', error2);
-				}
-				console.log('-----------------------------------4');
-				if(result2.rows[0] != undefined){ // check for the case where no match is found in the table.
-					console.log(result2.rows[0].username + ' - Found in members table.');
-					//fbuserInDB = true;
-					
-				} //else add to members
-				else {
-					insertNewFacebookUserIntoMembers();
-				}
-				client2.end();
+		function callBack2(error2, result2){
+			console.log('callBack2');
+			if(error2){
+				console.log('error', error2);
 			}
+			console.log('-----------------------------------4');
+			if(result2.rows[0] != undefined){ // check for the case where no match is found in the table.
+				console.log(result2.rows[0].username + ' - Found in members table.');	
+			} //else add to members
+			else {
+				insertNewFacebookUserIntoMembers();
+			}
+			client2.end();
 		}
+	}
 
-		//console.log('-----------------------------------5');
+	
 
 
-		function insertNewFacebookUserIntoMembers(){
-			console.log('insertNewFacebookUserIntoMembers');
-			pg.connect(connectionString, function (err3, client3){
+	function insertNewFacebookUserIntoMembers(){
+		console.log('insertNewFacebookUserIntoMembers');
+		pg.connect(connectionString, function (err3, client3){
 			if(err3){
 				console.log('Could not connect to postgresql on signup',err3);
 				return;
 			}			
-			//console.log('-----------------------------------6');
 			/* Put facebook user details into members table */
-			client3.query("insert into members values (default, '" + u.displayName + "','',''," + true + ",'1');", function(error3, result3){
-				
+			client3.query("insert into members values (default, '" + u.displayName + "','',''," + true + ",'" + u.id + "');", insertCallback);
+
+			function insertCallback(error3, result3){
+				console.log('insertCallback');
 				if(error3){
 					console.log('error3', error3);
 				}
-			client3.end();
-			});
-			//console.log('-----------------------------------7');
+				client3.end();
+			}
 		});
-		}
-
-
-		res.redirect('/index');
 	}
+	res.redirect('/index');
+}
 
 
 
