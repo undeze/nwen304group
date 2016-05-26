@@ -268,7 +268,7 @@ app.get('/login/facebook/return',
 			}			
 			console.log('-----------------------------------3');
 			client2.query("select * from members where username = '" + u.displayName + "';", function(error2, result2){
-				//completed2();
+				completed2();
 				if(error2){
 					console.log('error', error2);
 				}
@@ -280,12 +280,17 @@ app.get('/login/facebook/return',
 				client2.end();
 			});
 		}
+
+		function completed2(){
+			console.log('----------completed2()---------    :)')
+		}
 		
 		/* The idea here was to have the previous pg.connect set fbuserInDB to true before the following if clause. */
 		/* This doesn't work properly because of the callback function not returning before the if clause is reached. */
 		/* This results in entries in the members table being entered unnecessarily. */
 		/* I have to somehow wait for the previous callback function before executing the following code. */
 		console.log('-----------------------------------5');
+
 		if (!fbuserInDB){
 			pg.connect(connectionString, function (err3, client3, completed3){
 				if(err3){
