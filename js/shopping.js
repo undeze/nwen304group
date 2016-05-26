@@ -201,11 +201,18 @@ function refreshList(data){
 
 function getWeather(){
 	$.ajax({
-		url: 'https://query.yahooapis.com/v1/public/yql?q=select%20item.condition%20from%20weather.forecast%20where%20woeid%20%3D%2015021762&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
+		url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%2015021762&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
+		//url: 'https://query.yahooapis.com/v1/public/yql?q=select%20item.condition%20from%20weather.forecast%20where%20woeid%20%3D%2015021762&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
 		method: "GET",
 		dataType: "jsonp",
 		success: function(data){
-			alert(data.query.results.channel.item.condition.text);
+			var temp = data.query.results.channel.item.condition.temp;
+			temp = ((temp - 32) * 5)/9;
+			temp = temp.toFixed(1);
+			var condition = data.query.results.channel.item.condition.text;
+			var desc = data.query.results.channel.item.description;
+			desc = desc.substring(18,57);
+			$('.footer').children('#condition').html("<b>Current Conditions:</b> <br />"+condition+"</b> <br />"+temp+" Degrees </b> <br /> <img src="+desc+"/>");
 		},
 		error: function(){
 			alert('noob');
