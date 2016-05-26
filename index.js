@@ -160,7 +160,7 @@ app.get('/login',
 app.post('/loginnew', loginPost);
 
 function loginPost(req, res, next) {
-	console.log('loginPost');
+	console.log('index.js loginPost');
   // Ask passport to authenticate.
   passport.authenticate('local', function(err, username, info) {
   	console.log('loginPost passport.auth');
@@ -193,35 +193,35 @@ function loginPost(req, res, next) {
 }
 
 
-app.get('/login/facebook',
-	passport.authenticate('facebook'));
+app.get('/login/facebook', passport.authenticate('facebook'));
+
 
 app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/login' }), authenticateCallBack);
 
+
 function authenticateCallBack(req, res) {
 
-	console.log('authenticateCallBack');
+	console.log('index.js authenticateCallBack');
 	var u = req.user;
 				
 	pg.connect(connectionString, connectCallBack);
 
 	function connectCallBack(err2, client2){
-		console.log('connectCallBack');
+		console.log('index.js connectCallBack');
 		if(err2){
 			console.log('Could not connect to postgresql on signup',err2);
 			return;
 		}			
-		console.log('-----------------------------------3');
 		client2.query("select * from members where username = '" + u.displayName + "';", callBack2);
 
 		function callBack2(error2, result2){
-			console.log('callBack2');
+			console.log('index.js callBack2');
 			if(error2){
 				console.log('error', error2);
 			}
-			console.log('-----------------------------------4');
+			
 			if(result2.rows[0] != undefined){ // check for the case where no match is found in the table.
-				console.log(result2.rows[0].username + ' - Found in members table.');	
+				console.log('index.js ' + result2.rows[0].username + ' - Found in members table.');	
 			} //else add to members
 			else {
 				insertNewFacebookUserIntoMembers();
@@ -234,7 +234,7 @@ function authenticateCallBack(req, res) {
 
 
 	function insertNewFacebookUserIntoMembers(){
-		console.log('insertNewFacebookUserIntoMembers');
+		console.log('index.js insertNewFacebookUserIntoMembers');
 		pg.connect(connectionString, function (err3, client3){
 			if(err3){
 				console.log('Could not connect to postgresql on signup',err3);
@@ -242,9 +242,9 @@ function authenticateCallBack(req, res) {
 			}			
 			/* Put facebook user details into members table */
 			client3.query("insert into members values (default, '" + u.displayName + "','','','" + u.id + "');", insertCallback);
-			//client3.query("insert into members values (default, '" + u.displayName + "','',''," + true + ",'1');", insertCallback);
+			
 			function insertCallback(error3, result3){
-				console.log('insertCallback');
+				console.log('index.js insertCallback');
 				if(error3){
 					console.log('error3', error3);
 				}
