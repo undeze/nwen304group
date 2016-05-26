@@ -241,7 +241,7 @@ function authenticateCallBack(req, res) {
 				return;
 			}			
 			/* Put facebook user details into members table */
-			client3.query("insert into members values (default, '" + u.displayName + "','',''," + true + ",'" + u.id + "');", insertCallback);
+			client3.query("insert into members values (default, '" + u.displayName + "','','','" + u.id + "');", insertCallback);
 			//client3.query("insert into members values (default, '" + u.displayName + "','',''," + true + ",'1');", insertCallback);
 			function insertCallback(error3, result3){
 				console.log('insertCallback');
