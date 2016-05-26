@@ -271,14 +271,14 @@ app.get('/login/facebook/return',
 
 			function callBack2(error2, result2){
 
-				completed2();
+				//completed2();
 
 				if(error2){
 					console.log('error', error2);
 				}
 				console.log('-----------------------------------4');
 				if(result2.rows[0] != undefined){ // check for the case where no match is found in the table.
-					console.log('------------ ' + result2.rows[0].username);
+					console.log(result2.rows[0].username + ' - Found in members table.');
 					//fbuserInDB = true;
 					
 				} //else add to members
@@ -288,10 +288,10 @@ app.get('/login/facebook/return',
 				client2.end();
 			}
 		}
-
+		/*
 		function completed2(){
 			console.log('----------completed2()---------    :)')
-		}
+		}*/
 		
 		/* The idea here was to have the previous pg.connect set fbuserInDB to true before the following if clause. */
 		/* This doesn't work properly because of the callback function not returning before the if clause is reached. */
@@ -302,7 +302,7 @@ app.get('/login/facebook/return',
 
 		function insertNewFacebookUserIntoMembers(){
 			console.log('insertNewFacebookUserIntoMembers');
-			pg.connect(connectionString, function (err3, client3, completed3){
+			pg.connect(connectionString, function (err3, client3){//S, completed3){
 			if(err3){
 				console.log('Could not connect to postgresql on signup',err3);
 				return;
