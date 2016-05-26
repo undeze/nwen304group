@@ -267,8 +267,12 @@ app.get('/login/facebook/return',
 				return;
 			}			
 			console.log('-----------------------------------3');
-			client2.query("select * from members where username = '" + u.displayName + "';", function(error2, result2){
+			client2.query("select * from members where username = '" + u.displayName + "';", callBack2);
+
+			function callBack2(error2, result2){
+
 				completed2();
+
 				if(error2){
 					console.log('error', error2);
 				}
@@ -278,7 +282,7 @@ app.get('/login/facebook/return',
 					fbuserInDB = true;
 				} //else add to members
 				client2.end();
-			});
+			}
 		}
 
 		function completed2(){
