@@ -280,8 +280,11 @@ app.get('/login/facebook/return',
 				if(result2.rows[0] != undefined){ // check for the case where no match is found in the table.
 					console.log('------------ ' + result2.rows[0].username);
 					//fbuserInDB = true;
-					insertNewFacebookUserIntoMembers();
+					
 				} //else add to members
+				else {
+					insertNewFacebookUserIntoMembers();
+				}
 				client2.end();
 			}
 		}
