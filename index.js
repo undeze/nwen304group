@@ -162,36 +162,37 @@ app.post('/loginnew', loginPost);
 /* Login without facebook */
 function loginPost(req, res, next) {
 	console.log('index.js loginPost');
-  // Ask passport to authenticate.
-  passport.authenticate('local', function(err, username, info) {
-  	console.log('loginPost passport.auth');
-    if (err) {
-      // if error happens
-      console.log('loginPost err');
-      return next(err);
-    }    
-    if (!username) {
-      // If authentication fails, get the error message that we set
-      // from previous (info.message) step, assign it into to
-      // req.session and redirect to the login page again to display
-      req.session.messages = info.message;
-      console.log('loginPost !username');
-      return res.redirect('/login');
+  	// Ask passport to authenticate.
+  	/* Local authentication. That is, authentication without Facebook */
+  	passport.authenticate('local', function(err, username, info) {
+  		console.log('loginPost passport.auth');
+    	if (err) {
+      	// if error happens
+      	console.log('loginPost err');
+      	return next(err);
+    	}    
+    	if (!username) {
+      	// If authentication fails, get the error message that we set
+      	// from previous (info.message) step, assign it into to
+      	// req.session and redirect to the login page again to display
+      	req.session.messages = info.message;
+      	console.log('loginPost !username');
+      	return res.redirect('/login');
     }
     // If everything's OK
     req.logIn(username, function(err) {
-      if (err) {
-        req.session.messages = "Error";
-        console.log('loginPost Error');
-        return next(err);
-      }
-      // Set the message
-      req.session.messages = "Login successfully";
+      	if (err) {
+        	req.session.messages = "Error";
+        	console.log('loginPost Error');
+        	return next(err);
+      	}
+      	// Set the message
+      	req.session.messages = "Login successfully";
 
-      console.log('loginPost successful');
-      return res.redirect('/indexWithoutFacebook');
+      	console.log('loginPost successful');
+      	return res.redirect('/indexWithoutFacebook');
     });    
-  })(req, res, next);
+  });//(req, res, next);
 }
 
 
@@ -200,13 +201,13 @@ app.get('/login/facebook', passport.authenticate('facebook'));
 
 app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/login' }), authenticateCallBack);
 
-
+/* Facebook authentication */
 function authenticateCallBack(req, res) {
 
 	console.log('index.js authenticateCallBack');
 	var u = req.user;
 				
-	/* Now connect to heroku members table to check if user already exits in database. */
+	/* Now connect to heroku members table to check if facebook user already exits in database. */
 	pg.connect(connectionString, connectCallBack);
 
 	function connectCallBack(err2, client2){
@@ -235,13 +236,8 @@ function authenticateCallBack(req, res) {
 	}
 }
 
-
 	res.redirect('/index');
 }
-
-
-
-
 
 function insertNewFacebookUserIntoMembers(u){
 	console.log('index.js insertNewFacebookUserIntoMembers');
@@ -289,7 +285,7 @@ app.get('/indexWithoutFacebook',
 	require('connect-ensure-login').ensureLoggedIn(),
 	function(req, res){
 		console.log('/indexWithoutFacebook');
-		req.user.displayName = 'Fred';
+		//req.user.displayName = 'Fred';
 		res.render('pages/index', { user: req.user });
 	});
 
