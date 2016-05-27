@@ -206,7 +206,6 @@ function authenticateCallBack(req, res) {
 				
 	pg.connect(connectionString, connectCallBack);
 
-
 	function connectCallBack(err2, client2){
 	console.log('index.js connectCallBack');
 	if(err2){
@@ -286,6 +285,13 @@ app.get('/logout/facebook', fb.ensureLoggedIn(),
 		req.logout();
 		res.redirect('/');
 });
+
+app.get('/goShopping'){
+	require('connect-ensure-login').ensureLoggedIn(),
+	function(req, res){
+		res.render('pages/shopping', { user: req.user });
+	});
+}
 
 
 app.get('/profile',
