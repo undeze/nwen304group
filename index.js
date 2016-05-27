@@ -291,7 +291,7 @@ app.get('/goShopping',
 	function(req, res){
 		res.render('pages/shopping', { user: req.user });
 	});
-}
+
 
 
 app.get('/profile',
