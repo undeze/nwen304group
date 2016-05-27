@@ -192,7 +192,7 @@ function loginPost(req, res, next) {
       	console.log('loginPost successful');
       	return res.redirect('/indexWithoutFacebook');
     });    
-  });//(req, res, next);
+  })(req, res, next);
 }
 
 
