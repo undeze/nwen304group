@@ -225,7 +225,7 @@ function authenticateCallBack(req, res) {
 				console.log('index.js ' + result2.rows[0].username + ' - Found in members table.');	
 			} //else add to members
 			else {
-				insertNewFacebookUserIntoMembers();
+				insertNewFacebookUserIntoMembers(u);
 			}
 			client2.end();
 		}
@@ -238,7 +238,7 @@ function authenticateCallBack(req, res) {
 	res.redirect('/index');
 }
 
-function insertNewFacebookUserIntoMembers(){
+function insertNewFacebookUserIntoMembers(u){
 		console.log('index.js insertNewFacebookUserIntoMembers');
 		pg.connect(connectionString, function (err3, client3){
 			if(err3){
@@ -254,11 +254,9 @@ function insertNewFacebookUserIntoMembers(){
 					console.log('error3', error3);
 				}
 				client3.end();
-		}
-	});
-}
-
-
+			}
+		});
+	}
 
 app.get('/login/local',
 	function(req,res){
