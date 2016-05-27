@@ -239,24 +239,26 @@ function authenticateCallBack(req, res) {
 }
 
 function insertNewFacebookUserIntoMembers(u){
-		console.log('index.js insertNewFacebookUserIntoMembers');
-		pg.connect(connectionString, function (err3, client3){
-			if(err3){
-				console.log('Could not connect to postgresql on signup',err3);
-				return;
-			}			
-			/* Put facebook user details into members table */
-			client3.query("insert into members values (default, '" + u.displayName + "','','','" + u.id + "');", insertCallback);
+	console.log('index.js insertNewFacebookUserIntoMembers');
+	pg.connect(connectionString, function (err3, client3){
+		if(err3){
+			console.log('Could not connect to postgresql on signup',err3);
+			return;
+		}			
+		/* Put facebook user details into members table */
+		client3.query("insert into members values (default, '" + u.displayName + "','','','" + u.id + "');", insertCallback);
 			
-			function insertCallback(error3, result3){
-				console.log('index.js insertCallback');
-				if(error3){
-					console.log('error3', error3);
-				}
-				client3.end();
-			}
-		});
+		client3.end();
+	});
+}
+
+function insertCallback(error3, result3){
+	console.log('index.js insertCallback');
+	if(error3){
+		console.log('error3', error3);
 	}
+			
+}
 
 app.get('/login/local',
 	function(req,res){
