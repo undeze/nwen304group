@@ -186,7 +186,7 @@ function loginPost(req, res, next) {
       }
       // Set the message
       req.session.messages = "Login successfully";
-      req.user.displayName = "Fred";
+
       console.log('loginPost successful');
       return res.redirect('/index');
     });    
@@ -205,6 +205,7 @@ function authenticateCallBack(req, res) {
 	console.log('index.js authenticateCallBack');
 	var u = req.user;
 				
+	/* Now connect to heroku members table to check if user already exits in database. */
 	pg.connect(connectionString, connectCallBack);
 
 	function connectCallBack(err2, client2){
@@ -226,6 +227,7 @@ function authenticateCallBack(req, res) {
 			console.log('index.js ' + result2.rows[0].username + ' - Found in members table.');	
 		} //else add to members
 		else {
+			console.log('          Insert new facebook user into members table');
 			insertNewFacebookUserIntoMembers(u);
 		}
 		client2.end();
@@ -280,6 +282,13 @@ app.get('/index',
 	function(req, res){
 		res.render('pages/index', { user: req.user });
 	});
+
+app.get('/indexWithoutFacebook',
+	require('connect-ensure-login').ensureLoggedIn(),
+	function(req, res){
+		res.render('pages/index', { user: req.user });
+	});
+
 
 app.get('/logout/facebook', fb.ensureLoggedIn(),
 	function(req, res){
@@ -469,7 +478,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 //https://scotch.io/tutorials/easy-node-authentication-setup-and-local
 app.post('/Locallogin', passport.authenticate('local-login', {
 
-        successRedirect : '/index', // redirect to the secure profile section
+        successRedirect : '/indexWithoutFacebook', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
 	})
