@@ -186,6 +186,7 @@ function loginPost(req, res, next) {
       }
       // Set the message
       req.session.messages = "Login successfully";
+      req.user.displayName = "Fred";
       console.log('loginPost successful');
       return res.redirect('/index');
     });    
