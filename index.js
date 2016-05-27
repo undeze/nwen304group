@@ -286,6 +286,8 @@ app.get('/index',
 app.get('/indexWithoutFacebook',
 	require('connect-ensure-login').ensureLoggedIn(),
 	function(req, res){
+		console.log('/indexWithoutFacebook');
+		req.user = 'Fred';
 		res.render('pages/index', { user: req.user });
 	});
 
