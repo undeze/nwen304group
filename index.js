@@ -77,7 +77,7 @@ passport.use(new LocalStrategy({
 
 					if(passwordHash == result.rows[0].password){
 						console.log('successful login 2, username:' + username);
-						
+						/*
 						var newUser = new User();
 						newUser.local.displayName = 'bob';
 						newUser.save(function(err){
@@ -85,7 +85,7 @@ passport.use(new LocalStrategy({
 								throw err;
 							return done(null, newUser);
 						});
-
+						*/
 						return done(null, username);
 						//res.redirect('/login');
 					} else {
