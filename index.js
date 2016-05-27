@@ -478,7 +478,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 
 
 
-
+/*
 //https://scotch.io/tutorials/easy-node-authentication-setup-and-local
 app.post('/Locallogin', passport.authenticate('local-login', {
 
@@ -487,7 +487,7 @@ app.post('/Locallogin', passport.authenticate('local-login', {
         failureFlash : true // allow flash messages
 	})
 	
-);
+); */
 
 
 
