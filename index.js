@@ -286,7 +286,7 @@ app.get('/logout/facebook', fb.ensureLoggedIn(),
 		res.redirect('/');
 });
 
-app.get('/goShopping'){
+app.get('/goShopping',
 	require('connect-ensure-login').ensureLoggedIn(),
 	function(req, res){
 		res.render('pages/shopping', { user: req.user });
