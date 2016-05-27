@@ -1,0 +1,657 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Ajax Shopping Cart : Super Shopping Cart With JQuery and PHP : 99Points.info </title>
+<script type="text/javascript" src="jquery-1.3.2.js"></script>
+<script type="text/javascript" src="jquery.livequery.js"></script>
+
+<link href="css/css.css" rel="stylesheet" />
+<script src = "js/jquery-1.3.2.js"></script>
+<script src = "js/shopping.js"></script>
+<script src = "js/jquery.livequery.js"></script>
+
+
+</head>
+
+<body>
+
+
+<div align="left" style="min-height:800px;">
+	
+	<div id="cart_wrapper" align="center">
+	
+		<form action="#" id="cart_form" name="cart_form">
+		
+			<div class="cart-info"></div>
+			
+			<div class="cart-total">
+			
+				<b>Total Charges:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> $<span>0</span>
+				
+				<input type="hidden" name="total-hidden-charges" id="total-hidden-charges" value="0" />
+			</div>
+			
+			<button type="submit" id="Submit">CheckOut</button>
+		
+		</form>
+	</div>
+	
+	<div id="wrap" align="center">
+		
+		<a id="show_cart" href="javascript:void(0)">View Cart</a>
+		
+		<ul>
+			<li id="1">
+				<img src="product_img/1.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div>Red Grocery Bag</div>
+			</li>
+			
+			<li id="2">
+				<img src="product_img/2.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div>Reusable Grocery Bag</div>
+			</li>
+			
+			<li id="3">
+				<img src="product_img/3.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div>White Grocery Bag</div>
+			</li>
+			<li id="4">
+				<img src="product_img/4.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div>Yellow Grocery Bag</div>
+			</li>
+			
+			<!-- Detail Boxes for above four li -->
+			
+			<div class="detail-view" id="detail-1">
+			
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/1.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Red Grocery Bag</label>
+					<br clear="all" />
+					
+					<p>
+						shopping bag, shopping, bag, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+				
+			</div>
+			<div class="detail-view" id="detail-2">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/2.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Reusable Grocery Bag</label>
+					<br clear="all" />
+					
+					<p>
+						shopping bag, shopping, bag, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">70.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			<div class="detail-view" id="detail-3">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/3.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>White Grocery Bag</label>
+					<br clear="all" />
+					
+
+					<p>
+						shopping bag, shopping, bag, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">50.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			<div class="detail-view" id="detail-4">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/4.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Yellow Grocery Bag</label>
+					<br clear="all" />
+					
+					<p>
+						shopping bag, shopping, bag, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">90.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			
+			<!---->
+			
+			<li id="5">
+				<img src="product_img/5.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div>Reusable Green Bag</div>
+			</li>
+			
+			<li id="6">
+				<img src="product_img/6.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div>Simple  Bag</div>
+			</li>
+			
+			<li id="7">
+				<img src="product_img/7.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div>WhiteGrocery Bag</div>
+			</li>
+			<li id="8">
+				<img src="product_img/8.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div>Reusable Grocery Bag</div>
+			</li>
+			
+			<!-- Detail Boxes for above four li -->
+			
+			<div class="detail-view" id="detail-5">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/5.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Reusable Grocery Bag</label>
+					<br clear="all" />
+					
+					<p>
+						shopping bag, shopping, bag, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			<div class="detail-view" id="detail-6">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/6.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Reusable Grocery Bag</label>
+					<br clear="all" />
+					
+					<p>
+						shopping bag, shopping, bag, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			<div class="detail-view" id="detail-7">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/7.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>WhiteGrocery Bag</label>
+					<br clear="all" />
+					
+					<p>
+						shopping bag, shopping, bag, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			<div class="detail-view" id="detail-8">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/8.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Reusable Grocery Bag</label>
+					<br clear="all" />
+					
+					<p>
+						shopping bag, shopping, bag, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			
+			<!---->
+			
+			<li id="9">
+				<img src="product_img/9.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div><span class="name">B</span><span class="price"></span>lue Shirt </div>
+			</li>
+			
+			<li id="10">
+				<img src="product_img/10.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div><span class="name">Green Large </span> Shirt </div>
+			</li>
+			
+			<li id="11">
+				<img src="product_img/11.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div>WhiteGrocery Bag</div>
+			</li>
+			
+			<li id="12">
+				<img src="product_img/12.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div><span class="name">Black Large </span> Shirt </div>
+			</li>
+			
+			<!-- Detail Boxes for above four li -->
+			
+			<div class="detail-view" id="detail-9">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/9.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Blue Shirt </label>
+					<br clear="all" />
+					
+					<p>
+						shopping shirts, shopping, shirts, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			<div class="detail-view" id="detail-10">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/10.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Green Large Shirt </label>
+					<br clear="all" />
+					
+					<p>
+						shopping shirts, shopping, shirts, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			<div class="detail-view" id="detail-11">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/11.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>WhiteGrocery Bag</label>
+					<br clear="all" />
+					
+					<p>
+						shopping bag, shopping, bag, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			<div class="detail-view" id="detail-12">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/12.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Black Large Shirt </label>
+					<br clear="all" />
+					
+					<p>
+						shopping shirts, shopping, shirts, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			
+			<!---->
+			
+			<li id="13">
+				<img src="product_img/13.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div><span class="name">Red Large </span> Shirt </div>
+			</li>
+			
+			<li id="14">
+				<img src="product_img/14.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div><span class="name">Green Large </span> Shirt </div>
+			</li>
+			
+			<li id="15">
+				<img src="product_img/15.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div><span class="name">Blue Large </span> Shirt </div>
+			</li>
+			
+			<li id="16">
+				<img src="product_img/16.jpg" class="items" height="100" alt="" />
+				
+				<br clear="all" />
+				<div><span class="name">Fancy Large </span> Shirt </div>
+			</li>
+			
+			<!-- Detail Boxes for above four li -->
+			
+			<div class="detail-view" id="detail-13">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/13.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Red Large Shirt </label>
+					<br clear="all" />
+					
+					<p>
+						shopping shirts, shopping, shirts, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			<div class="detail-view" id="detail-14">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/14.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Green Large Shirt </label>
+					<br clear="all" />
+					
+					<p>
+						shopping shirts, shopping, shirts, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			<div class="detail-view" id="detail-15">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/15.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Blue Large Shirt </label>
+					<br clear="all" />
+					
+					<p>
+						shopping, shirts, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			<div class="detail-view" id="detail-16">
+				
+				<div class="close" align="right">
+					<a href="javascript:void(0)">x</a>
+					
+				</div>
+				
+				<img src="product_img/16.jpg" class="detail_images" width="340" height="310" alt="" />
+				
+				<div class="detail_info">
+					
+					<label class='item_name'>Fancy Large Shirt </label>
+					<br clear="all" />
+					
+					<p>
+						shopping shirts, shopping, merchandise, consumerism, gift:
+					
+						<br clear="all" /><br clear="all" />
+						$<span class="price">80.00</span>
+						
+					</p>
+					
+					<br clear="all" />
+					
+					<button  class="add-to-cart-button">Add to Cart</button>
+					
+				</div>
+				
+			</div>
+			
+			<br clear="all" />
+		</ul>
+		<br clear="all" />
+	</div>
+	
+		
+</div>
+
+<div class="footer">
+		<p id="weather"></p>
+</div>
+<!-- 
+
+Ajax Shopping Cart: Created By Zeeshan Rasool on http://www.99points.info for more tutorials visit http://www.99points.info 
+
+-->
+</body>
+</html>
