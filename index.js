@@ -50,7 +50,6 @@ passport.use(new FacebookStrategy({
 /* https://scotch.io/tutorials/easy-node-authentication-setup-and-local  */
 passport.use(new LocalStrategy({
 		usernameField: 'username',
-		displayName: 'username',
 		passwordField: 'password',		
 	},
 
@@ -197,6 +196,7 @@ function loginPost(req, res, next) {
       	}
       	// Set the message
       	req.session.messages = "Login successfully";
+      	req.passport.user = { displayName: 'fred'};
 
       	console.log('loginPost successful');
       	return res.redirect('/indexWithoutFacebook');
