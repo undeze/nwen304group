@@ -445,6 +445,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 		console.log('password: ' + password);
 
 		pg.connect(connectionString, function (err, client, done){
+			console.log('pg.connect...............................');
 			if(err){
 					console.log('Could not connect to postgresql on signup',err);
 					return;
