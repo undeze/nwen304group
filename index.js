@@ -409,7 +409,7 @@ app.put('/cart/purchase', function(req, res){
 		var itemid = 1//req.body.item;
 		var price = 20.35//req.body.price;
 
-		var query = client.query("INSERT INTO Purchases (MemberID,ItemID,Price,DatePurchased) VALUES('"+memberid+"','"+itemid+"','"+price+"',CURRENT_DATE");
+		var query = client.query("INSERT INTO Purchases (MemberID,ItemID,Price,DatePurchased) VALUES('"+memberid+"','"+itemid+"','"+price+"',CURRENT_DATE;");
 
 		//Error checking for adding to purchases
 		query.on('error', function(){
