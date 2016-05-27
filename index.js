@@ -394,11 +394,28 @@ app.delete('/cart/delete', function(req, res){
 		var itemid = req.body.item; 
 		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemid = '"+itemid+"';");
 
-		//Error checking for adding to shopping cart
+		//Error checking for deleting from shopping cart
 		query.on('error',function(){
 			return response.status(500).send('Error deleting from shopping cart');
 		});
 		res.send("Item has been deleted from cart \n");
+	});
+});
+
+//Adds purchases when a user buys items
+app.put('/cart/purchase', function(req, res){
+	pg.connect(process.env.DATABASE_URL, function(err, client, done){
+		var memberid = 8//req.body.member;
+		var itemid = 1//req.body.item;
+		var price = 20.35//req.body.price;
+
+		var query = client.query("INSERT INTO Purchases (MemberID,ItemID,Price,DatePurchased) VALUES('"+memberid+"','"+itemid+"','"+price+"',CURRENT_DATE");
+
+		//Error checking for adding to purchases
+		query.on('error', function(){
+			return response.status(500).send('Error adding to purchases');
+		});
+		res.send("Purchase has been made \n");
 	});
 });
 
