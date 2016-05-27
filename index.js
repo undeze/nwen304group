@@ -159,6 +159,7 @@ app.get('/login',
 
 app.post('/loginnew', loginPost);
 
+/* Login without facebook */
 function loginPost(req, res, next) {
 	console.log('index.js loginPost');
   // Ask passport to authenticate.
@@ -188,7 +189,7 @@ function loginPost(req, res, next) {
       req.session.messages = "Login successfully";
 
       console.log('loginPost successful');
-      return res.redirect('/index');
+      return res.redirect('/indexWithoutFacebook');
     });    
   })(req, res, next);
 }
@@ -268,6 +269,7 @@ function insertNewFacebookUserIntoMembers(u){
 
 app.get('/login/local',
 	function(req,res){
+		console.log('/login/local ----------------------------------')
 		res.render('pages/local');
 });
 
