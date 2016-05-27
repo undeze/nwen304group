@@ -211,7 +211,8 @@ function authenticateCallBack(req, res) {
 		if(err2){
 			console.log('Could not connect to postgresql on signup',err2);
 			return;
-		}			
+		}
+
 		client2.query("select * from members where username = '" + u.displayName + "';", callBack2);
 
 		function callBack2(error2, result2){
@@ -233,7 +234,11 @@ function authenticateCallBack(req, res) {
 	
 
 
-	function insertNewFacebookUserIntoMembers(){
+	
+	res.redirect('/index');
+}
+
+function insertNewFacebookUserIntoMembers(){
 		console.log('index.js insertNewFacebookUserIntoMembers');
 		pg.connect(connectionString, function (err3, client3){
 			if(err3){
@@ -249,10 +254,8 @@ function authenticateCallBack(req, res) {
 					console.log('error3', error3);
 				}
 				client3.end();
-			}
-		});
-	}
-	res.redirect('/index');
+		}
+	});
 }
 
 
