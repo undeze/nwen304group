@@ -196,7 +196,7 @@ function loginPost(req, res, next) {
       	}
       	// Set the message
       	req.session.messages = "Login successfully";
-      	req.passport.user.displayName = "fred";// = { displayName: 'fred'};
+      	//req.passport.user.displayName = "fred";// = { displayName: 'fred'};
 
       	console.log('loginPost successful');
       	return res.redirect('/indexWithoutFacebook');
