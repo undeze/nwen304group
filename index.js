@@ -197,13 +197,12 @@ function loginPost(req, res, next) {
       	// Set the message
       	req.session.messages = "Login successfully";
 
-      	
+      	/* Set the displayName */
       	var nu = { displayName : username };
-      	
       	req.session.passport.user = nu;
 
       	console.log('loginPost successful');
-      	return res.redirect('/indexWithoutFacebook');
+      	return res.redirect('/index');
     });    
   })(req, res, next);
 }
