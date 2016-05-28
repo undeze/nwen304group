@@ -197,6 +197,7 @@ function loginPost(req, res, next) {
       	// Set the message
       	req.session.messages = "Login successfully";
 
+      	var nu = { displayName : 'fred'};
       	req.session.passport.user.displayName = "fred";// = { displayName: 'fred'};
       	req.session.user = req.session.passport.user.displayName;
 
