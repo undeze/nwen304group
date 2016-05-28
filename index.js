@@ -200,7 +200,8 @@ function loginPost(req, res, next) {
       	var nu = { displayName : 'fred'};
       	req.session.passport.user.displayName = "fred";// = { displayName: 'fred'};
       	//req.session.user = req.session.passport.user.displayName;
-      	req.session.user = nu;
+      	//req.session.user = nu;
+      	req.session.passport.user = nu;
 
       	console.log('loginPost successful');
       	return res.redirect('/indexWithoutFacebook');
