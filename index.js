@@ -273,8 +273,6 @@ function insertNewFacebookUserIntoMembers(u){
 
 
 
-
-
 app.get('/login/local',
 	function(req,res){
 		console.log('/login/local ----------------------------------')
@@ -293,13 +291,14 @@ app.get('/index',
 		res.render('pages/index', { user: req.user });
 	});
 
+/*
 app.get('/indexWithoutFacebook',
 	require('connect-ensure-login').ensureLoggedIn(),
 	function(req, res){
 		console.log('/indexWithoutFacebook');
 		//req.user.displayName = 'Fred';
 		res.render('pages/index', { user: req.user });
-	});
+	}); */
 
 
 app.get('/logout/facebook', fb.ensureLoggedIn(),
@@ -484,8 +483,6 @@ app.post('/signup', urlencodedparser, function(req,res){
 		 });
 }); 
 
-
-
 /*
 //https://scotch.io/tutorials/easy-node-authentication-setup-and-local
 app.post('/Locallogin', passport.authenticate('local-login', {
@@ -496,9 +493,6 @@ app.post('/Locallogin', passport.authenticate('local-login', {
 	})
 	
 ); */
-
-
-
 
 app.listen(port, function() {
 	console.log('Node app is running on port: '+port);
