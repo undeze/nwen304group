@@ -45,7 +45,7 @@ $(document).ready(function() {
 			var Height = $('#cart_wrapper').height();
 			$('#cart_wrapper').css({height:Height+parseInt(45)});
 			
-			$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+thisID+'"><div class="label">'+itemname+'</div><div class="shopp-price"> $<em>'+itemprice+'</em></div><span class="shopp-quantity">1</span><img src="./public/product_img/remove.png" class="remove" /><br class="all" /></div>');
+			$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+thisID+'"><div class="label">'+itemname+'</div><div class="shopp-price"> $<em>'+itemprice+'</em></div><span class="shopp-quantity">1</span><img src="../../public/product_img/remove.png" class="remove" /><br class="all" /></div>');
 		}
 		$('.detail-view').slideUp('slow');
 	});	
