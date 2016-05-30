@@ -189,8 +189,8 @@ function getData(){
 //Redraws the shopping cart for the client
 function refreshList(data){
 	//Loop through all items in the cart database
-	alert(data.name);
 	for(items in data){
+		alert(items);
 		var itemName = data[items].name;
 		var price = data[items].price;
 		var quantity = data[items].quantity;
