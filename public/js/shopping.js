@@ -3,7 +3,7 @@
 $(document).ready(function() {
 	
 	var Arrays=new Array();
-	//getData();
+	getData();
 	getWeather();
 	
 	$('.add-to-cart-button').click(function(){
