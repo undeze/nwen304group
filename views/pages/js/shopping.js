@@ -154,6 +154,7 @@ function getpos(arr, obj) {
 
 //A GET request. If successful, this passes data to the 'refreshList' function
 function getData(){
+	alert("memex");
 	$.get('https://nwen304group6.herokuapp.com/cart',function(data){
 			alert(data);
 			//refreshList(data);
