@@ -123,6 +123,20 @@ app.get('*',function(req,res,next){
     next() /* Continue to other routes if we're not redirecting */
 });
 
+app.all('*', function(req, res, next) {
+  var start = process.hrtime();
+
+  // event triggers when express is done sending response
+  res.on('finish', function() {
+    var hrtime = process.hrtime(start);
+    var elapsed = parseFloat(hrtime[0] + (hrtime[1] / 1000000).toFixed(3), 10);
+    console.log(elapsed + 'ms');
+  });
+
+  next();
+});
+
+
 var urlencodedparser = require('body-parser').urlencoded({extended: false});
 
 // Configure Passport authenticated session persistence.
@@ -310,6 +324,7 @@ app.get('/logout/facebook', fb.ensureLoggedIn(),
 app.get('/goShopping',
 	require('connect-ensure-login').ensureLoggedIn(),
 	function(req, res){
+		res.setHeader('Cache-Control', 'public, max-age=22');
 		res.render('pages/shopping', { user: req.user });
 	});
 
