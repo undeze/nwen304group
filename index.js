@@ -122,7 +122,7 @@ app.get('*',function(req,res,next){
   else
     next() /* Continue to other routes if we're not redirecting */
 });
-
+// response time for API functions
 app.all('*', function(req, res, next) {
   var start = process.hrtime();
 
@@ -324,7 +324,8 @@ app.get('/logout/facebook', fb.ensureLoggedIn(),
 app.get('/goShopping',
 	require('connect-ensure-login').ensureLoggedIn(),
 	function(req, res){
-		res.setHeader('Cache-Control', 'public, max-age=22');
+			//HTTP CACHE HEADERS
+		res.setHeader('Cache-Control', 'public, max-age=3');
 		res.render('pages/shopping', { user: req.user });
 	});
 
@@ -358,7 +359,7 @@ app.get('/db', function(req, res){
 			query.on('end',function(){
 				client.end();
 				//HTTP CACHE HEADERS
-				res.setHeader('Cache-Control', 'public, max-age=22');
+				res.setHeader('Cache-Control', 'public, max-age=3');
 				res.json(results);
 			});
 		});
@@ -391,7 +392,7 @@ app.get('/cart', function(req, res){
 		query.on('end', function(){
 			client.end();
 			//HTTP CACHE HEADERS
-			res.setHeader('Cache-Control', 'public, max-age=22');
+			//res.setHeader('Cache-Control', 'public, max-age=3');
 			res.json(results);
 		});
 	});
@@ -421,7 +422,7 @@ app.get('/store', function(req, res){
 		query.on('end', function(){
 			client.end();
 			//HTTP CACHE HEADERS
-			res.setHeader('Cache-Control', 'public, max-age=22');
+			res.setHeader('Cache-Control', 'public, max-age=3');
 			res.json(results);
 		});
 	});
