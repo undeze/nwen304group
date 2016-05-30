@@ -342,6 +342,7 @@ app.get('/db', function(req, res){
 			// After all data is returned, close connection and return results
 			query.on('end',function(){
 				client.end();
+				res.setHeader('Cache-Control', 'public, max-age=22');
 				res.json(results);
 			});
 		});
@@ -373,6 +374,7 @@ app.get('/cart', function(req, res){
 		// After all data is returned, close connection and return results
 		query.on('end', function(){
 			client.end();
+			res.setHeader('Cache-Control', 'public, max-age=22');
 			res.json(results);
 		});
 	});
@@ -401,6 +403,7 @@ app.get('/store', function(req, res){
 		// After all data is returned, close connection and return results
 		query.on('end', function(){
 			client.end();
+			res.setHeader('Cache-Control', 'public, max-age=22');
 			res.json(results);
 		});
 	});
