@@ -393,7 +393,6 @@ app.get('/cart', function(req, res){
 			client.end();
 			//HTTP CACHE HEADERS
 			//res.setHeader('Cache-Control', 'public, max-age=3');
-			console.log("Should be sending as json");
 			res.json(results);
 		});
 	});
