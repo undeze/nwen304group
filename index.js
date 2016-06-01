@@ -368,11 +368,11 @@ app.get('/db', function(req, res){
 //Gets all the data from a members shopping cart
 app.get('/cart', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
-		if(err){
-			console.error('Could not connect to database');
-			console.error(err);
-			return;
-		}
+		// if(err){
+		// 	console.error('Could not connect to database');
+		// 	console.error(err);
+		// 	return;
+		// }
 		var memberid = req.body.member;
 		//var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
 		var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = 8;");//,

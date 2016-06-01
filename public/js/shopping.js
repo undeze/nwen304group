@@ -156,9 +156,9 @@ function getpos(arr, obj) {
 function getData(){
 	$.get('https://nwen304group6.herokuapp.com/cart', function(data){
 			//alert(data);
-				console.log(data);
-	console.log(data[0]);
-	console.log(data[1]);
+			console.log(data);
+			console.log(data[0]);
+			console.log(data[1]);
 			refreshList(data);
 		});
 	// });
