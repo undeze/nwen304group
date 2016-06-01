@@ -3,7 +3,10 @@
 $(document).ready(function() {
 	var totalPrice = 0;
 	var Arrays=new Array();
-	getData();
+
+	//Gets data for shopping cart items
+	getData(totalPrice);
+	//Gets the data for the weather
 	getWeather();
 	
 	$('.add-to-cart-button').click(function(){
@@ -153,14 +156,14 @@ function getpos(arr, obj) {
 }
 
 //A GET request. If successful, this passes data to the 'refreshList' function
-function getData(){
+function getData(totalPrice){
 	$.ajax({
 		method: 'GET',
 		url: 'https://nwen304group6.herokuapp.com/cart',
 		contentType: "application/json",
 		dataType: "json",
 		success: function(data){
-			refreshList(data);
+			refreshList(data,totalPrice);
 		},
 		error: function() {
 			console.log("An error ocurred retrieving data");
@@ -169,7 +172,7 @@ function getData(){
 };
 
 //Redraws the shopping cart for the client
-function refreshList(data){
+function refreshList(data,totalPrice){
 	//Loop through all items in the cart database
 	//alert("Data: "+data);
 	//alert("First data: "+data[0]);
