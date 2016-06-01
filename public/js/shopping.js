@@ -191,6 +191,8 @@ function refreshList(data){
 	//Loop through all items in the cart database
 	//alert("Data: "+data);
 	console.log(data);
+	console.log(data[0]);
+	console.log(data[1]);
 	//alert("First data: "+data[0]);
 	for(items in data){
 		//alert("Items: "+items);
