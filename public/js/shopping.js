@@ -1,11 +1,10 @@
 
 
 $(document).ready(function() {
-	var totalPrice = 0;
 	var Arrays=new Array();
 
 	//Gets data for shopping cart items
-	getData(totalPrice);
+	var totalPrice = getData();
 	//Gets the data for the weather
 	getWeather();
 	
@@ -156,14 +155,14 @@ function getpos(arr, obj) {
 }
 
 //A GET request. If successful, this passes data to the 'refreshList' function
-function getData(totalPrice){
+function getData(){
 	$.ajax({
 		method: 'GET',
 		url: 'https://nwen304group6.herokuapp.com/cart',
 		contentType: "application/json",
 		dataType: "json",
 		success: function(data){
-			refreshList(data,totalPrice);
+			return refreshList(data);
 		},
 		error: function() {
 			console.log("An error ocurred retrieving data");
@@ -172,10 +171,9 @@ function getData(totalPrice){
 };
 
 //Redraws the shopping cart for the client
-function refreshList(data,totalPrice){
+function refreshList(data){
 	//Loop through all items in the cart database
-	//alert("Data: "+data);
-	//alert("First data: "+data[0]);
+	var totalPrice = 0;
 	for(items in data){
 		//alert("Items: "+items);
 		var itemName = data[items].name;
@@ -184,6 +182,7 @@ function refreshList(data,totalPrice){
 		var quantity = data[items].quantity;
 		$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+items+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>');
 	}
+	return totalPrice;
 };
 
 function getWeather(){
