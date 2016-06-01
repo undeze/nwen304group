@@ -1,10 +1,10 @@
 
 
 $(document).ready(function() {
-	
+	var totalPrice = 0;
 	var Arrays=new Array();
 	getData();
-	//getWeather();
+	getWeather();
 	
 	$('.add-to-cart-button').click(function(){
 		
@@ -28,7 +28,7 @@ $(document).ready(function() {
 			prev_charges = parseInt(prev_charges)-parseInt(price);
 			
 			prev_charges = parseInt(prev_charges)+parseInt(total);
-			$('.cart-total span').html(prev_charges);
+			$('.cart-total span').html(totalPrice);
 			
 			$('#total-hidden-charges').val(prev_charges);
 		}
@@ -154,51 +154,21 @@ function getpos(arr, obj) {
 
 //A GET request. If successful, this passes data to the 'refreshList' function
 function getData(){
-	// $.get('https://nwen304group6.herokuapp.com/cart', function(data){
-	// 		//alert(data);
-	// 		console.log(data);
-	// 		console.log(data[0]);
-	// 		console.log(data[1]);
-	// 		refreshList(data);
-	// 	});
 	$.ajax({
 		method: 'GET',
 		url: 'https://nwen304group6.herokuapp.com/cart',
 		contentType: "application/json",
 		dataType: "json",
+		data: JSON.stringify({
+				member: 
+			}),
 		success: function(data){
 			refreshList(data);
 		},
 		error: function() {
-			console.log("SUH DUDE!!!");
+			console.log("An error ocurred retrieving data");
 		}
 	});
-	// });
-	// $.ajax({
-	// 	method: 'GET',
-	// 	url: 'https://nwen304group6.herokuapp.com/cart',
-	// 	data: JSON.stringify({
-	// 		member: "8"
-	// 	}),
-	// 	contentType: "application/json",
-	// 	dataType: "json"
-	// }).then(refreshList,alert('hello'));//ERROR_LOG);
-	// $.ajax({
-	// 	method: 'GET',
-	// 	url: 'https://nwen304group6.herokuapp.com/cart',
-	// 	data: JSON.stringify({
-	// 		member: 8
-	// 	}),
-	// 	contentType: "application/json",
-	// 	dataType: "json",
-	// 	success: function(data){
-	// 		alert('No Error...');
-	// 		refreshList(data);
-	// 	},
-	// 	error: function(){
-	// 		alert('Error...');
-	// 	}
-	// });
 };
 
 //Redraws the shopping cart for the client
@@ -210,6 +180,7 @@ function refreshList(data){
 		//alert("Items: "+items);
 		var itemName = data[items].name;
 		var price = data[items].price;
+		totalPrice += price;
 		var quantity = data[items].quantity;
 		$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+items+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>');
 	}
