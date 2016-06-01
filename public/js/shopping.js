@@ -5,6 +5,7 @@ $(document).ready(function() {
 
 	//Gets data for shopping cart items
 	var totalPrice = getData();
+	console.log(totalPrice);
 	//Gets the data for the weather
 	getWeather();
 	
@@ -163,7 +164,6 @@ function getData(){
 		dataType: "json",
 		success: function(data){
 			var returnData = refreshList(data);
-			console.log(returnData);
 			return returnData;
 		},
 		error: function() {
