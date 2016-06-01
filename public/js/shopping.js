@@ -159,7 +159,6 @@ function getData(){
 			console.log(data);
 			console.log(data[0]);
 			console.log(data[1]);
-			console.log(JSON.stringify(data));
 			refreshList(data);
 		});
 	// });
