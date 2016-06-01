@@ -193,7 +193,6 @@ function refreshList(data){
 	console.log(data);
 	console.log(data[0]);
 	console.log(data[1]);
-	console.log(data.name);
 	//alert("First data: "+data[0]);
 	for(items in data){
 		//alert("Items: "+items);
