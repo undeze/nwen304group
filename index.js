@@ -390,7 +390,7 @@ app.get('/cart', function(req, res){
 		});
 		// After all data is returned, close connection and return results
 		query.on('end', function(){
-			//client.end();
+			client.end();
 			//HTTP CACHE HEADERS
 			//res.setHeader('Cache-Control', 'public, max-age=3');
 			console.log("Should be sending as json");
