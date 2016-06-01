@@ -210,11 +210,11 @@ function getWeather(){
 		method: "GET",
 		dataType: "jsonp",
 		success: function(data){
-			var temp = data.query.results.channel.item.condition.temp;
+			var temp = query.results.channel.item.condition.temp;
 			temp = ((temp - 32) * 5)/9;
 			temp = temp.toFixed(1);
-			var condition = data.query.results.channel.item.condition.text;
-			var desc = data.query.results.channel.item.description;
+			var condition = query.results.channel.item.condition.text;
+			var desc = query.results.channel.item.description;
 			desc = desc.match(/"[^"]+"/g);
 			$('.footer').children('#weather').html("<b>Current Conditions:</b> <br />"+condition+"</b> <br />"+temp+" Degrees </b> <br /> <img src="+desc+"/>");
 		},
