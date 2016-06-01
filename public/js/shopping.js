@@ -4,7 +4,7 @@ $(document).ready(function() {
 	var Arrays=new Array();
 
 	//Gets data for shopping cart items
-	console.log(getData());
+	var totalPrice = getData();
 	//Gets the data for the weather
 	getWeather();
 	
@@ -162,7 +162,9 @@ function getData(){
 		contentType: "application/json",
 		dataType: "json",
 		success: function(data){
-			return refreshList(data);
+			var returnData = refreshList(data);
+			console.log(returnData);
+			return returnData;
 		},
 		error: function() {
 			console.log("An error ocurred retrieving data");
