@@ -154,13 +154,25 @@ function getpos(arr, obj) {
 
 //A GET request. If successful, this passes data to the 'refreshList' function
 function getData(){
-	$.get('https://nwen304group6.herokuapp.com/store', function(data){
-			//alert(data);
-			console.log(data);
-			console.log(data[0]);
-			console.log(data[1]);
+	// $.get('https://nwen304group6.herokuapp.com/cart', function(data){
+	// 		//alert(data);
+	// 		console.log(data);
+	// 		console.log(data[0]);
+	// 		console.log(data[1]);
+	// 		refreshList(data);
+	// 	});
+	$.ajax({
+		method: 'GET',
+		url: 'https://nwen304group6.herokuapp.com/cart',
+		contentType: "application/json",
+		dataType: "json",
+		success: function(data){
 			refreshList(data);
-		});
+		},
+		error: function() {
+			console.log("SUH DUDE!!!");
+		}
+	});
 	// });
 	// $.ajax({
 	// 	method: 'GET',
