@@ -373,9 +373,9 @@ app.get('/cart', function(req, res){
 		// 	console.error(err);
 		// 	return;
 		// }
-		var memberid = req.body.member;
-		//var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
-		var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = 8;");//,
+		// var memberid = req.body.member;
+		// //var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
+		// var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = 8;");//,
 		// function(error, result){
 		// 	if(err){
 		// 		console.error(error);
@@ -383,17 +383,35 @@ app.get('/cart', function(req, res){
 		// 	}
 		// 	done();
 		// });
+		// var results = [];
+		// // Stream results back one row at a time
+		// query.on('row', function(row){
+		// 	results.push(row);
+		// });
+		// // After all data is returned, close connection and return results
+		// query.on('end', function(){
+		// 	client.end();
+		// 	//HTTP CACHE HEADERS
+		// 	//res.setHeader('Cache-Control', 'public, max-age=3');
+		// 	res.json(results);
+		// });
+		console.log("Getting data");
+		//SQL Query > Select Data
+		var query = client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = 8;");
 		var results = [];
-		// Stream results back one row at a time
-		query.on('row', function(row){
+		//Stream results back one row at a time
+		query.on('row',function(row){
 			results.push(row);
 		});
-		// After all data is returned, close connection and return results
-		query.on('end', function(){
-			client.end();
-			//HTTP CACHE HEADERS
-			//res.setHeader('Cache-Control', 'public, max-age=3');
+
+		//After all data is returned, close connection and return results
+		query.on('end',function(){
 			res.json(results);
+		});
+
+		//Error checking for GET
+		query.on('error',function(){
+			return res.status(500).send('Error getting the data from database');
 		});
 	});
 });
