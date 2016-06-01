@@ -373,7 +373,7 @@ app.get('/cart', function(req, res){
 			console.error(err);
 			return;
 		}
-		var memberid = req.body.member;
+		//var memberid = req.body.member;
 		//var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
 		var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = 8;",
 		function(error, result){
@@ -390,7 +390,7 @@ app.get('/cart', function(req, res){
 		});
 		// After all data is returned, close connection and return results
 		query.on('end', function(){
-			client.end();
+			//client.end();
 			//HTTP CACHE HEADERS
 			//res.setHeader('Cache-Control', 'public, max-age=3');
 			res.json(results);
@@ -518,18 +518,4 @@ app.post('/Locallogin', passport.authenticate('local-login', {
 
 app.listen(port, function() {
 	console.log('Node app is running on port: '+port);
-});
-
-//Add headers
-app.use(function(req, res, next){
-	//Website you wish to allow to connect
-	res.setHeader('Access-Control-Allow-Origin','*');
-	//Request methods you wish to allow
-	res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTIONS,PUT,PATCH,DELETE');
-	
-	//Request headers you wish to allow
-	res.setHeader('Access-Control-Allow-Headers','Content-Type,Access-Control-Allow-Headers');
-
-	//Pass to next layer of middleware
-	next();
 });
