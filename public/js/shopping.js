@@ -159,9 +159,6 @@ function getData(){
 		url: 'https://nwen304group6.herokuapp.com/cart',
 		contentType: "application/json",
 		dataType: "json",
-		data: JSON.stringify({
-				member: 
-			}),
 		success: function(data){
 			refreshList(data);
 		},
