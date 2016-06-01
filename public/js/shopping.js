@@ -157,19 +157,20 @@ function getpos(arr, obj) {
 
 //A GET request. If successful, this passes data to the 'refreshList' function
 function getData(){
+	var returnVal = 0;
 	$.ajax({
 		method: 'GET',
 		url: 'https://nwen304group6.herokuapp.com/cart',
 		contentType: "application/json",
 		dataType: "json",
 		success: function(data){
-			var returnData = refreshList(data);
-			return returnData;
+			returnVal = refreshList(data);
 		},
 		error: function() {
 			console.log("An error ocurred retrieving data");
 		}
 	});
+	return returnVal;
 };
 
 //Redraws the shopping cart for the client
