@@ -189,14 +189,15 @@ function getData(){
 //Redraws the shopping cart for the client
 function refreshList(data){
 	//Loop through all items in the cart database
-	alert("Data: "+data);
+	//alert("Data: "+data);
+	console.log(data);
 	//alert("First data: "+data[0]);
 	for(items in data){
 		//alert("Items: "+items);
 		var itemName = data[items].name;
 		var price = data[items].price;
 		var quantity = data[items].quantity;
-		$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+thisID+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>');
+		$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+items+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>');
 	}
 };
 
