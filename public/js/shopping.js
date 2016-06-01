@@ -178,7 +178,8 @@ function refreshList(data){
 		//alert("Items: "+items);
 		var itemName = data[items].name;
 		var price = data[items].price;
-		totalPrice += price;
+		var priceAsFloat = parseFloat(price.split("$").pop());
+		totalPrice += priceAsFloat;
 		var quantity = data[items].quantity;
 		$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+items+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>');
 	}
