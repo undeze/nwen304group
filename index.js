@@ -448,7 +448,8 @@ app.delete('/cart/delete', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		var memberid = req.body.member; 
 		var itemName = req.body.name; 
-		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemid = '"+itemid+"';");
+		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"';");
+		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = '"+itemName+"';");
 
 		//Error checking for deleting from shopping cart
 		query.on('error',function(){

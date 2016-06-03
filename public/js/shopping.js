@@ -56,6 +56,7 @@ $(document).ready(function() {
 		
 		var item = $(this).parent().children(".label").html();
 		console.log(item);
+		removeItem(item);
 		// var prev_charges = $('.cart-total span').html();
 		
 		// var thisID = $(this).parent().attr('id').replace('each-','');
@@ -178,7 +179,7 @@ function refreshList(data){
 	var totalPrice = 0;
 	for(items in data){
 		//alert("Items: "+items);
-		var itemName = data[items].itemname;
+		var itemName = data[items].name;
 		var price = data[items].price;
 		var priceAsFloat = parseFloat(price.split("$").pop());
 		var quantity = data[items].quantity;
@@ -210,7 +211,19 @@ function getWeather(){
 };
 
 function removeItem(itemName){
-
+	$.ajax({
+		method: 'DELETE',
+		url: 'https://nwen304group6.herokuapp.com/cart/delete',
+		contentType: "application/json",
+		dataType: "json",
+		data: JSON.stringify({
+			member: 8,
+			name: itemName
+		}),
+		error: function() {
+			console.log("An error ocurred retrieving data");
+		}
+	});	
 }
 
 function getRecommendation(weather,temperature){
