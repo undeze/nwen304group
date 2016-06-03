@@ -55,16 +55,17 @@ $(document).ready(function() {
 	$('.remove').livequery('click', function() {
 		
 		var deduct = $(this).parent().children(".shopp-price").find('em').html();
-		var prev_charges = $('.cart-total span').html();
+		console.log(deduct);
+		// var prev_charges = $('.cart-total span').html();
 		
-		var thisID = $(this).parent().attr('id').replace('each-','');
+		// var thisID = $(this).parent().attr('id').replace('each-','');
 		
-		var pos = getpos(Arrays,thisID);
-		Arrays.splice(pos,1,"0")
+		// var pos = getpos(Arrays,thisID);
+		// Arrays.splice(pos,1,"0")
 		
-		prev_charges = parseInt(prev_charges)-parseInt(deduct);
-		$('.cart-total span').html(prev_charges);
-		$('#total-hidden-charges').val(prev_charges);
+		// prev_charges = parseInt(prev_charges)-parseInt(deduct);
+		// $('.cart-total span').html(prev_charges);
+		// $('#total-hidden-charges').val(prev_charges);
 		$(this).parent().remove();
 		
 	});	
