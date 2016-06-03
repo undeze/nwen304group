@@ -175,7 +175,6 @@ function getData(){
 //Redraws the shopping cart for the client
 function refreshList(data){
 	//Loop through all items in the cart database
-	console.log(data);
 	var totalPrice = 0;
 	for(items in data){
 		//alert("Items: "+items);
@@ -214,12 +213,12 @@ function removeItem(itemName){
 	$.ajax({
 		method: 'DELETE',
 		url: 'https://nwen304group6.herokuapp.com/cart/delete',
-		contentType: "application/json",
-		dataType: "json",
 		data: JSON.stringify({
-			member: 8,
+			member: '8',
 			name: itemName
 		}),
+		contentType: "application/json",
+		dataType: "json",
 		error: function() {
 			console.log("An error ocurred retrieving data");
 		}
