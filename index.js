@@ -444,7 +444,7 @@ app.post('/cart/add', function(req, res){
 });
 
 //Deletes items to a members shopping cart
-app.delete('/cart/delete', function(req, res){
+app.post('/cart/delete', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		var memberid = req.body.member; 
 		var itemName = req.body.name; 
