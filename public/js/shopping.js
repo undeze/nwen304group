@@ -219,6 +219,9 @@ function removeItem(itemName){
 		}),
 		contentType: "application/json",
 		dataType: "json",
+		success: function() {
+			console.log("Successfully removed item from cart");
+		},
 		error: function() {
 			console.log("An error ocurred retrieving data");
 		}
