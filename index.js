@@ -375,8 +375,7 @@ app.get('/cart', function(req, res){
 		}
 		//var memberid = req.body.member;
 		//var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
-		//var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = 8;",
-		var query = client.query("SELECT * FROM ShoppingCart WHERE memberid = 8;",
+		var query = client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = 8;",
 		function(error, result){
 			if(err){
 				console.error(error);
