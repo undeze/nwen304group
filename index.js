@@ -437,7 +437,7 @@ app.post('/cart/add', function(req, res){
 
 		//Error checking for adding to shopping cart
 		query.on('error',function(){
-			return response.status(500).send('Error updating shopping cart');
+			return res.status(500).send('Error updating shopping cart');
 		});
 		res.send("Item has been added to cart \n");
 	});
@@ -446,12 +446,23 @@ app.post('/cart/add', function(req, res){
 //Deletes items to a members shopping cart
 app.delete('/cart/delete', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
+		if(err){
+			console.error('Could not connect to database');
+			console.error(err);
+			return;
+		}
 		// var memberid = req.body.member; 
 		// var itemName = req.body.name; 
 		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"';");
 		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = '"+itemName+"';");
-		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = Awesome Bag;");
-
+		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = Awesome Bag;",
+			function(error, result){
+			if(error){
+				console.error(error);
+				return;
+			}
+			done();
+		});
 		//Error checking for deleting from shopping cart
 		query.on('error',function(){
 			return res.status(500).send('Error deleting from shopping cart');
@@ -471,7 +482,7 @@ app.put('/cart/purchase', function(req, res){
 
 		//Error checking for adding to purchases
 		query.on('error', function(){
-			return response.status(500).send('Error adding to purchases');
+			return res.status(500).send('Error adding to purchases');
 		});
 		res.send("Purchase has been made \n");
 	});
