@@ -448,12 +448,13 @@ app.delete('/cart/delete', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		var memberid = req.body.member; 
 		var itemName = req.body.name; 
+		console.log(memberid+" "+itemName);
 		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"';");
 		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = '"+itemName+"';");
 
 		//Error checking for deleting from shopping cart
 		query.on('error',function(){
-			return response.status(500).send('Error deleting from shopping cart');
+			return res.status(500).send('Error deleting from shopping cart');
 		});
 		res.send("Item has been deleted from cart \n");
 	});
