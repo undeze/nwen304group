@@ -444,10 +444,10 @@ app.post('/cart/add', function(req, res){
 });
 
 //Deletes items to a members shopping cart
-app.post('/cart/delete', function(req, res){
+app.delete('/cart/delete', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
-		var memberid = req.body.member; 
-		var itemName = req.body.name; 
+		// var memberid = req.body.member; 
+		// var itemName = req.body.name; 
 		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"';");
 		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = '"+itemName+"';");
 		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = Awesome Bag;");
