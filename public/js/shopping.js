@@ -54,7 +54,7 @@ $(document).ready(function() {
 	
 	$('.remove').livequery('click', function() {
 		
-		var deduct = $(this).parent().children(".shopp").find('.label').html();
+		var deduct = $(this).parent().children(".label").html();
 		console.log(deduct);
 		// var prev_charges = $('.cart-total span').html();
 		
