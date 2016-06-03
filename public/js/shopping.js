@@ -178,7 +178,7 @@ function refreshList(data){
 	var totalPrice = 0;
 	for(items in data){
 		//alert("Items: "+items);
-		var itemName = data[items].itemname;
+		var itemName = data[items].name;
 		var price = data[items].price;
 		var priceAsFloat = parseFloat(price.split("$").pop());
 		var quantity = data[items].quantity;
