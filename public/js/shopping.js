@@ -213,10 +213,11 @@ function removeItem(itemName){
 	$.ajax({
 		method: "DELETE",
 		url: "https://nwen304group6.herokuapp.com/cart/delete",
-		data: JSON.stringify({
-			member: "8",
-			name: itemName
-		}),
+		// data: JSON.stringify({
+		// 	member: "8",
+		// 	name: itemName
+		// }),
+		data: '{"member":"8", "name":"Awesome Bag"}',
 		contentType: "application/json",
 		dataType: "json",
 		success: function() {
@@ -226,7 +227,7 @@ function removeItem(itemName){
 			console.log("An error ocurred retrieving data");
 		}
 	});	
-}
+};
 
 function getRecommendation(weather,temperature){
 	
