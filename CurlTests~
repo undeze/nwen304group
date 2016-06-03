@@ -8,4 +8,4 @@ curl -H "Content-Type: application/json" -X GET -d '{"member":"8"}' https://nwen
 curl -H "Content-Type: application/json" -X POST -d '{"member":"8","item":"1"}' https://nwen304group6.herokuapp.com/cart/add
 
 //Deleting item from shopping cart
-curl -H "Content-Type: application/json" -X DELETE -d '{"member":"8","item":"1"}' https://nwen304group6.herokuapp.com/cart/delete
+curl -H "Content-Type: application/json" -X DELETE -d '{"member":"8","name":"Awesome Bag"}' https://nwen304group6.herokuapp.com/cart/delete

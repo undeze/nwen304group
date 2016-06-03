@@ -5,7 +5,7 @@ curl -H "Content-Type: application/json" -X GET https://nwen304group6.herokuapp.
 curl -H "Content-Type: application/json" -X GET -d '{"member":"8"}' https://nwen304group6.herokuapp.com/cart
 
 //Adding item to shopping cart
-curl -H "Content-Type: application/json" -X POST -d '{"member":"8","item":"1"}' https://nwen304group6.herokuapp.com/cart/add
+curl -H "Content-Type: application/json" -X POST -d '{"member":"8","item":"1", "Name":"Cool T-Shirt"}' https://nwen304group6.herokuapp.com/cart/add
 
 //Deleting item from shopping cart
 curl -H "Content-Type: application/json" -X DELETE -d '{"member":"8","name":"Awesome Bag"}' https://nwen304group6.herokuapp.com/cart/delete
