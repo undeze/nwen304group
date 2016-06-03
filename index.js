@@ -447,7 +447,7 @@ app.post('/cart/add', function(req, res){
 app.delete('/cart/delete', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		var memberid = req.body.member; 
-		var itemid = req.body.item; 
+		var itemName = req.body.name; 
 		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemid = '"+itemid+"';");
 
 		//Error checking for deleting from shopping cart

@@ -54,8 +54,8 @@ $(document).ready(function() {
 	
 	$('.remove').livequery('click', function() {
 		
-		var deduct = $(this).parent().children(".label").html();
-		console.log(deduct);
+		var item = $(this).parent().children(".label").html();
+		console.log(item);
 		// var prev_charges = $('.cart-total span').html();
 		
 		// var thisID = $(this).parent().attr('id').replace('each-','');
@@ -177,7 +177,7 @@ function refreshList(data){
 	var totalPrice = 0;
 	for(items in data){
 		//alert("Items: "+items);
-		var itemName = data[items].name;
+		var itemName = data[items].itemname;
 		var price = data[items].price;
 		var priceAsFloat = parseFloat(price.split("$").pop());
 		var quantity = data[items].quantity;
@@ -208,7 +208,7 @@ function getWeather(){
 	});
 };
 
-function removeItem(){
+function removeItem(itemName){
 
 }
 
