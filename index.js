@@ -431,14 +431,22 @@ app.get('/store', function(req, res){
 //Adds items to a members shopping cart
 app.post('/cart/add', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
+		if(err){
+			console.error('Could not connect to database');
+			console.error(err);
+			return;
+		}
 		var memberid = req.body.member; 
 		var itemid = req.body.item;
-		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = '"+memberid+"' AND itemid = '"+itemid+"' RETURNING *) INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT '"+memberid+"','"+itemid+"',1  WHERE NOT EXISTS (SELECT * FROM upsert);");
-
-		//Error checking for adding to shopping cart
-		query.on('error',function(){
-			return res.status(500).send('Error updating shopping cart');
-		});
+		var itemName = req.body.Name;
+		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = '"+memberid+"' AND itemid = '"+itemid+"' RETURNING *) INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT '"+memberid+"','"+itemid+"',1  WHERE NOT EXISTS (SELECT * FROM upsert);",
+		function(error, result){
+			if(error){
+				console.error(error);
+				return;
+			}
+			done();
+		});			
 		res.send("Item has been added to cart \n");
 	});
 });
@@ -456,16 +464,12 @@ app.delete('/cart/delete', function(req, res){
 		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"';");
 		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = '"+itemName+"';");
 		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = Awesome Bag;",
-			function(error, result){
+		function(error, result){
 			if(error){
 				console.error(error);
 				return;
 			}
 			done();
-		});
-		//Error checking for deleting from shopping cart
-		query.on('error',function(){
-			return res.status(500).send('Error deleting from shopping cart');
 		});
 		res.send("Item has been deleted from cart \n");
 	});

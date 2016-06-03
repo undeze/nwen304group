@@ -9,6 +9,9 @@ $(document).ready(function() {
 	getWeather();
 	
 	$('.add-to-cart-button').click(function(){
+
+		//Add item to cart database
+		addToCart();
 		
 		var thisID 	  = $(this).parent().parent().attr('id').replace('detail-','');
 		
@@ -56,7 +59,7 @@ $(document).ready(function() {
 		
 		var item = $(this).parent().children(".label").html();
 		console.log(item);
-		removeItem(item);
+		removeFromCart(item);
 		// var prev_charges = $('.cart-total span').html();
 		
 		// var thisID = $(this).parent().attr('id').replace('each-','');
@@ -209,10 +212,10 @@ function getWeather(){
 	});
 };
 
-function removeItem(itemName){
+function removeFromCart(itemName){
 	$.ajax({
 		method: "DELETE",
-		url: "https://nwen304group6.herokuapp.com/cart/delete",
+		url: 'https://nwen304group6.herokuapp.com/cart/delete',
 		// data: JSON.stringify({
 		// 	member: "8",
 		// 	name: itemName
@@ -228,6 +231,26 @@ function removeItem(itemName){
 	});	
 };
 
+function addToCart(){
+	$.ajax({
+		method: 'POST',
+		url: 'https://nwen304group6.herokuapp.com/cart/add',
+		contentType: "application/json",
+		dataType: "json",
+		data: JSON.stringify({
+			member: "8",
+			item: "1",
+			Name: "Cool T-Shirt"
+		}),
+		success: function(data){
+			console.log("Successfully added item to cart");
+		},
+		error: function() {
+			console.log("An error ocurred retrieving data");
+		}
+	});
+};
+
 function getRecommendation(weather,temperature){
 	
-}
+};
