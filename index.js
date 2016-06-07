@@ -532,9 +532,10 @@ app.post('/signup', urlencodedparser, function(req,res){
 
 app.get('/mismatch',
 	function(req,res){
-		console.log('/login/mismatch ----------------------------------')
+		console.log('/login/mismatch ----------------------------------');
 		res.render('pages/mismatch');
 });
+
 
 /*
 //https://scotch.io/tutorials/easy-node-authentication-setup-and-local
