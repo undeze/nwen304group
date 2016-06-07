@@ -509,6 +509,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 			res.redirect('/signup');
 		}*/
 		if (req.body.password != req.body.password1){
+			console.log('Passwords dont match');
 			res.redirect('/signup');
 		}
 
