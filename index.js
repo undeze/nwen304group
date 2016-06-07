@@ -498,12 +498,12 @@ app.post('/signup', urlencodedparser, function(req,res){
 		console.log('here, signing up');
 		var username = req.body.username;
 		var email = req.body.email;
-		var password = req.body.password;
-		var password1 = req.body.password1;
+		//var password = req.body.password;
+		//var password1 = req.body.password1;
 		console.log('username: ' + username);
 		console.log('email: ' + email);
-		console.log('password: ' + password);
-		console.log('password1: ' + password1);
+		//console.log('password: ' + password);
+		//console.log('password1: ' + password1);
 
 		if (req.body.password != req.body.password1){
 			console.log('Passwords dont match');
@@ -517,7 +517,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 					return;
 				}
 				const hash = crypto.createHash('sha256');
-				hash.update(password);
+				hash.update(req.body.password);
 				var encrypted = hash.digest('hex');
 				var query = client.query("insert into members values (default,'" + username + 
 					"','" + encrypted + "','" + email + "', null);", function(error, result){
@@ -532,7 +532,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 
 app.get('/mismatch',
 	function(req,res){
-		console.log('/login/mismatch ----------------------------------');
+		console.log('/mismatch ----------------------------------');
 		res.render('pages/mismatch');
 });
 
