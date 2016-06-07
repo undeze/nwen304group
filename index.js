@@ -505,6 +505,10 @@ app.post('/signup', urlencodedparser, function(req,res){
 		console.log('password: ' + password);
 		console.log('password1: ' + password1);
 
+		if (password != password1){
+			res.redirect('/signup');
+		}
+
 
 		pg.connect(connectionString, function (err, client, done){
 			console.log('pg.connect...............................');
