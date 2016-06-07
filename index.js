@@ -496,12 +496,12 @@ app.put('/cart/purchase', function(req, res){
 /* Currently inputs data into members table in db and then returns to /login page. */
 app.post('/signup', urlencodedparser, function(req,res){
 		console.log('here, signing up');
-		var username = req.body.username;
-		var email = req.body.email;
+		//var username = req.body.username;
+		//var email = req.body.email;
 		//var password = req.body.password;
 		//var password1 = req.body.password1;
-		console.log('username: ' + username);
-		console.log('email: ' + email);
+		//console.log('username: ' + username);
+		//console.log('email: ' + email);
 		//console.log('password: ' + password);
 		//console.log('password1: ' + password1);
 
@@ -519,8 +519,8 @@ app.post('/signup', urlencodedparser, function(req,res){
 				const hash = crypto.createHash('sha256');
 				hash.update(req.body.password);
 				var encrypted = hash.digest('hex');
-				var query = client.query("insert into members values (default,'" + username + 
-					"','" + encrypted + "','" + email + "', null);", function(error, result){
+				var query = client.query("insert into members values (default,'" + req.body.username + 
+					"','" + encrypted + "','" + req.body.email + "', null);", function(error, result){
 					done();
 					if(error){}
 						res.redirect('/login');
