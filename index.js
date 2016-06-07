@@ -501,9 +501,10 @@ app.post('/signup', urlencodedparser, function(req,res){
 		var password = req.body.password;
 		var password1 = req.body.password1;
 		console.log('username: ' + username);
-
 		console.log('email: ' + email);
 		console.log('password: ' + password);
+		console.log('password1: ' + password1);
+
 
 		pg.connect(connectionString, function (err, client, done){
 			console.log('pg.connect...............................');
