@@ -506,8 +506,8 @@ app.post('/signup', urlencodedparser, function(req,res){
 		console.log('password1: ' + password1);
 
 		if (password != password1){
-			res.redirect('/signup');
 			console.log('Passwords dont match');
+			res.redirect('/mismatch');
 		} 
 		else{
 			pg.connect(connectionString, function (err, client, done){
@@ -529,6 +529,12 @@ app.post('/signup', urlencodedparser, function(req,res){
 
 		}
 }); 
+
+app.get('/mismatch',
+	function(req,res){
+		console.log('/login/mismatch ----------------------------------')
+		res.render('pages/mismatch');
+});
 
 /*
 //https://scotch.io/tutorials/easy-node-authentication-setup-and-local
