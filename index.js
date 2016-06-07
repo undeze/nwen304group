@@ -499,6 +499,7 @@ app.post('/signup', urlencodedparser, function(req,res){
 		var username = req.body.username;
 		var email = req.body.email;
 		var password = req.body.password;
+		var password1 = req.body.password1;
 		console.log('username: ' + username);
 
 		console.log('email: ' + email);
