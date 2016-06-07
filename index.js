@@ -508,29 +508,26 @@ app.post('/signup', urlencodedparser, function(req,res){
 		if (password != password1){
 			res.redirect('/signup');
 			console.log('Passwords dont match');
-		}
-		/*if (req.body.password != req.body.password1){
-			console.log('Passwords dont match');
-			res.redirect('/signup');
-		}*/
-
-
-		pg.connect(connectionString, function (err, client, done){
-			console.log('pg.connect...............................');
-			if(err){
+		} 
+		else{
+			pg.connect(connectionString, function (err, client, done){
+				console.log('pg.connect...............................');
+				if(err){
 					console.log('Could not connect to postgresql on signup',err);
 					return;
-			}
-			const hash = crypto.createHash('sha256');
-			hash.update(password);
-			var encrypted = hash.digest('hex');
-			var query = client.query("insert into members values (default,'" + username + 
-				"','" + encrypted + "','" + email + "', null);", function(error, result){
+				}
+				const hash = crypto.createHash('sha256');
+				hash.update(password);
+				var encrypted = hash.digest('hex');
+				var query = client.query("insert into members values (default,'" + username + 
+					"','" + encrypted + "','" + email + "', null);", function(error, result){
 					done();
 					if(error){}
 						res.redirect('/login');
-				});
-		 });
+					});
+		 	});
+
+		}
 }); 
 
 /*
