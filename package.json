@@ -19,7 +19,7 @@
     "connect-ensure-login": "^0.1.1",
     "pg":"4.x",
     "http":"^0.0.0",
-    "simple-captcha":"<2.15.1"
+    "simple-captcha":"^2.15.1"
     
   },
   "engines": {
