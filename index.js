@@ -79,15 +79,7 @@ passport.use(new LocalStrategy({
 
 					if(passwordHash == result.rows[0].password){
 						console.log('successful login 2, username:' + username);
-						/*
-						var newUser = new User();
-						newUser.local.displayName = 'bob';
-						newUser.save(function(err){
-							if (err)
-								throw err;
-							return done(null, newUser);
-						});
-						*/
+						
 						return done(null, username);
 						//res.redirect('/login');
 					} else {
@@ -181,12 +173,10 @@ app.get('/login',
 		res.render('pages/login');
 	});
 
-//app.post('/loginnew', db.loginPost);
 
 app.post('/loginnew', loginPost);
 
 /* Login without facebook */
-
 function loginPost(req, res, next) {
 	console.log('index.js loginPost');
   	// Ask passport to authenticate.
@@ -309,15 +299,6 @@ app.get('/index',
 	function(req, res){
 		res.render('pages/index', { user: req.user });
 	});
-
-/*
-app.get('/indexWithoutFacebook',
-	require('connect-ensure-login').ensureLoggedIn(),
-	function(req, res){
-		console.log('/indexWithoutFacebook');
-		//req.user.displayName = 'Fred';
-		res.render('pages/index', { user: req.user });
-	}); */
 
 
 app.get('/logout/facebook', fb.ensureLoggedIn(),
@@ -540,18 +521,6 @@ app.get('/mismatch',
 		console.log('/mismatch ----------------------------------');
 		res.render('pages/mismatch');
 });
-
-
-/*
-//https://scotch.io/tutorials/easy-node-authentication-setup-and-local
-app.post('/Locallogin', passport.authenticate('local-login', {
-
-        successRedirect : '/indexWithoutFacebook', // redirect to the secure profile section
-        failureRedirect : '/login', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-	})
-	
-); */
 
 app.listen(port, function() {
 	console.log('Node app is running on port: '+port);
