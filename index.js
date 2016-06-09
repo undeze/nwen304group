@@ -12,8 +12,6 @@ var passport = require('passport')
 /* To support the database */
 var pg = require('pg'); 
 
-var db = require('./db.js');
-
 var http = require('http');
 
 const crypto = require('crypto');
