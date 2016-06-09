@@ -12,6 +12,8 @@ var passport = require('passport')
 /* To support the database */
 var pg = require('pg'); 
 
+var db = require('./db.js');
+
 var http = require('http');
 
 const crypto = require('crypto');
@@ -179,13 +181,16 @@ app.get('/login',
 		res.render('pages/login');
 	});
 
+app.post('/loginnew', db.loginPost);
+/*
 app.post('/loginnew', loginPost);
 
 /* Login without facebook */
+/*
 function loginPost(req, res, next) {
 	console.log('index.js loginPost');
   	// Ask passport to authenticate.
-  	/* Local authentication. That is, authentication without Facebook */
+  	// Local authentication. That is, authentication without Facebook 
   	passport.authenticate('local', function(err, username, info) {
   		console.log('loginPost passport.auth');
     	if (err) {
@@ -211,7 +216,7 @@ function loginPost(req, res, next) {
       	// Set the message
       	req.session.messages = "Login successfully";
 
-      	/* Set the displayName */
+      	// Set the displayName 
       	var nu = { displayName : username };
       	req.session.passport.user = nu;
 
@@ -220,7 +225,7 @@ function loginPost(req, res, next) {
     });    
   })(req, res, next);
 }
-
+*/
 
 app.get('/login/facebook', passport.authenticate('facebook'));
 
