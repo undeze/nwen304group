@@ -181,12 +181,12 @@ app.get('/login',
 		res.render('pages/login');
 	});
 
-app.post('/loginnew', db.loginPost);
-/*
+//app.post('/loginnew', db.loginPost);
+
 app.post('/loginnew', loginPost);
 
 /* Login without facebook */
-/*
+
 function loginPost(req, res, next) {
 	console.log('index.js loginPost');
   	// Ask passport to authenticate.
@@ -225,7 +225,7 @@ function loginPost(req, res, next) {
     });    
   })(req, res, next);
 }
-*/
+
 
 app.get('/login/facebook', passport.authenticate('facebook'));
 
