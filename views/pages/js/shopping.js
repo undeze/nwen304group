@@ -17,6 +17,12 @@ $(document).ready(function() {
 		var itemname  = $(this).parent().find('.item_name').html();
 		var itemprice = $(this).parent().find('.price').html();
 		
+		$.post('https://nwen304group6.herokuapp.com/cart/add', { member: 6, item: thisID, Name: itemname },
+          		function(data, status){ 
+             
+          	});
+
+		
 		if(include(Arrays,thisID))
 		{
 			var price 	 = $('#each-'+thisID).children(".shopp-price").find('em').html();
@@ -36,10 +42,7 @@ $(document).ready(function() {
 			
 			$('#total-hidden-charges').val(prev_charges);
 
-			$.post('https://nwen304group6.herokuapp.com/cart/add', { member: 6, item: thisID, Name: itemname },
-          		function(data, status){ 
-             
-          	});
+			
 		}
 		else
 		{
