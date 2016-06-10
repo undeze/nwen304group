@@ -9,7 +9,7 @@ $(document).ready(function() {
 	getWeather();
 	
 	$('.add-to-cart-button').click(function(){
-		console.log("add to cart button");
+		//console.log("add to cart button");
 
 		
 		var thisID 	  = $(this).parent().parent().attr('id').replace('detail-','');
