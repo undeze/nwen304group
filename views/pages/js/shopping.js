@@ -9,7 +9,7 @@ $(document).ready(function() {
 	getWeather();
 	
 	$('.add-to-cart-button').click(function(){
-
+		console.log("add to cart button");
 
 		
 		var thisID 	  = $(this).parent().parent().attr('id').replace('detail-','');
@@ -17,12 +17,12 @@ $(document).ready(function() {
 		var itemname  = $(this).parent().find('.item_name').html();
 		var itemprice = $(this).parent().find('.price').html();
 		
-		$.post('https://nwen304group6.herokuapp.com/cart/add', { member: 6, item: thisID, Name: itemname },
+		/*$.post('https://nwen304group6.herokuapp.com/cart/add', { member: 6, item: thisID, Name: itemname },
           		function(data, status){ 
              
-          	});
+          	});*/
 
-		
+
 		if(include(Arrays,thisID))
 		{
 			var price 	 = $('#each-'+thisID).children(".shopp-price").find('em').html();
