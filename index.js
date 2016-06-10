@@ -423,7 +423,7 @@ app.post('/cart/add', function(req, res){
 		var memberid = req.body.member; 
 		var itemid = req.body.item;
 		var itemName = req.body.Name;
-		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = '"+memberid+"' AND itemid = '"+itemid+"' RETURNING *) INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT '"+memberid+"','"+itemid+"',1  WHERE NOT EXISTS (SELECT * FROM upsert);",
+		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = "+memberid+" AND itemid = "+itemid+" RETURNING *) INSERT INTO ShoppingCart (memberid,itemid,Quantity) SELECT "+memberid+","+itemid+",1  WHERE NOT EXISTS (SELECT * FROM upsert);",
 		function(error, result){
 			if(error){
 				console.error(error);
