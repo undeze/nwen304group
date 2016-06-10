@@ -1,12 +1,16 @@
 
 
 $(document).ready(function() {
+
+
 	
 	var Arrays=new Array();
 	getData();
 	getWeather();
 	
 	$('.add-to-cart-button').click(function(){
+
+
 		
 		var thisID 	  = $(this).parent().parent().attr('id').replace('detail-','');
 		
@@ -31,6 +35,11 @@ $(document).ready(function() {
 			$('.cart-total span').html(prev_charges);
 			
 			$('#total-hidden-charges').val(prev_charges);
+
+			$.post('https://nwen304group6.herokuapp.com/cart/add', { member: 6, item: thisID, Name: itemname },
+          		function(data, status){ 
+             
+          	});
 		}
 		else
 		{
