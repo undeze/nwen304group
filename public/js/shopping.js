@@ -216,10 +216,10 @@ function removeFromCart(itemName){
 	$.ajax({
 		method: "DELETE",
 		url: 'https://nwen304group6.herokuapp.com/cart/delete',
-		// data: JSON.stringify({
-		// 	member: "8",
-		// 	name: itemName
-		// }),
+		data: JSON.stringify({
+			member: "8",
+			name: itemName
+		}),
 		contentType: "application/json",
 		dataType: "json",
 		success: function() {

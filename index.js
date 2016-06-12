@@ -452,8 +452,8 @@ app.delete('/cart/delete', function(req, res){
 		// var memberid = req.body.member; 
 		// var itemName = req.body.name; 
 		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"';");
-		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = '"+itemName+"';");
-		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = 'Awesome Bag';",
+		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = '"+itemName+"';");
+		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = 'Awesome Bag';",
 		function(error, result){
 			if(error){
 				console.error(error);
