@@ -213,12 +213,12 @@ function getWeather(){
 };
 
 function removeFromCart(itemName){
-		var stringURL = 'https://nwen304group6.herokuapp.com/cart/delete';
-		$.post(stringURL, { member: '8',
-							name: 'Awesome Bag'},
-		function success(data, status){
-			console.log("Successfully removed item from cart");
-		});
+	var stringURL = 'https://nwen304group6.herokuapp.com/cart/delete';
+	$.post(stringURL, { member: '8',
+						name: itemName},
+	function success(data, status){
+		console.log("Successfully removed item from cart");
+	});
 
 	// $.ajax({
 	// 	method: "DELETE",
@@ -239,23 +239,30 @@ function removeFromCart(itemName){
 };
 
 function addToCart(){
-	$.ajax({
-		method: 'POST',
-		url: 'https://nwen304group6.herokuapp.com/cart/add',
-		contentType: "application/json",
-		dataType: "json",
-		data: JSON.stringify({
-			member: "8",
-			item: "1",
-			Name: "Awesome Bag"
-		}),
-		success: function(data){
+	var stringURL = 'https://nwen304group6.herokuapp.com/cart/add';
+	$.post(stringURL, { member: "8",
+						item: "1",
+						Name: "Awesome Bag"},
+		function success(data, status){
 			console.log("Successfully added item to cart");
-		},
-		error: function() {
-			console.log("An error ocurred retrieving data");
-		}
-	});
+		});
+	// $.ajax({
+	// 	method: 'POST',
+	// 	url: 'https://nwen304group6.herokuapp.com/cart/add',
+	// 	contentType: "application/json",
+	// 	dataType: "json",
+	// 	data: JSON.stringify({
+	// 		member: "8",
+	// 		item: "1",
+	// 		Name: "Awesome Bag"
+	// 	}),
+	// 	success: function(data){
+	// 		console.log("Successfully added item to cart");
+	// 	},
+	// 	error: function() {
+	// 		console.log("An error ocurred retrieving data");
+	// 	}
+	// });
 };
 
 function getRecommendation(weather,temperature){
