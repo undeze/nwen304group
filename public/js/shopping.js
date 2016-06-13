@@ -213,22 +213,29 @@ function getWeather(){
 };
 
 function removeFromCart(itemName){
-	$.ajax({
-		method: "DELETE",
-		url: 'https://nwen304group6.herokuapp.com/cart/delete',
-		data: JSON.stringify({
-			member: "8",
-			name: itemName
-		}),
-		contentType: "application/json",
-		dataType: "json",
-		success: function() {
+		var stringURL = 'https://nwen304group6.herokuapp.com/cart/delete';
+		$.post(stringURL, { member: '8',
+							name: 'Awesome Bag'},
+		function success(data, status){
 			console.log("Successfully removed item from cart");
-		},
-		error: function() {
-			console.log("An error ocurred retrieving data");
-		}
-	});	
+		});
+
+	// $.ajax({
+	// 	method: "DELETE",
+	// 	url: 'https://nwen304group6.herokuapp.com/cart/delete',
+	// 	data: {
+	// 		member: "8",
+	// 		name: itemName
+	// 	},
+	// 	contentType: "application/json",
+	// 	dataType: "json",
+	// 	success: function() {
+	// 		console.log("Successfully removed item from cart");
+	// 	},
+	// 	error: function() {
+	// 		console.log("An error ocurred retrieving data");
+	// 	}
+	// });	
 };
 
 function addToCart(){
