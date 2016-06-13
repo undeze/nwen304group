@@ -240,7 +240,7 @@ function addToCart(){
 		data: JSON.stringify({
 			member: "8",
 			item: "1",
-			Name: "Cool T-Shirt"
+			Name: "Awesome Bag"
 		}),
 		success: function(data){
 			console.log("Successfully added item to cart");
