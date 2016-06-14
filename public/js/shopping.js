@@ -10,13 +10,13 @@ $(document).ready(function() {
 	
 	$('.add-to-cart-button').click(function(){
 
-		//Add item to cart database
-		addToCart();
-		
-		var thisID 	  = $(this).parent().parent().attr('id').replace('detail-','');
-		
+		var thisID 	  = $(this).parent().parent().attr('id').replace('detail-','');	
 		var itemname  = $(this).parent().find('.item_name').html();
 		var itemprice = $(this).parent().find('.price').html();
+		
+		//Add item to cart database
+		addToCart(itemname);
+		alert(itemname);
 		
 		if(include(Arrays,thisID))
 		{
@@ -238,11 +238,10 @@ function removeFromCart(itemName){
 	// });	
 };
 
-function addToCart(){
+function addToCart(itemName){
 	var stringURL = 'https://nwen304group6.herokuapp.com/cart/add';
 	$.post(stringURL, { member: "8",
-						item: "1",
-						Name: "Awesome Bag"},
+						Name: itemName},
 		function success(data, status){
 			console.log("Successfully added item to cart");
 		});
