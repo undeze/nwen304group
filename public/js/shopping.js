@@ -16,7 +16,6 @@ $(document).ready(function() {
 		
 		//Add item to cart database
 		addToCart(itemname);
-		alert(itemname);
 		
 		if(include(Arrays,thisID))
 		{
@@ -60,6 +59,7 @@ $(document).ready(function() {
 		var item = $(this).parent().children(".label").html();
 		console.log(item);
 		removeFromCart(item);
+		getData();
 		// var prev_charges = $('.cart-total span').html();
 		
 		// var thisID = $(this).parent().attr('id').replace('each-','');
