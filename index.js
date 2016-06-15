@@ -414,7 +414,6 @@ app.get('/store', function(req, res){
 
 //Adds items to a members shopping cart
 app.post('/cart/add', function(req, res){
-	console.log('/cart/add');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.error('Could not connect to database');
@@ -425,7 +424,7 @@ app.post('/cart/add', function(req, res){
 		var memberid = req.body.member; 
 		//var itemid = req.body.item;
 		var itemName = req.body.Name;
-		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"' RETURNING *) INSERT INTO ShoppingCart (memberid,itemid,Quantity,itemname) SELECT '"+memberid+"','"+itemid+"',1,'"+itemName+"' WHERE NOT EXISTS (SELECT * FROM upsert);",
+		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"' RETURNING *) INSERT INTO ShoppingCart (memberid,Quantity,itemname) SELECT '"+memberid+"',1,'"+itemName+"' WHERE NOT EXISTS (SELECT * FROM upsert);",
 
 		function(error, result){
 			if(error){
