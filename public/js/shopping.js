@@ -32,7 +32,7 @@ $(document).ready(function() {
 			prev_charges = parseInt(prev_charges)-parseInt(price);
 			
 			prev_charges = parseInt(prev_charges)+parseInt(total);
-			$('.cart-total span').html(totalPrice);
+			//$('.cart-total span').html(totalPrice);
 			
 			$('#total-hidden-charges').val(prev_charges);
 		}
