@@ -58,8 +58,9 @@ $(document).ready(function() {
 		
 		var item = $(this).parent().children(".label").html();
 		console.log(item);
-		// var prev_charges = $('.cart-total span').html();
-		
+		//Remove item from datbase and reload
+		removeFromCart(item);
+		// var prev_charges = $('.cart-total span').html();		
 		// var thisID = $(this).parent().attr('id').replace('each-','');
 		
 		// var pos = getpos(Arrays,thisID);
@@ -73,11 +74,6 @@ $(document).ready(function() {
 		//Decrease size of wrapper
 		var Height = $('#cart_wrapper').height();
 		$('#cart_wrapper').css({height:Height-parseInt(45)});
-
-		//Remove item from datbase and reload
-		removeFromCart(item);
-		getData();
-		
 	});	
 	
 	$('#Submit').livequery('click', function() {
@@ -183,12 +179,12 @@ function getData(){
 
 //Redraws the shopping cart for the client
 function refreshList(data){
+	alert(data);
 	//Clear data
 	$('#cart_wrapper .cart-info').empty();
 	//Loop through all items in the cart database
 	var totalPrice = 0;
 	for(items in data){
-		//alert("Items: "+items);
 		var itemName = data[items].name;
 		var price = data[items].price;
 		var priceAsFloat = parseFloat(price.split("$").pop());
@@ -226,6 +222,7 @@ function removeFromCart(itemName){
 						name: itemName},
 	function success(data, status){
 		console.log("Successfully removed item from cart");
+		getData();
 	});
 
 	// $.ajax({
