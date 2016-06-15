@@ -75,6 +75,8 @@ $(document).ready(function() {
 		//Decrease size of wrapper
 		var Height = $('#cart_wrapper').height();
 		$('#cart_wrapper').css({height:Height-parseInt(45)});
+
+		getData();
 	});	
 	
 	$('#Submit').livequery('click', function() {
@@ -223,7 +225,6 @@ function removeFromCart(itemName){
 						name: itemName},
 	function success(data, status){
 		console.log("Successfully removed item from cart");
-		getData();
 	});
 
 	// $.ajax({
