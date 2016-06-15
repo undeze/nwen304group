@@ -58,8 +58,6 @@ $(document).ready(function() {
 		
 		var item = $(this).parent().children(".label").html();
 		console.log(item);
-		removeFromCart(item);
-		getData();
 		// var prev_charges = $('.cart-total span').html();
 		
 		// var thisID = $(this).parent().attr('id').replace('each-','');
@@ -71,6 +69,10 @@ $(document).ready(function() {
 		// $('.cart-total span').html(prev_charges);
 		// $('#total-hidden-charges').val(prev_charges);
 		$(this).parent().remove();
+
+		//Remove item from datbase and reload
+		removeFromCart(item);
+		getData();
 		
 	});	
 	
@@ -177,6 +179,8 @@ function getData(){
 
 //Redraws the shopping cart for the client
 function refreshList(data){
+	//Clear data
+	$('#cart_wrapper .cart-info').html('');
 	//Loop through all items in the cart database
 	var totalPrice = 0;
 	for(items in data){
