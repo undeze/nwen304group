@@ -59,6 +59,7 @@ $(document).ready(function() {
 		var item = $(this).parent().children(".label").html();
 		console.log(item);
 		//Remove item from datbase and reload
+		alert(item);
 		removeFromCart(item);
 		// var prev_charges = $('.cart-total span').html();		
 		// var thisID = $(this).parent().attr('id').replace('each-','');
@@ -179,7 +180,7 @@ function getData(){
 
 //Redraws the shopping cart for the client
 function refreshList(data){
-	alert(data);
+	console.log(data);
 	//Clear data
 	$('#cart_wrapper .cart-info').empty();
 	//Loop through all items in the cart database
