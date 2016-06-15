@@ -70,6 +70,10 @@ $(document).ready(function() {
 		// $('#total-hidden-charges').val(prev_charges);
 		$(this).parent().remove();
 
+		//Decrease size of wrapper
+		var Height = $('#cart_wrapper').height();
+		$('#cart_wrapper').css({height:Height-parseInt(45)});
+
 		//Remove item from datbase and reload
 		removeFromCart(item);
 		getData();
@@ -180,7 +184,7 @@ function getData(){
 //Redraws the shopping cart for the client
 function refreshList(data){
 	//Clear data
-	$('#cart_wrapper .cart-info').html('');
+	$('#cart_wrapper .cart-info').empty();
 	//Loop through all items in the cart database
 	var totalPrice = 0;
 	for(items in data){
