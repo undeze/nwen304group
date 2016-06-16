@@ -162,8 +162,18 @@ app.use(passport.session());
 
 
 app.get('/', function(req,res){
-	res.render('pages/home',{user: req.user});
+	res.render('pages/home', {user: req.user});
 });
+
+
+/*
+app.get('/profile',
+	require('connect-ensure-login').ensureLoggedIn(),
+	function(req, res){
+
+		res.render('pages/profile', { user: req.user });
+});
+*/
 
 
 app.get('/login',
