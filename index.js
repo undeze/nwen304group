@@ -319,7 +319,7 @@ app.get('/profile',
 	require('connect-ensure-login').ensureLoggedIn(),
 	function(req, res){
 
-		res.render('pages/profile', { user: req.user, username: req.username });
+		res.render('pages/profile', { user: req.user });
 });
 
 app.get('/db', function(req, res){
