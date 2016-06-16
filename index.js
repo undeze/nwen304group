@@ -310,7 +310,7 @@ app.get('/goShopping',
 	function(req, res){
 			//HTTP CACHE HEADERS
 		res.setHeader('Cache-Control', 'public, max-age=3600');
-		res.render('pages/shopping', { user: req.user });
+		res.render('pages/shopping', { user: req.user, username: req.username });
 	});
 
 
