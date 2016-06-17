@@ -103,7 +103,7 @@ passport.use(new LocalStrategy({
 // logging, parsing, and session handling.
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: {maxAge : 60000} }));
 
 
 
