@@ -147,6 +147,7 @@ $(document).ready(function() {
 	$('#show_cart').click(function() {
 		
 		$('#cart_wrapper').slideToggle('slow');
+		getData();
 		
 	});
 	
