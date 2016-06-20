@@ -88,11 +88,11 @@ a#show_cart{
 	overflow:hidden;
 }
 
-.footer{ height:120px; 
+.footer{ height:160px; 
 	background:#E2E2E2;
 	position: absolute;
-  	left: 100px;
-  	top: 20px;} 
+  	left: 10px;
+  	top: 120px;} 
 
 #wrap ul li:hover{ border:solid #f3f4ee 1px; }
 
