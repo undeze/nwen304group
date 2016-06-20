@@ -91,8 +91,8 @@ a#show_cart{
 .footer{ height:160px; 
 	background:#E2E2E2;
 	position: absolute;
-  	left: 10px;
-  	top: 120px;} 
+  	left: 0px;
+  	top: 140px;} 
 
 #wrap ul li:hover{ border:solid #f3f4ee 1px; }
 
