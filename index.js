@@ -456,11 +456,10 @@ app.post('/cart/delete', function(req, res){
 			console.error(err);
 			return;
 		}
-		// var memberid = req.body.member; 
-		var itemName = req.body.name; 
-		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"';");
-		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = '"+itemName+"';",
-		//var query = client.query("DELETE FROM ShoppingCart WHERE memberid = 8 AND itemname = 'Awesome Bag';",
+		var memberid = req.body.member; 
+		var itemName = req.body.name;
+		
+		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"';",
 		function(error, result){
 			if(error){
 				console.error(error);
