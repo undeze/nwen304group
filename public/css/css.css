@@ -88,7 +88,7 @@ a#show_cart{
 	overflow:hidden;
 }
 
-.footer{ height:400px; background:#E2E2E2} 
+.footer{ height:100px; background:#E2E2E2} 
 
 #wrap ul li:hover{ border:solid #f3f4ee 1px; }
 
