@@ -473,13 +473,10 @@ app.post('/cart/delete', function(req, res){
 });
 
 //Adds purchases when a user buys items
-app.put('/cart/purchase', function(req, res){
+app.post('/cart/purchase', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
-		var memberid = 8//req.body.member;
-		var itemid = 1//req.body.item;
-		var price = 20.35//req.body.price;
-
-		var query = client.query("INSERT INTO Purchases (MemberID,ItemID,Price,DatePurchased) VALUES('"+memberid+"','"+itemid+"','"+price+"',CURRENT_DATE);");
+		var memberid = req.body.member;
+		var query = client.query("INSERT INTO purchases (memberid,price,datepurchased,itemname) SELECT s.memberid,s.quantity*i.price AS price,NOW(),s.itemname FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE memberid = '"+memberid+"';");
 
 		//Error checking for adding to purchases
 		query.on('error', function(){

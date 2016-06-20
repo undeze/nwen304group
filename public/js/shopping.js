@@ -80,12 +80,10 @@ $(document).ready(function() {
 	});	
 	
 	$('#Submit').livequery('click', function() {
+		makePurchase();
+		$('#cart_wrapper').html('Thank you for your purchase');
 		
-		var totalCharge = $('#total-hidden-charges').val();
-		
-		$('#cart_wrapper').html('Total Charges: $'+totalCharge);
-		
-		return false;
+		//return false;
 		
 	});	
 	
@@ -235,6 +233,14 @@ function addToCart(itemName){
 			console.log("Successfully added item to cart");
 		});
 };
+
+function makePurchase(){
+	var stringURL = 'https://nwen304group6.herokuapp.com/cart/purchase';
+		$.post(stringURL, { member: "8"},
+		function success(data, status){
+			console.log("Successfully made purchase");
+		});
+}
 
 function getRecommendation(weather,temperature){
 	
