@@ -191,6 +191,7 @@ function refreshList(data){
 		var quantity = data[items].quantity;
 		totalPrice += priceAsFloat * quantity;
 		$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+items+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>');
+		$('#cart_wrapper').css({height:Height+parseInt(45)});
 	}
 	$('.cart-total span').html(totalPrice);
 };
@@ -240,7 +241,7 @@ function makePurchase(){
 		function success(data, status){
 			console.log("Successfully made purchase");
 		});
-}
+};
 
 function getRecommendation(weather,temperature){
 	

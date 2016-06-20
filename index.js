@@ -476,7 +476,7 @@ app.post('/cart/delete', function(req, res){
 app.post('/cart/purchase', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		var memberid = req.body.member;
-		var query = client.query("INSERT INTO purchases (memberid,price,datepurchased,itemname) SELECT s.memberid,s.quantity*i.price AS price,NOW(),s.itemname FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE memberid = '"+memberid+"';");
+		var query = client.query("INSERT INTO purchases (memberid,price,datepurchased,itemname) SELECT s.memberid,s.quantity*i.price AS price,NOW(),s.itemname FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE memberid = '"+memberid+"'; TRUNCATE TABLE shoppingcart;");
 
 		//Error checking for adding to purchases
 		query.on('error', function(){
