@@ -56,8 +56,8 @@ $(document).ready(function() {
 		
 		var item = $(this).parent().children(".label").html();
 		console.log(item);
+		
 		//Remove item from datbase and reload
-		alert(item);
 		removeFromCart(item);
 		// var prev_charges = $('.cart-total span').html();		
 		
@@ -198,7 +198,6 @@ function refreshList(data, isFirstLoad){
 		}
 		$('#cart_wrapper .cart-info').append($newItem);
 	}
-	alert("Price: "+totalPrice);
 	$('.cart-total span').html(totalPrice);
 };
 
