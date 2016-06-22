@@ -194,10 +194,10 @@ function refreshList(data){
 
 		var itemHTML = '<div class="shopp" id="each-'+items+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>';
 		var $newItem = $(itemHTML);
-		
-		var Height = $('#cart_wrapper').height();
+
+		//var Height = $('#cart_wrapper').height();
 		$('#cart_wrapper .cart-info').append($newItem);
-		$('#cart_wrapper').css({height:Height+parseInt(45)});
+		//$('#cart_wrapper').css({height:Height+parseInt(45)});
 	}
 	alert(totalPrice);
 	$('.cart-total span').html(totalPrice);
@@ -229,7 +229,7 @@ function removeFromCart(itemName){
 	$.post(stringURL, { member: "8",
 						name: itemName},
 	function success(data, status){
-		getData();
+		//getData();
 		console.log("Successfully removed item from cart");
 	});
 };
