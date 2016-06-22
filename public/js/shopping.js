@@ -194,6 +194,8 @@ function refreshList(data){
 
 		var itemHTML = '<div class="shopp" id="each-'+items+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>';
 		var $newItem = $(itemHTML);
+		
+		var Height = $('#cart_wrapper').height();
 		$('#cart_wrapper .cart-info').append($newItem);
 		$('#cart_wrapper').css({height:Height+parseInt(45)});
 	}
