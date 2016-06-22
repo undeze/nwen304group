@@ -177,9 +177,9 @@ function getData(isFirstLoad){
 
 //Redraws the shopping cart for the client
 function refreshList(data, isFirstLoad){
-	console.log(data);
 	//Clear data
 	$('#cart_wrapper .cart-info').empty();
+
 	//Loop through all items in the cart database
 	var totalPrice = 0;
 	for(items in data){
@@ -201,9 +201,9 @@ function refreshList(data, isFirstLoad){
 	$('.cart-total span').html(totalPrice);
 };
 
+//Gets the weather data from yahoo to be displayed
 function getWeather(){
 	$.ajax({
-		//url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%2015021762&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
 		url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%2029344823&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
 		method: "GET",
 		dataType: "jsonp",
@@ -214,9 +214,10 @@ function getWeather(){
 			var condition = data.query.results.channel.item.condition.text;
 			var conditionCode = data.query.results.channel.item.condition.code;
 			var desc = data.query.results.channel.item.description;
+			console.log("Weather code: "+conditionCode);
 			var response = getRecommendation(conditionCode,temp);
 			desc = desc.match(/"[^"]+"/g);
-			$('.footer').children('#weather').html("<b>Current Conditions:</b> <br />"+condition+"</b> <br />"+temp+" Degrees </b> <br /> <img src="+desc+"/> <br /> "+response);
+			$('.footer').children('#weather').html("<b>Current Conditions:</b> <br />"+condition+"<br />"+temp+" Degrees<br /> <img src="+desc+"/> <br /> "+response);
 		},
 		error: function(){
 			alert('Error retreiving weather results');
@@ -224,6 +225,7 @@ function getWeather(){
 	});
 };
 
+//Removes an item from the shopping cart
 function removeFromCart(itemName){
 	var stringURL = 'https://nwen304group6.herokuapp.com/cart/delete';
 	$.post(stringURL, { member: "8",
@@ -235,6 +237,7 @@ function removeFromCart(itemName){
 	});
 };
 
+//Adds an item to the shopping cart
 function addToCart(itemName){
 	var stringURL = 'https://nwen304group6.herokuapp.com/cart/add';
 	$.post(stringURL, { member: "8",
@@ -245,6 +248,7 @@ function addToCart(itemName){
 		});
 };
 
+//Makes a purchases putting everything from shopping cart into a purchase table
 function makePurchase(){
 	var stringURL = 'https://nwen304group6.herokuapp.com/cart/purchase';
 		$.post(stringURL, { member: "8"},
@@ -253,26 +257,38 @@ function makePurchase(){
 		});
 };
 
+//Gets a purchase recommendation for the user
 function getRecommendation(weatherCode,temperature){
+//Weather Codes from yahoo
+//https://developer.yahoo.com/weather/documentation.html
+
 	var response = "";
+
+	//Stormy
 	if(weatherCode <= 4){
 		response = "The weather looks terrible out there, you may want some gumboots";
 	}
+	//Raining
 	else if(weatherCode <= 12){
 		response = "Stay nice and dry with a waterproof jacket";
 	}
+	//Snow / hail / sleet
 	else if(weatherCode <= 18){
 		response = "Get some warm gloves to play out in the snow";
 	}
+	//Fog,haze,smoky
 	else if(weatherCode <= 22){
 		response = "Could be hard to see out there, maybe look for some glasses";
 	}
+	//Windy
 	else if(weatherCode <= 24){
-		response = "It's looking really windy out there, check out some windproof jackets";
+		response = "It's looking pretty windy out there, check out some windproof jackets";
 	}
+	//Cold
 	else if(weatherCode <= 25){
 		response = "Stay warm with a nice warm jacket";
 	}
+	//Cloudy
 	else if(weatherCode <= 30){
 		if(temperature < 10){
 			response = "Cloudy and cold, check out some warm pants";
@@ -281,6 +297,7 @@ function getRecommendation(weatherCode,temperature){
 			response = "Cloudy but not cold, check out some whiskey";
 		}
 	}
+	//Sunny,clear
 	else if(weatherCode <= 34){
 		if(temperature > 20){
 			response = "It's looking beautiful out there, check out our range of singlets";
@@ -292,15 +309,19 @@ function getRecommendation(weatherCode,temperature){
 			response = "It's looking nice out there, not too warm though, stay protected with some sunnies";
 		}
 	}
+	//Rain,hail
 	else if(weatherCode <= 35){
 		rsponse = "Rain, with chances of hail, maybe you should check out some weatherproof gear";
 	}
+	//Hot
 	else if(weatherCode <= 36){
 		response = "It sure is hot outside, check out some sunnies and singlets to stay cool";
 	}
+	//Thunderstorms
 	else if(weatherCode <= 40){
 		response = "It's an inside day today, enjoy it with some whiskey";
 	}
+	//Snow
 	else if(weatherCode <= 43){
 		response = "Go play in the snow with some warm gloves and boots";
 	}
@@ -309,3 +330,8 @@ function getRecommendation(weatherCode,temperature){
 	}
 	return response;
 };
+
+//Gets a recommendation based on a member's past purchases
+function getPastPurchaseRecommendation(){
+
+}
