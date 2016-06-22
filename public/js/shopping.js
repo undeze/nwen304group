@@ -258,22 +258,22 @@ function getRecommendation(weatherCode,temperature){
 	if(weatherCode <= 4){
 		response = "The weather looks terrible out there, you may want some gumboots";
 	}
-	else-if(weatherCode <= 12){
+	else if(weatherCode <= 12){
 		response = "Stay nice and dry with a waterproof jacket";
 	}
-	else-if(weatherCode <= 18){
+	else if(weatherCode <= 18){
 		response = "Get some warm gloves to play out in the snow";
 	}
-	else-if(weatherCode <= 22){
+	else if(weatherCode <= 22){
 		response = "Could be hard to see out there, maybe look for some glasses";
 	}
-	else-if(weatherCode <= 24){
+	else if(weatherCode <= 24){
 		response = "It's looking really windy out there, check out some windproof jackets";
 	}
-	else-if(weatherCode <= 25){
+	else if(weatherCode <= 25){
 		response = "Stay warm with a nice warm jacket";
 	}
-	else-if(weatherCode <= 30){
+	else if(weatherCode <= 30){
 		if(temperature < 10){
 			response = "Cloudy and cold, check out some warm pants";
 		}
@@ -281,27 +281,27 @@ function getRecommendation(weatherCode,temperature){
 			response = "Cloudy but not cold, check out some whiskey";
 		}
 	}
-	else-if(weatherCode <= 34){
+	else if(weatherCode <= 34){
 		if(temperature > 20){
 			response = "It's looking beautiful out there, check out our range of singlets";
 		}
-		else-if(temperature > 15){
+		else if(temperature > 15){
 			response = "It's looking nice out there, check out our range of t-shirts";
 		}
 		else{
 			response = "It's looking nice out there, not too warm though, stay protected with some sunnies";
 		}
 	}
-	else-if(weatherCode <= 35){
+	else if(weatherCode <= 35){
 		rsponse = "Rain, with chances of hail, maybe you should check out some weatherproof gear";
 	}
-	else-if(weatherCode <= 36){
+	else if(weatherCode <= 36){
 		response = "It sure is hot outside, check out some sunnies and singlets to stay cool";
 	}
-	else-if(weatherCode <= 40){
+	else if(weatherCode <= 40){
 		response = "It's an inside day today, enjoy it with some whiskey";
 	}
-	else-if(weatherCode <= 43){
+	else if(weatherCode <= 43){
 		response = "Go play in the snow with some warm gloves and boots";
 	}
 	else{
