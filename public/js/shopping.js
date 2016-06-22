@@ -228,7 +228,8 @@ function removeFromCart(itemName){
 	$.post(stringURL, { member: "8",
 						name: itemName},
 	function success(data, status){
-		//getData();
+		$('#cart_wrapper').slideUp('slow');
+		getData();
 		console.log("Successfully removed item from cart");
 	});
 };
