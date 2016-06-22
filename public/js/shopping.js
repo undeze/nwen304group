@@ -25,8 +25,8 @@ $(document).ready(function() {
 			
 			var total = parseInt(itemprice)*parseInt(quantity);
 			
-			$('#each-'+thisID).children(".shopp-price").find('em').html(total);
-			$('#each-'+thisID).children(".shopp-quantity").html(quantity);
+			//$('#each-'+thisID).children(".shopp-price").find('em').html(total);
+			//$('#each-'+thisID).children(".shopp-quantity").html(quantity);
 			
 			var prev_charges = $('.cart-total span').html();
 			prev_charges = parseInt(prev_charges)-parseInt(price);
@@ -43,7 +43,7 @@ $(document).ready(function() {
 			var prev_charges = $('.cart-total span').html();
 			prev_charges = parseInt(prev_charges)+parseInt(itemprice);
 			
-			$('.cart-total span').html(prev_charges);
+			//$('.cart-total span').html(prev_charges);
 			$('#total-hidden-charges').val(prev_charges);
 			
 			var Height = $('#cart_wrapper').height();
