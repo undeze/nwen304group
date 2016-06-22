@@ -4,7 +4,7 @@ $(document).ready(function() {
 	var Arrays=new Array();
 
 	//Gets data for shopping cart items
-	getData();
+	getData(true);
 	//Gets the data for the weather
 	getWeather();
 	
@@ -17,8 +17,7 @@ $(document).ready(function() {
 		//Add item to cart database
 		addToCart(itemname);
 		
-		// if(include(Arrays,thisID))
-		// {
+		if(include(Arrays,thisID)) {
 		// 	var price 	 = $('#each-'+thisID).children(".shopp-price").find('em').html();
 		// 	var quantity = $('#each-'+thisID).children(".shopp-quantity").html();
 		// 	quantity = parseInt(quantity)+parseInt(1);
@@ -35,10 +34,9 @@ $(document).ready(function() {
 		// 	//$('.cart-total span').html(totalPrice);
 			
 		// 	$('#total-hidden-charges').val(prev_charges);
-		// }
-		// else
-		// {
-		// 	Arrays.push(thisID);
+		}
+		else {
+		Arrays.push(thisID);
 			
 		// 	var prev_charges = $('.cart-total span').html();
 		// 	prev_charges = parseInt(prev_charges)+parseInt(itemprice);
@@ -46,11 +44,11 @@ $(document).ready(function() {
 		// 	//$('.cart-total span').html(prev_charges);
 		// 	$('#total-hidden-charges').val(prev_charges);
 			
-		// 	var Height = $('#cart_wrapper').height();
-		// 	$('#cart_wrapper').css({height:Height+parseInt(45)});
+			var Height = $('#cart_wrapper').height();
+			$('#cart_wrapper').css({height:Height+parseInt(45)});
 			
 		// 	$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+thisID+'"><div class="label">'+itemname+'</div><div class="shopp-price"> $<em>'+itemprice+'</em></div><span class="shopp-quantity">1</span><img src="remove.png" class="remove" /><br class="all" /></div>');
-		// }
+		}
 		$('.detail-view').slideUp('slow');
 	});	
 	
@@ -64,8 +62,8 @@ $(document).ready(function() {
 		// var prev_charges = $('.cart-total span').html();		
 		// var thisID = $(this).parent().attr('id').replace('each-','');
 		
-		// var pos = getpos(Arrays,thisID);
-		// Arrays.splice(pos,1,"0")
+		var pos = getpos(Arrays,thisID);
+		Arrays.splice(pos,1,"0")
 		
 		// prev_charges = parseInt(prev_charges)-parseInt(deduct);
 		// $('.cart-total span').html(prev_charges);
@@ -76,7 +74,7 @@ $(document).ready(function() {
 		var Height = $('#cart_wrapper').height();
 		$('#cart_wrapper').css({height:Height-parseInt(45)});
 
-		getData();
+		getData(false);
 	});	
 	
 	$('#Submit').livequery('click', function() {
@@ -162,14 +160,14 @@ function getpos(arr, obj) {
 }
 
 //A GET request. If successful, this passes data to the 'refreshList' function
-function getData(){
+function getData(isFirstLoad){
 	$.ajax({
 		method: 'GET',
 		url: 'https://nwen304group6.herokuapp.com/cart',
 		contentType: "application/json",
 		dataType: "json",
 		success: function(data){
-			refreshList(data);
+			refreshList(data,isFirstLoad);
 		},
 		error: function() {
 			console.log("An error ocurred retrieving data");
@@ -178,14 +176,13 @@ function getData(){
 };
 
 //Redraws the shopping cart for the client
-function refreshList(data){
+function refreshList(data, isFirstLoad){
 	console.log(data);
 	//Clear data
 	$('#cart_wrapper .cart-info').empty();
 	//Loop through all items in the cart database
 	var totalPrice = 0;
 	for(items in data){
-		alert(items);
 		var itemName = data[items].name;
 		var price = data[items].price;
 		var priceAsFloat = parseFloat(price.split("$").pop());
@@ -195,11 +192,13 @@ function refreshList(data){
 		var itemHTML = '<div class="shopp" id="each-'+items+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>';
 		var $newItem = $(itemHTML);
 
-		//var Height = $('#cart_wrapper').height();
+		if(isFirstLoad){
+			var Height = $('#cart_wrapper').height();
+			$('#cart_wrapper').css({height:Height+parseInt(45)});
+		}
 		$('#cart_wrapper .cart-info').append($newItem);
-		//$('#cart_wrapper').css({height:Height+parseInt(45)});
 	}
-	alert(totalPrice);
+	alert("Price: "+totalPrice);
 	$('.cart-total span').html(totalPrice);
 };
 
@@ -239,7 +238,7 @@ function addToCart(itemName){
 	$.post(stringURL, { member: "8",
 						Name: itemName},
 		function success(data, status){
-			getData();
+			getData(false);
 			console.log("Successfully added item to cart");
 		});
 };
