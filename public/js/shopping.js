@@ -60,8 +60,8 @@ $(document).ready(function() {
 		alert(item);
 		removeFromCart(item);
 		// var prev_charges = $('.cart-total span').html();		
-		// var thisID = $(this).parent().attr('id').replace('each-','');
 		
+		var thisID = $(this).parent().attr('id').replace('each-','');
 		var pos = getpos(Arrays,thisID);
 		Arrays.splice(pos,1,"0")
 		
