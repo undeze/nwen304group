@@ -195,7 +195,7 @@ function refreshList(data){
 		$('#cart_wrapper').css({height:Height+parseInt(45)});
 	}
 	alert(totalPrice);
-	$('.cart-total span').html(totalPrice);
+	$('.cart-total span').html('100');
 };
 
 function getWeather(){
