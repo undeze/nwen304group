@@ -185,13 +185,16 @@ function refreshList(data){
 	//Loop through all items in the cart database
 	var totalPrice = 0;
 	for(items in data){
+		alert(items);
 		var itemName = data[items].name;
 		var price = data[items].price;
 		var priceAsFloat = parseFloat(price.split("$").pop());
 		var quantity = data[items].quantity;
 		totalPrice += priceAsFloat * quantity;
-		alert(itemName+" "+priceAsFloat+" "+quantity);
-		$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+items+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>');
+
+		var itemHTML = '<div class="shopp" id="each-'+items+'"><div class="label">'+itemName+'</div><div class="shopp-price"> $<em>'+price+'</em></div><span class="shopp-quantity">'+quantity+'</span><img src="remove.png" class="remove" /><br class="all" /></div>';
+		var $newItem = $(itemHTML);
+		$('#cart_wrapper .cart-info').append($newItem);
 		$('#cart_wrapper').css({height:Height+parseInt(45)});
 	}
 	alert(totalPrice);
