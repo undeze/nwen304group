@@ -262,7 +262,7 @@ function getRecommendation(weatherCode,temperature){
 //Weather Codes from yahoo
 //https://developer.yahoo.com/weather/documentation.html
 	getPastPurchaseRecommendation();
-	
+
 	var response = "";
 
 	//Stormy
@@ -334,17 +334,19 @@ function getRecommendation(weatherCode,temperature){
 
 //Gets a recommendation based on a member's past purchases
 function getPastPurchaseRecommendation(){
-	$.ajax({
-		method: 'GET',
-		url: 'https://nwen304group6.herokuapp.com/recommendation',
-		contentType: "application/json",
-		dataType: "json",
-		data: {member: 8},
-		success: function(data){
-			console.log(data);
-		},
-		error: function() {
-			console.log("An error ocurred retrieving data");
-		}
-	});
+	var stringURL = 'https://nwen304group6.herokuapp.com/recommendation';
+	$.get(stringURL, { member: "8"},
+	// $.ajax({
+	// 	method: 'GET',
+	// 	url: 'https://nwen304group6.herokuapp.com/recommendation',
+	// 	contentType: "application/json",
+	// 	dataType: "json",
+	// 	data: {member: 8},
+	// 	success: function(data){
+	// 		console.log(data);
+	// 	},
+	// 	error: function() {
+	// 		console.log("An error ocurred retrieving data");
+	// 	}
+	// });
 }
