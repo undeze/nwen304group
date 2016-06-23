@@ -279,13 +279,9 @@ function getPastPurchaseRecommendation(){
 function getRecommendation(weatherCode,temperature){
 //Weather Codes from yahoo
 //https://developer.yahoo.com/weather/documentation.html
-	var colour = "";
+	
+	var colour = getPastPurchaseRecommendation();
 
-	var func = function(){
-		colour = getPastPurchaseRecommendation();
-	};
-
-	func();
 	//There is no colour to recommend
 	if(colour == "none"){
 		colour = "";
@@ -360,5 +356,6 @@ function getRecommendation(weatherCode,temperature){
 	if(colour == 'none'){
 		response = response + ". And maybe enjoy some more whiskey :)";
 	}
+	console.log("Colour now is: "+colour);
 	return response;
 };
