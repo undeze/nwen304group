@@ -257,16 +257,30 @@ function makePurchase(){
 		});
 };
 
+//Gets a recommendation based on a member's past purchases
+function getPastPurchaseRecommendation(){
+	$.ajax({
+		method: 'GET',
+		url: 'https://nwen304group6.herokuapp.com/recommendation',
+		contentType: "application/json",
+		dataType: "json",
+		success: function(data){
+			var col = data[0].colour;
+			console.log("Passed: "+col);
+			return col;
+		},
+		error: function() {
+			console.log("An error ocurred retrieving data");
+		}
+	});
+};
+
 //Gets a purchase recommendation for the user
 function getRecommendation(weatherCode,temperature){
 //Weather Codes from yahoo
 //https://developer.yahoo.com/weather/documentation.html
 
-	var func = getPastPurchaseRecommendation();
-	var colour = "";
-	func.then(function(result){
-		colour = result;
-	});
+	var colour = getPastPurchaseRecommendation();
 	var response = "";
 
 	//There is no colour to recommend
@@ -345,22 +359,4 @@ function getRecommendation(weatherCode,temperature){
 	}
 
 	return response;
-};
-
-//Gets a recommendation based on a member's past purchases
-function getPastPurchaseRecommendation(){
-	$.ajax({
-		method: 'GET',
-		url: 'https://nwen304group6.herokuapp.com/recommendation',
-		contentType: "application/json",
-		dataType: "json",
-		success: function(data){
-			var col = data[0].colour;
-			console.log("Passed: "+col);
-			return col;
-		},
-		error: function() {
-			console.log("An error ocurred retrieving data");
-		}
-	});
 };
