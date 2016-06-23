@@ -261,7 +261,7 @@ function makePurchase(){
 function getRecommendation(weatherCode,temperature){
 //Weather Codes from yahoo
 //https://developer.yahoo.com/weather/documentation.html
-	getPastPurchaseRecommendation();
+	var colour = getPastPurchaseRecommendation();
 
 	var response = "";
 
@@ -341,6 +341,8 @@ function getPastPurchaseRecommendation(){
 		dataType: "json",
 		success: function(data){
 			console.log(data);
+			console.log(data[0].colour);
+			return data[0].colour;
 		},
 		error: function() {
 			console.log("An error ocurred retrieving data");
