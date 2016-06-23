@@ -336,6 +336,9 @@ function getRecommendation(weatherCode,temperature){
 function getPastPurchaseRecommendation(){
 	var stringURL = 'https://nwen304group6.herokuapp.com/recommendation';
 	$.get(stringURL, { member: "8"},
+		function success(data, status){
+			console.log("Successfully found recommendation");
+		});
 	// $.ajax({
 	// 	method: 'GET',
 	// 	url: 'https://nwen304group6.herokuapp.com/recommendation',
@@ -349,4 +352,4 @@ function getPastPurchaseRecommendation(){
 	// 		console.log("An error ocurred retrieving data");
 	// 	}
 	// });
-}
+};
