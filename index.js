@@ -437,7 +437,7 @@ app.post('/cart/add', function(req, res){
 		console.log("ADDING TO CART "+member);
 		//var itemid = req.body.item;
 		var itemName = req.body.Name;
-		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE member = '"+member+"' AND itemname = '"+itemName+"' RETURNING *) INSERT INTO ShoppingCart (Quantity,itemname,memberid) SELECT 1,'"+itemName+"','"+member+"' WHERE NOT EXISTS (SELECT * FROM upsert);",
+		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE member = '"+member+"' AND itemname = '"+itemName+"' RETURNING *) INSERT INTO ShoppingCart (Quantity,itemname,member) SELECT 1,'"+itemName+"','"+member+"' WHERE NOT EXISTS (SELECT * FROM upsert);",
 
 		function(error, result){
 			if(error){
