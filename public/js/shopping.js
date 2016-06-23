@@ -282,17 +282,10 @@ function getRecommendation(weatherCode,temperature){
 	var colour = "";
 
 	var func = function(){
-		var r = $.Deferred();
-
-		setTimeout(function() {
-			r.resolve();
-		}, 2500);
-		
 		colour = getPastPurchaseRecommendation();
-		return r;
 	};
 
-	func().done();
+	func();
 	//There is no colour to recommend
 	if(colour == "none"){
 		colour = "";
