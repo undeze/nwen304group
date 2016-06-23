@@ -216,7 +216,7 @@ function getWeather(){
 			var desc = data.query.results.channel.item.description;
 			console.log("Weather code: "+conditionCode);
 			var response = getRecommendation(conditionCode,temp);
-			sleep(500);
+			sleep(2000);
 			desc = desc.match(/"[^"]+"/g);
 			$('.footer').children('#weather').html("<b>Current Conditions:</b> <br />"+condition+"<br />"+temp+" Degrees<br /> <img src="+desc+"/> <br /> "+response);
 			console.log("WHAT TGHE FRONT DOOR");
