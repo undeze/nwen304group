@@ -361,14 +361,15 @@ app.get('/db', function(req, res){
 
 //Gets all the data from a members shopping cart
 app.get('/cart', function(req, res){
-	console.log("The user name !!!!!!!!!!!!!!!!!: "+req.user.displayName+" "+req.user.username);
+	//console.log("The user name !!!!!!!!!!!!!!!!!: "+req.user.displayName);
+	console.log("##################### "+getUserID(req.user.displayName);
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.error('Could not connect to database');
 			console.error(err);
 			return;
 		}
-		//var memberid = req.body.member;
+		var memberid = req.body.member;
 		//var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
 		var query = client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemname = i.name WHERE s.memberid = 8;",
 		function(error, result){
@@ -562,6 +563,35 @@ app.get('/mismatch',
 app.listen(port, function() {
 	console.log('Node app is running on port: '+port);
 });
+
+function getUserID(name){
+	pg.connect(process.env.DATABASE_URL, function(err, client, done){
+		if(err){
+			console.error('Could not connect to database');
+			console.error(err);
+			return;
+		}
+		var memberid = 8;
+		var query =  client.query("SELECT id FROM members WHERE username = '"+name"';",
+		function(error, result){
+			if(error){
+				console.error(error);
+				return;
+			}
+			done();
+		});
+		var results = [];
+		// Stream results back one row at a time
+		query.on('row', function(row){
+			results.push(row);
+		});
+		// After all data is returned, close connection and return results
+		query.on('end', function(){
+			client.end();
+			return results;
+		});
+	});
+}
 
 //Add headers
 app.use(function(req, res, next){
