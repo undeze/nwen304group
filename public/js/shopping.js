@@ -218,6 +218,7 @@ function getWeather(){
 			var response = getRecommendation(conditionCode,temp);
 			desc = desc.match(/"[^"]+"/g);
 			$('.footer').children('#weather').html("<b>Current Conditions:</b> <br />"+condition+"<br />"+temp+" Degrees<br /> <img src="+desc+"/> <br /> "+response);
+			console.log("WHAT TGHE FRONT DOOR");
 		},
 		error: function(){
 			alert('Error retreiving weather results');
@@ -363,7 +364,7 @@ function getRecommendation(weatherCode,temperature){
 			if(colour == 'none'){
 				response = response + ". And maybe enjoy some more whiskey :)";
 			}
-			console.log("Colour now is: "+colour);
+			console.log(response);
 			return response;
 		},
 		error: function() {
