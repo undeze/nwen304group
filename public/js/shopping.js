@@ -229,8 +229,7 @@ function getWeather(){
 //Removes an item from the shopping cart
 function removeFromCart(itemName){
 	var stringURL = 'https://nwen304group6.herokuapp.com/cart/delete';
-	$.post(stringURL, { member: "8",
-						name: itemName},
+	$.post(stringURL, {name: itemName},
 	function success(data, status){
 		$('#cart_wrapper').slideUp('slow');
 		getData();
@@ -241,8 +240,7 @@ function removeFromCart(itemName){
 //Adds an item to the shopping cart
 function addToCart(itemName){
 	var stringURL = 'https://nwen304group6.herokuapp.com/cart/add';
-	$.post(stringURL, { member: "8",
-						Name: itemName},
+	$.post(stringURL, {name: itemName},
 		function success(data, status){
 			getData(false);
 			console.log("Successfully added item to cart");
@@ -252,7 +250,7 @@ function addToCart(itemName){
 //Makes a purchases putting everything from shopping cart into a purchase table
 function makePurchase(){
 	var stringURL = 'https://nwen304group6.herokuapp.com/cart/purchase';
-		$.post(stringURL, { member: "8"},
+		$.post(stringURL, {},
 		function success(data, status){
 			console.log("Successfully made purchase");
 		});

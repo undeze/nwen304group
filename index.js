@@ -434,9 +434,7 @@ app.post('/cart/add', function(req, res){
 			return;
 		}
 		var member = req.user.displayName;
-		console.log("ADDING TO CART "+member);
-		//var itemid = req.body.item;
-		var itemName = req.body.Name;
+		var itemName = req.body.name;
 		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE member = '"+member+"' AND itemname = '"+itemName+"' RETURNING *) INSERT INTO ShoppingCart (Quantity,itemname,member) SELECT 1,'"+itemName+"','"+member+"' WHERE NOT EXISTS (SELECT * FROM upsert);",
 
 		function(error, result){
@@ -459,10 +457,10 @@ app.post('/cart/delete', function(req, res){
 			console.error(err);
 			return;
 		}
-		var memberid = req.body.member; 
+		var memberid = req.user.displayName; 
 		var itemName = req.body.name;
 		
-		var query = client.query("DELETE FROM ShoppingCart WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"';",
+		var query = client.query("DELETE FROM ShoppingCart WHERE member = '"+member+"' AND itemname = '"+itemName+"';",
 		function(error, result){
 			if(error){
 				console.error(error);
@@ -477,8 +475,8 @@ app.post('/cart/delete', function(req, res){
 //Adds purchases when a user buys items
 app.post('/cart/purchase', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
-		var memberid = req.body.member;
-		var query = client.query("INSERT INTO purchases (memberid,price,datepurchased,itemname,colour) SELECT s.memberid,s.quantity*i.price AS price,NOW(),s.itemname,i.colour FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE memberid = '"+memberid+"'; TRUNCATE TABLE shoppingcart;");
+		var member = req.user.displayName;
+		var query = client.query("INSERT INTO purchases (price,datepurchased,itemname,colour,member) SELECT s.quantity*i.price AS price,NOW(),s.itemname,i.colours.member FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE member = '"+member+"'; DELETE FROM shoppingcart WHERE member = '"+member"';");
 
 		//Error checking for adding to purchases
 		query.on('error', function(){
@@ -496,7 +494,7 @@ app.get('/recommendation', function(req, res){
 			console.error(err);
 			return;
 		}
-		var member = "panther";
+		var member = req.user.displayName;
 		var query =  client.query("SELECT colour, COUNT(*) AS total FROM purchases WHERE member = '"+member+"' GROUP BY colour ORDER BY total DESC LIMIT 1;",
 		function(error, result){
 			if(error){
