@@ -352,7 +352,8 @@ function getPastPurchaseRecommendation(){
 		dataType: "json",
 		success: function(data){
 			console.log(data[0].colour);
-			return data[0].colour;
+			var col = data[0].colour;
+			return col;
 		},
 		error: function() {
 			console.log("An error ocurred retrieving data");
