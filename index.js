@@ -362,7 +362,6 @@ app.get('/db', function(req, res){
 //Gets all the data from a members shopping cart
 app.get('/cart', function(req, res){
 	//console.log("The user name !!!!!!!!!!!!!!!!!: "+req.user.displayName);
-	console.log("##################### "+getUserID(req.user.displayName);
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.error('Could not connect to database');
