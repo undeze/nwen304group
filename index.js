@@ -434,7 +434,7 @@ app.post('/cart/add', function(req, res){
 		}
 		var member = req.user.displayName;
 		var itemName = req.body.name;
-		
+
 		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE member = '"+member+"' AND itemname = '"+itemName+"' RETURNING *) INSERT INTO ShoppingCart (Quantity,itemname,member) SELECT 1,'"+itemName+"','"+member+"' WHERE NOT EXISTS (SELECT * FROM upsert);",
 		function(error, result){
 			if(error){
@@ -475,7 +475,7 @@ app.post('/cart/delete', function(req, res){
 app.post('/cart/purchase', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		var member = req.user.displayName;
-		var query = client.query("INSERT INTO purchases (price,datepurchased,itemname,colour,member) SELECT s.quantity*i.price AS price,NOW(),s.itemname,i.colours.member FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE member = '"+member+"'; DELETE FROM shoppingcart WHERE member = '"+member"';");
+		var query = client.query("INSERT INTO purchases (price,datepurchased,itemname,colour,member) SELECT s.quantity*i.price AS price,NOW(),s.itemname,i.colours,s.member FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE member = '"+member+"'; DELETE FROM shoppingcart WHERE member = '"+member"';");
 
 		//Error checking for adding to purchases
 		query.on('error', function(){
