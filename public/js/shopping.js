@@ -283,8 +283,8 @@ function getRecommendation(weatherCode,temperature){
 	var func = function(){
 		colour = getPastPurchaseRecommendation();
 	};
-	
-	func.on('end'){
+
+	func.on('end', function(){
 		//There is no colour to recommend
 		if(colour == "none"){
 			colour = "";
@@ -359,6 +359,6 @@ function getRecommendation(weatherCode,temperature){
 		if(colour == 'none'){
 			response = response + ". And maybe enjoy some more whiskey :)";
 		}
-	}
+	});
 	return response;
 };
