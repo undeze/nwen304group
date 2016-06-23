@@ -262,9 +262,9 @@ function getRecommendation(weatherCode,temperature){
 //Weather Codes from yahoo
 //https://developer.yahoo.com/weather/documentation.html
 
-	var funct = getPastPurchaseRecommendation();
+	var func = getPastPurchaseRecommendation();
 	var colour = "";
-	colour.then(function(result){
+	func.then(function(result){
 		colour = result;
 	});
 	var response = "";
