@@ -266,7 +266,7 @@ function getRecommendation(weatherCode,temperature){
 	var response = "";
 
 	//There is no colour to recommend
-	if(colour == 'none'){
+	if(colour == "none"){
 		colour = "";
 	}
 
@@ -351,8 +351,8 @@ function getPastPurchaseRecommendation(){
 		contentType: "application/json",
 		dataType: "json",
 		success: function(data){
-			console.log(data[0].colour);
 			var col = data[0].colour;
+			console.log(col);
 			return col;
 		},
 		error: function() {
