@@ -216,7 +216,6 @@ function getWeather(){
 			var desc = data.query.results.channel.item.description;
 			console.log("Weather code: "+conditionCode);
 			var response = getRecommendation(conditionCode,temp);
-			sleep(2000);
 			desc = desc.match(/"[^"]+"/g);
 			$('.footer').children('#weather').html("<b>Current Conditions:</b> <br />"+condition+"<br />"+temp+" Degrees<br /> <img src="+desc+"/> <br /> "+response);
 			console.log("WHAT TGHE FRONT DOOR");
@@ -281,102 +280,86 @@ function getPastPurchaseRecommendation(){
 function getRecommendation(weatherCode,temperature){
 //Weather Codes from yahoo
 //https://developer.yahoo.com/weather/documentation.html
-
-	$.ajax({
-		method: 'GET',
-		url: 'https://nwen304group6.herokuapp.com/recommendation',
-		contentType: "application/json",
-		dataType: "json",
-		success: function(data){
-			var colour = data[0].colour;
-			console.log("Passed: "+colour);
-
-			//There is no colour to recommend
-			if(colour == "none"){
-				colour = "";
-			}
-
-			//Stormy
-			if(weatherCode <= 4){
-				response = "The weather looks terrible out there, you may want some "+colour+" gumboots";
-			}
-			//Raining
-			else if(weatherCode <= 12){
-				response = "Stay nice and dry with a "+colour+" waterproof jacket";
-			}
-			//Snow / hail / sleet
-			else if(weatherCode <= 18){
-				response = "You should get some warm "+colour+" gloves to play out in the snow";
-			}
-			//Fog,haze,smoky
-			else if(weatherCode <= 22){
-				response = "Could be hard to see out there, maybe look for some "+colour+" glasses";
-			}
-			//Windy
-			else if(weatherCode <= 24){
-				response = "It's looking pretty windy out there, check out some "+colour+" windproof jackets";
-			}
-			//Cold
-			else if(weatherCode <= 25){
-				response = "Stay warm with a nice warm "+colour+" jacket";
-			}
-			//Cloudy
-			else if(weatherCode <= 30){
-				if(temperature < 10){
-					response = "Cloudy and cold, check out some warm "+colour+" pants";
-				}
-				else{
-					response = "Cloudy but not cold, check out some whiskey";
-				}
-			}
-			//Sunny,clear
-			else if(weatherCode <= 34){
-				if(temperature > 20){
-					response = "It's looking beautiful out there, check out our range of "+colour+" singlets";
-				}
-				else if(temperature > 15){
-					response = "It's looking nice out there, check out our range of "+colour+" t-shirts";
-				}
-				else{
-					response = "It's looking nice out there, not too warm though, stay protected with some "+colour+" sunnies";
-				}
-			}
-			//Rain,hail
-			else if(weatherCode <= 35){
-				rsponse = "Rain, with chances of hail, maybe you should check out some "+colour+" weatherproof gear";
-			}
-			//Hot
-			else if(weatherCode <= 36){
-				response = "It sure is hot outside, check out some "+colour+" sunnies and singlets to stay cool";
-			}
-			//Thunderstorms
-			else if(weatherCode <= 40){
-				response = "It's an inside day today, enjoy it with some whiskey";
-			}
-			//Snow
-			else if(weatherCode <= 43){
-				response = "Go play in the snow with some "+colour+" warm gloves and boots";
-			}
-			else{
-				response = "Check out our whole range, there will be something everyone will love";
-			}
-
-			//Past purchases were mainly whiskey
-			if(colour == 'none'){
-				response = response + ". And maybe enjoy some more whiskey :)";
-			}
-			console.log(response);
-			return response;
-		},
-		error: function() {
-			console.log("An error ocurred retrieving data");
-		}
+	var colour = "";
+	$.post('', function(response) {
+		colour = getPastPurchaseRecommendation();
+		console.log("Inside: "+colour);
 	});
-};
+	console.log("Outside: "+colour)
+	//There is no colour to recommend
+	if(colour == "none"){
+		colour = "";
+	}
 
-function sleep(millis) {
-  var date = new Date();
-  var curDate = null;
-  do { curDate = new Date(); }
-  while(curDate-date < millis);
+	//Stormy
+	if(weatherCode <= 4){
+		response = "The weather looks terrible out there, you may want some "+colour+" gumboots";
+	}
+	//Raining
+	else if(weatherCode <= 12){
+		response = "Stay nice and dry with a "+colour+" waterproof jacket";
+	}
+	//Snow / hail / sleet
+	else if(weatherCode <= 18){
+		response = "You should get some warm "+colour+" gloves to play out in the snow";
+	}
+	//Fog,haze,smoky
+	else if(weatherCode <= 22){
+		response = "Could be hard to see out there, maybe look for some "+colour+" glasses";
+	}
+	//Windy
+	else if(weatherCode <= 24){
+		response = "It's looking pretty windy out there, check out some "+colour+" windproof jackets";
+	}
+	//Cold
+	else if(weatherCode <= 25){
+		response = "Stay warm with a nice warm "+colour+" jacket";
+	}
+	//Cloudy
+	else if(weatherCode <= 30){
+		if(temperature < 10){
+			response = "Cloudy and cold, check out some warm "+colour+" pants";
+		}
+		else{
+			response = "Cloudy but not cold, check out some whiskey";
+		}
+	}
+	//Sunny,clear
+	else if(weatherCode <= 34){
+		if(temperature > 20){
+			response = "It's looking beautiful out there, check out our range of "+colour+" singlets";
+		}
+		else if(temperature > 15){
+			response = "It's looking nice out there, check out our range of "+colour+" t-shirts";
+		}
+		else{
+			response = "It's looking nice out there, not too warm though, stay protected with some "+colour+" sunnies";
+		}
+	}
+	//Rain,hail
+	else if(weatherCode <= 35){
+		rsponse = "Rain, with chances of hail, maybe you should check out some "+colour+" weatherproof gear";
+	}
+	//Hot
+	else if(weatherCode <= 36){
+		response = "It sure is hot outside, check out some "+colour+" sunnies and singlets to stay cool";
+	}
+	//Thunderstorms
+	else if(weatherCode <= 40){
+		response = "It's an inside day today, enjoy it with some whiskey";
+	}
+	//Snow
+	else if(weatherCode <= 43){
+		response = "Go play in the snow with some "+colour+" warm gloves and boots";
+	}
+	else{
+		response = "Check out our whole range, there will be something everyone will love";
+	}
+
+	//Past purchases were mainly whiskey
+	if(colour == 'none'){
+		response = response + ". And maybe enjoy some more whiskey :)";
+	}
+	console.log(response);
+	return response;
 };
