@@ -250,7 +250,7 @@ function addToCart(itemName){
 //Makes a purchases putting everything from shopping cart into a purchase table
 function makePurchase(){
 	var stringURL = 'https://nwen304group6.herokuapp.com/cart/purchase';
-		$.post(stringURL, {},
+		$.post(stringURL, {member: "8"},
 		function success(data, status){
 			console.log("Successfully made purchase");
 		});

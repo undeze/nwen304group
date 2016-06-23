@@ -369,7 +369,6 @@ app.get('/cart', function(req, res){
 			return;
 		}
 		var member = req.user.displayName;
-		console.log("The user name !!!!!!!!!!!!!!!!!: "+member);
 		//var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
 		var query = client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemname = i.name WHERE s.member = '"+member+"';",
 		function(error, result){
@@ -435,8 +434,8 @@ app.post('/cart/add', function(req, res){
 		}
 		var member = req.user.displayName;
 		var itemName = req.body.name;
+		
 		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE member = '"+member+"' AND itemname = '"+itemName+"' RETURNING *) INSERT INTO ShoppingCart (Quantity,itemname,member) SELECT 1,'"+itemName+"','"+member+"' WHERE NOT EXISTS (SELECT * FROM upsert);",
-
 		function(error, result){
 			if(error){
 				console.error(error);
