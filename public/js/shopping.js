@@ -264,9 +264,9 @@ function getRecommendation(weatherCode,temperature){
 
 	var funct = getPastPurchaseRecommendation();
 	var colour = "";
-	colour.then(function(result)){
+	colour.then(function(result){
 		colour = result;
-	}
+	});
 	var response = "";
 
 	//There is no colour to recommend
