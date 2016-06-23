@@ -308,7 +308,7 @@ function getRecommendation(weatherCode,temperature){
 			response = "Cloudy and cold, check out some warm pants";
 		}
 		else{
-			response = "Cloudy but not cold, check out some whiskey";
+			response = "Cloudy but not cold, check out some jerseys";
 		}
 	}
 	//Sunny,clear
