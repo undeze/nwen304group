@@ -475,7 +475,7 @@ app.post('/cart/delete', function(req, res){
 app.post('/cart/purchase', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		var memberid = req.body.member;
-		var query = client.query("INSERT INTO purchases (memberid,price,datepurchased,itemname) SELECT s.memberid,s.quantity*i.price AS price,NOW(),s.itemname FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE memberid = '"+memberid+"'; TRUNCATE TABLE shoppingcart;");
+		var query = client.query("INSERT INTO purchases (memberid,price,datepurchased,itemname,colour) SELECT s.memberid,s.quantity*i.price AS price,NOW(),s.itemname,i.colour FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE memberid = '"+memberid+"'; TRUNCATE TABLE shoppingcart;");
 
 		//Error checking for adding to purchases
 		query.on('error', function(){
@@ -485,6 +485,35 @@ app.post('/cart/purchase', function(req, res){
 	});
 });
 
+//Gets item recommendation from previous purchases
+app.get('/recommendation', function(req, res){
+	pg.connect(process.env.DATABASE_URL, function(err, client, done){
+		if(err){
+			console.error('Could not connect to database');
+			console.error(err);
+			return;
+		}
+		var memberid = req.body.member;
+		var query =  client.query("SELECT colour, COUNT(*) AS total FROM purchases WHERE memberid = '"+memberid+"' GROUP BY colour ORDER BY total DESC LIMIT 1;",
+		function(error, result){
+			if(error){
+				console.error(error);
+				return;
+			}
+			done();
+		});
+		var results = [];
+		// Stream results back one row at a time
+		query.on('row', function(row){
+			results.push(row);
+		});
+		// After all data is returned, close connection and return results
+		query.on('end', function(){
+			client.end();
+			res.json(results);
+		});
+	});
+});
 
 /* Currently inputs data into members table in db and then returns to /login page. */
 app.post('/signup', urlencodedparser, function(req,res){
