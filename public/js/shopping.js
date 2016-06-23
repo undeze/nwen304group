@@ -351,6 +351,7 @@ function getPastPurchaseRecommendation(){
 		contentType: "application/json",
 		dataType: "json",
 		success: function(data){
+			console.log(data);
 			return data[0].colour;
 		},
 		error: function() {
