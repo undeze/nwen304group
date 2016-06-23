@@ -262,8 +262,11 @@ function getRecommendation(weatherCode,temperature){
 //Weather Codes from yahoo
 //https://developer.yahoo.com/weather/documentation.html
 
-	var colour = getPastPurchaseRecommendation();
-	console.log(colour);
+	var funct = getPastPurchaseRecommendation();
+	var colour = "";
+	colour.then(function(result)){
+		colour = result;
+	}
 	var response = "";
 
 	//There is no colour to recommend
