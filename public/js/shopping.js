@@ -287,8 +287,8 @@ function getRecommendation(weatherCode,temperature){
 		dataType: "json",
 		success: function(data){
 			var colour = data[0].colour;
-			console.log("Passed: "+col);
-			
+			console.log("Passed: "+colour);
+
 			//There is no colour to recommend
 			if(colour == "none"){
 				colour = "";
