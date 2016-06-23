@@ -493,7 +493,7 @@ app.get('/recommendation', function(req, res){
 			console.error(err);
 			return;
 		}
-		var memberid = req.body.member;
+		var memberid = 8;
 		var query =  client.query("SELECT colour, COUNT(*) AS total FROM purchases WHERE memberid = '"+memberid+"' GROUP BY colour ORDER BY total DESC LIMIT 1;",
 		function(error, result){
 			if(error){

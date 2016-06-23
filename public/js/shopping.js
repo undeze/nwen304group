@@ -334,22 +334,16 @@ function getRecommendation(weatherCode,temperature){
 
 //Gets a recommendation based on a member's past purchases
 function getPastPurchaseRecommendation(){
-	var stringURL = 'https://nwen304group6.herokuapp.com/recommendation';
-	$.get(stringURL, { member: "8"},
-		function success(data, status){
-			console.log("Successfully found recommendation");
-		});
-	// $.ajax({
-	// 	method: 'GET',
-	// 	url: 'https://nwen304group6.herokuapp.com/recommendation',
-	// 	contentType: "application/json",
-	// 	dataType: "json",
-	// 	data: {member: 8},
-	// 	success: function(data){
-	// 		console.log(data);
-	// 	},
-	// 	error: function() {
-	// 		console.log("An error ocurred retrieving data");
-	// 	}
-	// });
+	$.ajax({
+		method: 'GET',
+		url: 'https://nwen304group6.herokuapp.com/recommendation',
+		contentType: "application/json",
+		dataType: "json",
+		success: function(data){
+			console.log(data);
+		},
+		error: function() {
+			console.log("An error ocurred retrieving data");
+		}
+	});
 };
