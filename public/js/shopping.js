@@ -263,6 +263,7 @@ function getRecommendation(weatherCode,temperature){
 //https://developer.yahoo.com/weather/documentation.html
 
 	var colour = getPastPurchaseRecommendation();
+	console.log(colour);
 	var response = "";
 
 	//There is no colour to recommend
@@ -352,7 +353,7 @@ function getPastPurchaseRecommendation(){
 		dataType: "json",
 		success: function(data){
 			var col = data[0].colour;
-			console.log(col);
+			console.log("Passed: "+col);
 			return col;
 		},
 		error: function() {
