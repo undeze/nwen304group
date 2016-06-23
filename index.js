@@ -369,9 +369,9 @@ app.get('/cart', function(req, res){
 			console.error(err);
 			return;
 		}
-		var memberid = req.body.member;
+		var member = req.user.displayName;
 		//var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
-		var query = client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemname = i.name WHERE s.memberid = 8;",
+		var query = client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemname = i.name WHERE s.member = '"+member+"';",
 		function(error, result){
 			if(err){
 				console.error(error);
@@ -433,10 +433,10 @@ app.post('/cart/add', function(req, res){
 			console.error(err);
 			return;
 		}
-		var memberid = req.body.member; 
+		var member = req.user.displayName;
 		//var itemid = req.body.item;
 		var itemName = req.body.Name;
-		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE memberid = '"+memberid+"' AND itemname = '"+itemName+"' RETURNING *) INSERT INTO ShoppingCart (memberid,Quantity,itemname) SELECT '"+memberid+"',1,'"+itemName+"' WHERE NOT EXISTS (SELECT * FROM upsert);",
+		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE member = '"+member+"' AND itemname = '"+itemName+"' RETURNING *) INSERT INTO ShoppingCart (Quantity,itemname,memberid) SELECT 1,'"+itemName+"','"+member+"' WHERE NOT EXISTS (SELECT * FROM upsert);",
 
 		function(error, result){
 			if(error){
@@ -563,35 +563,6 @@ app.get('/mismatch',
 app.listen(port, function() {
 	console.log('Node app is running on port: '+port);
 });
-
-function getUserID(name){
-	pg.connect(process.env.DATABASE_URL, function(err, client, done){
-		if(err){
-			console.error('Could not connect to database');
-			console.error(err);
-			return;
-		}
-		var memberid = 8;
-		var query =  client.query("SELECT id FROM members WHERE username = '"+name"';",
-		function(error, result){
-			if(error){
-				console.error(error);
-				return;
-			}
-			done();
-		});
-		var results = [];
-		// Stream results back one row at a time
-		query.on('row', function(row){
-			results.push(row);
-		});
-		// After all data is returned, close connection and return results
-		query.on('end', function(){
-			client.end();
-			return results;
-		});
-	});
-}
 
 //Add headers
 app.use(function(req, res, next){
