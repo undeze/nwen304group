@@ -281,10 +281,10 @@ function getRecommendation(weatherCode,temperature){
 //Weather Codes from yahoo
 //https://developer.yahoo.com/weather/documentation.html
 	var colour = "";
-	$.post('', function(response) {
+	setTimeout(function(){
 		colour = getPastPurchaseRecommendation();
 		console.log("Inside: "+colour);
-	});
+	},0);
 	console.log("Outside: "+colour)
 	//There is no colour to recommend
 	if(colour == "none"){
