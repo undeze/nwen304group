@@ -216,6 +216,7 @@ function getWeather(){
 			var desc = data.query.results.channel.item.description;
 			console.log("Weather code: "+conditionCode);
 			var response = getRecommendation(conditionCode,temp);
+			sleep(500);
 			desc = desc.match(/"[^"]+"/g);
 			$('.footer').children('#weather').html("<b>Current Conditions:</b> <br />"+condition+"<br />"+temp+" Degrees<br /> <img src="+desc+"/> <br /> "+response);
 			console.log("WHAT TGHE FRONT DOOR");
@@ -371,4 +372,11 @@ function getRecommendation(weatherCode,temperature){
 			console.log("An error ocurred retrieving data");
 		}
 	});
+};
+
+function sleep(millis) {
+  var date = new Date();
+  var curDate = null;
+  do { curDate = new Date(); }
+  while(curDate-date < millis);
 };
