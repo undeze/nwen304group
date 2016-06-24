@@ -378,7 +378,7 @@ app.get('/cart', function(req, res){
 });
 
 app.get('/googled79864604bf9328e.html', function(req,res){
-	res.render('pages/googled79864604bf9328e');
+	res.render('pages/googled79864604bf9328e.html');
 })
 
 //Gets all the items for the store
