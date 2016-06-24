@@ -202,7 +202,7 @@ function refreshList(data, isFirstLoad){
 //Gets the weather data from yahoo to be displayed
 function getWeather(){
 	var trying = $('#city').innerHTML;
-	while (typeof myVar == 'undefined'){
+	while (typeof trying == 'undefined'){
 		trying = $('#city').innerHTML;
 	}
 	console.log("City: "+trying);
