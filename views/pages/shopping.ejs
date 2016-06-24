@@ -16,6 +16,7 @@
 <script type="text/javascript"> 
   
 var geocoder;
+initialize();
 
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
@@ -74,7 +75,7 @@ function initialize() {
 
 </head>
 
-<body onload= "initialize()">
+<body>
 
 <p> Name: <%= user.displayName %> <br/>
 </p>
