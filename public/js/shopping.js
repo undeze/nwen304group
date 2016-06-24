@@ -3,6 +3,18 @@
 $(document).ready(function() {
 	var Arrays=new Array();
 
+	function success(position) {
+    	var lat = position.coords.latitude;
+    	var long = position.coords.longitude;
+    	console.log(lat+" "+long);
+	}
+
+	if (navigator.geolocation) {
+  		navigator.geolocation.getCurrentPosition(success);
+	} 
+	else {
+  		error('Geo Location is not supported');
+	}
 	//Gets data for shopping cart items
 	getData(true);
 	//Gets the data for the weather
