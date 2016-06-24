@@ -65,7 +65,7 @@ function codeLatLng(lat, lng) {
 	        // }
 	    console.log("To display: "+results[0].address_components[3].short_name);
 	    var city = results[0].address_components[3].short_name;
-	    document.getElementById("weather").innerHTML = "<b>"+city+",</b>>br />";
+	    document.getElementById("weather").innerHTML = "<b>"+city+",</b><br />";
 	    } 
 	    else {
 	    	alert("Geocoder failed due to: " + status);
