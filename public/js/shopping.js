@@ -215,7 +215,7 @@ function getWeather(){
 			console.log("Weather code: "+conditionCode);
 			var response = getRecommendation(conditionCode,temp);
 			desc = desc.match(/"[^"]+"/g);
-			$('.footer').children('#weather').html("<b>Current Conditions:</b> <br />"+condition+"<br />"+temp+" Degrees<br /> <img src="+desc+"/> <br /> "+response+ "<br />");
+			$('.footer').children('#weather').append("<b>Current Conditions:</b> <br />"+condition+"<br />"+temp+" Degrees<br /> <img src="+desc+"/> <br /> "+response+ "<br />");
 			getPastPurchaseRecommendation();
 		},
 		error: function(){

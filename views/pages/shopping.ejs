@@ -18,6 +18,7 @@
 var geocoder;
 initialize();
 
+//Check if browser has support for geolocation
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
 } 
@@ -25,7 +26,6 @@ if (navigator.geolocation) {
 function successFunction(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
-    console.log("success");
     codeLatLng(lat, lng)
 }
 
@@ -33,36 +33,39 @@ function errorFunction(){
     alert("Geocoder failed");
 };
 
+//Initialise the google maps geocoder
 function initialize() {
-	console.log("initialized..");
 	geocoder = new google.maps.Geocoder();
 };
 
+//Find location based on lattitude and longitude values
 function codeLatLng(lat, lng) {
 	var latlng = new google.maps.LatLng(lat, lng);
 	console.log("coding time");
     geocoder.geocode({'latLng': latlng}, function(results, status) {
 	    if (status == google.maps.GeocoderStatus.OK) {
 	    	console.log(results)
-	        if (results[1]) {
-	        	//formatted address
-	        	alert(results[0].formatted_address)
-	       		//find country name
-	            for (var i=0; i<results[0].address_components.length; i++) {
-	            	for (var b=0;b<results[0].address_components[i].types.length;b++) {
-	                	if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
-	                    city= results[0].address_components[i];
-	                    break;
-	                	}
-	            	}
-	        	}
-	        //city data
-	        alert(city.short_name + " " + city.long_name)
-	        } 
-	        else {
-	          alert("No results found");
-	        }
+	        // if (results[1]) {
+	        // 	//formatted address
+	        // 	alert(results[0].formatted_address)
+	       	// 	//find country name
+	        //     for (var i=0; i<results[0].address_components.length; i++) {
+	        //     	for (var b=0;b<results[0].address_components[i].types.length;b++) {
+	        //         	if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+	        //             city= results[0].address_components[i];
+	        //             break;
+	        //         	}
+	        //     	}
+	        // 	}
+	        // //city data
+	        // alert(city.short_name + " " + city.long_name)
+	        // } 
+	        // else {
+	        //   alert("No results found");
+	        // }
 	    console.log("To display: "+results[0].address_components[3].short_name);
+	    var city = results[0].address_components[3].short_name;
+	    document.getElementById("weather").innerHTML = "<b>"+city+",/b>";
 	    } 
 	    else {
 	    	alert("Geocoder failed due to: " + status);
