@@ -344,7 +344,6 @@ app.get('/profile',
 
 //Gets all the data from a members shopping cart
 app.get('/cart', function(req, res){
-	//console.log("The user name !!!!!!!!!!!!!!!!!: "+req.user.displayName);
 	console.log('/cart-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
@@ -377,9 +376,10 @@ app.get('/cart', function(req, res){
 	});
 });
 
-app.get('/googled79864604bf9328e.html', function(req,res){
-	res.render('pages/googled79864604bf9328e');
-});
+//Was needed for to prove to google may not need anymore
+// app.get('/googled79864604bf9328e.html', function(req,res){
+// 	res.render('pages/googled79864604bf9328e');
+// });
 
 //Gets all the items for the store
 app.get('/store', function(req, res){
