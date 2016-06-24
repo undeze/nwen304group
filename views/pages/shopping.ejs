@@ -15,15 +15,16 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2J3Y_PGgqeuwoCW6mX9RBqV2ewCYzM2g"></script>
 <script type="text/javascript"> 
   
-  var geocoder;
+var geocoder;
 
-  if (navigator.geolocation) {
+if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
 } 
 //Get the latitude and the longitude;
 function successFunction(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
+    console.log("success");
     codeLatLng(lat, lng)
 }
 
@@ -31,12 +32,14 @@ function errorFunction(){
     alert("Geocoder failed");
 }
 
-  function initialize() {
-    geocoder = new google.maps.Geocoder();
-  }
+function initialize() {
+	console.log("initialized..");
+	geocoder = new google.maps.Geocoder();
+}
 
   function codeLatLng(lat, lng) {
     var latlng = new google.maps.LatLng(lat, lng);
+    console.log("coding time");
     geocoder.geocode({'latLng': latlng}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
       console.log(results)
