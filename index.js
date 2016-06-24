@@ -98,12 +98,18 @@ passport.use(new LocalStrategy({
 ));
 
 
-
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: {maxAge : 60000} }));
+
+// time out, timeout
+app.use(require('express-session')({ 
+	secret: 'keyboard cat', 
+	resave: true, 
+	saveUninitialized: true, 
+	cookie: {maxAge : 60000} 
+}));
 
 
 
@@ -184,7 +190,7 @@ app.get('/login',
 
 app.post('/loginnew', loginPost);
 
-/* Login without facebook */
+/* Login without facebook. Local login */
 function loginPost(req, res, next) {
 	console.log('index.js loginPost');
   	// Ask passport to authenticate.
@@ -228,7 +234,11 @@ function loginPost(req, res, next) {
 app.get('/login/facebook', passport.authenticate('facebook'));
 
 
-app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/login' }), authenticateCallBack);
+app.get('/login/facebook/return', 
+	passport.authenticate('facebook', 
+		{ failureRedirect: '/login' }
+		), authenticateCallBack);
+
 
 /* Facebook authentication */
 function authenticateCallBack(req, res) {
@@ -331,7 +341,7 @@ app.get('/profile',
 
 		res.render('pages/profile', { user: req.user });
 });
-
+/*
 app.get('/db', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
@@ -357,7 +367,8 @@ app.get('/db', function(req, res){
 				res.json(results);
 			});
 		});
-});
+}); */
+
 
 //Gets all the data from a members shopping cart
 app.get('/cart', function(req, res){
@@ -557,6 +568,8 @@ app.post('/signup', urlencodedparser, function(req,res){
 		}
 }); 
 
+/* If signing up (i.e. without facebook) new user is required to input their password twice. */
+/* If the two password entries are not equal, render /mismatch. */
 app.get('/mismatch',
 	function(req,res){
 		console.log('/mismatch ----------------------------------');
