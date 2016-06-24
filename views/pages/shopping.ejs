@@ -41,7 +41,6 @@ function initialize() {
 //Find location based on lattitude and longitude values
 function codeLatLng(lat, lng) {
 	var latlng = new google.maps.LatLng(lat, lng);
-	console.log("coding time");
     geocoder.geocode({'latLng': latlng}, function(results, status) {
 	    if (status == google.maps.GeocoderStatus.OK) {
 	    	console.log(results)
@@ -65,7 +64,7 @@ function codeLatLng(lat, lng) {
 	        // }
 	    console.log("To display: "+results[0].address_components[3].short_name);
 	    var city = results[0].address_components[3].short_name;
-	    document.getElementById("weather").innerHTML = "<b>"+city+",</b><br />";
+	    document.getElementById("city").innerHTML = "<b>"+city+",</b>";
 	    } 
 	    else {
 	    	alert("Geocoder failed due to: " + status);
@@ -713,6 +712,7 @@ function codeLatLng(lat, lng) {
 </div>
 
 <div class="footer">
+		<p id="city"></p>
 		<p id="weather"></p>
 </div>
 <!-- 
