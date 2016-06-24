@@ -345,6 +345,7 @@ app.get('/profile',
 //Gets all the data from a members shopping cart
 app.get('/cart', function(req, res){
 	//console.log("The user name !!!!!!!!!!!!!!!!!: "+req.user.displayName);
+	console.log('/cart-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.error('Could not connect to database');
@@ -378,6 +379,7 @@ app.get('/cart', function(req, res){
 
 //Gets all the items for the store
 app.get('/store', function(req, res){
+	console.log('/store-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.error('Could not connect to database');
@@ -408,6 +410,7 @@ app.get('/store', function(req, res){
 
 //Adds items to a members shopping cart
 app.post('/cart/add', function(req, res){
+	console.log('/cart/add-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.error('Could not connect to database');
@@ -433,6 +436,7 @@ app.post('/cart/add', function(req, res){
 
 //Deletes items to a members shopping cart
 app.post('/cart/delete', function(req, res){
+	console.log('/cart/delete-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.log('Could not connect to database');
@@ -459,6 +463,7 @@ app.post('/cart/delete', function(req, res){
 
 //Adds purchases when a user buys items
 app.post('/cart/purchase', function(req, res){
+	console.log('/cart/purchase-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		var member = req.user.displayName;
 		console.log("PURCHASE NAME "+member);
@@ -474,6 +479,7 @@ app.post('/cart/purchase', function(req, res){
 
 //Gets item recommendation from previous purchases
 app.get('/recommendation', function(req, res){
+	console.log('/recommendation-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.error('Could not connect to database');
