@@ -1,5 +1,5 @@
 
-
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 $(document).ready(function() {
 	var Arrays=new Array();
 
