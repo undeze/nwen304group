@@ -286,7 +286,6 @@ function insertNewFacebookUserIntoMembers(u){
 			return;
 		}			
 		/* Put facebook user details into members table */
-		//client3.query("insert into members values (default, '" + u.displayName + "','','','" + u.id + "');", insertCallback);
 		client3.query("insert into members values (default, '" + u.displayName + "','','','" + u.id + "');", insertCallback);
 		function insertCallback(error3, result3){
 			console.log('index.js insertCallback');
@@ -353,7 +352,7 @@ app.get('/cart', function(req, res){
 			return;
 		}
 		var member = req.user.displayName;
-		//var query =  client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemid = i.itemid WHERE memberid = '"+ memberid +"';",
+		
 		var query = client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemname = i.name WHERE s.member = '"+member+"';",
 		function(error, result){
 			if(err){
