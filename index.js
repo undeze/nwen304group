@@ -351,6 +351,9 @@ app.get('/cart', function(req, res){
 			return;
 		}
 		var member = req.user.displayName;
+		if(req.body.member != ""){
+			member = req.body.member;
+		}
 		
 		var query = client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemname = i.name WHERE s.member = '"+member+"';",
 		function(error, result){
@@ -374,11 +377,6 @@ app.get('/cart', function(req, res){
 		});
 	});
 });
-
-//Was needed for to prove to google may not need anymore
-// app.get('/googled79864604bf9328e.html', function(req,res){
-// 	res.render('pages/googled79864604bf9328e');
-// });
 
 //Gets all the items for the store
 app.get('/store', function(req, res){
