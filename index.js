@@ -492,7 +492,8 @@ app.get('/recommendation', function(req, res){
 		}
 		var member = req.user.displayName;
 		console.log("RECOMMENDATION NAME "+member);
-		var query =  client.query("SELECT colour, COUNT(*) AS total FROM purchases WHERE member = '"+member+"' GROUP BY colour ORDER BY total DESC LIMIT 1;",
+		//var query =  client.query("SELECT colour, COUNT(*) AS total FROM purchases WHERE member = '"+member+"' GROUP BY colour ORDER BY total DESC LIMIT 1;",
+		var query = client.query("SELECT colour, COUNT(*) AS total FROM purchases WHERE member = '"+member"' AND datepurchased > (datepurchased - interval '3 months') GROUP BY colour ORDER BY total DESC LIMIT 1;")
 		function(error, result){
 			if(error){
 				console.error(error);
