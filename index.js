@@ -188,7 +188,7 @@ app.get('/login',
 	});
 
 /* Login without facebook. Local login */
-app.post('/loginnew', loginPost);
+app.post('/loginLocal', loginPost);
 
 /* Login without facebook. Local login */
 function loginPost(req, res, next) {
