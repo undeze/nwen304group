@@ -413,7 +413,6 @@ app.get('/store', function(req, res){
 
 //Adds items to a members shopping cart
 app.post('/cart/add', function(req, res){
-	console.log('/cart/add-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.error('Could not connect to database');
@@ -421,7 +420,13 @@ app.post('/cart/add', function(req, res){
 			console.error(err);
 			return;
 		}
-		var member = req.user.displayName;
+		var member;
+		if(typeof req.body.member != "undefined"){
+			member = req.body.member;
+		}
+		else{
+			member = req.user.displayName;
+		}
 		var itemName = req.body.name;
 
 		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE member = '"+member+"' AND itemname = '"+itemName+"' RETURNING *) INSERT INTO ShoppingCart (Quantity,itemname,member) SELECT 1,'"+itemName+"','"+member+"' WHERE NOT EXISTS (SELECT * FROM upsert);",
@@ -445,8 +450,13 @@ app.post('/cart/delete', function(req, res){
 			console.error(err);
 			return;
 		}
-
-		var member = req.user.displayName;
+		var member;
+		if(typeof req.body.member != "undefined"){
+			member = req.body.member;
+		}
+		else{
+			member = req.user.displayName;
+		}
 		var itemName = req.body.name;
 		
 		var query = client.query("DELETE FROM ShoppingCart WHERE member = '"+member+"' AND itemname = '"+itemName+"';",
