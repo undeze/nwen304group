@@ -344,7 +344,6 @@ app.get('/profile',
 
 //Gets all the data from a members shopping cart
 app.get('/cart', function(req, res){
-	console.log('/cart-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.error('Could not connect to database');
@@ -383,7 +382,6 @@ app.get('/cart', function(req, res){
 
 //Gets all the items for the store
 app.get('/store', function(req, res){
-	console.log('/store-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.error('Could not connect to database');
@@ -423,7 +421,6 @@ app.post('/cart/add', function(req, res){
 			return;
 		}
 		var member = req.user.displayName;
-		console.log("ADDING TO CART NAME "+member);
 		var itemName = req.body.name;
 
 		var query = client.query("WITH upsert AS (UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE member = '"+member+"' AND itemname = '"+itemName+"' RETURNING *) INSERT INTO ShoppingCart (Quantity,itemname,member) SELECT 1,'"+itemName+"','"+member+"' WHERE NOT EXISTS (SELECT * FROM upsert);",
@@ -440,7 +437,6 @@ app.post('/cart/add', function(req, res){
 
 //Deletes items to a members shopping cart
 app.post('/cart/delete', function(req, res){
-	console.log('/cart/delete-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.log('Could not connect to database');
@@ -450,7 +446,6 @@ app.post('/cart/delete', function(req, res){
 		}
 
 		var member = req.user.displayName;
-		console.log("DELETE NAME "+member); 
 		var itemName = req.body.name;
 		
 		var query = client.query("DELETE FROM ShoppingCart WHERE member = '"+member+"' AND itemname = '"+itemName+"';",
@@ -467,10 +462,8 @@ app.post('/cart/delete', function(req, res){
 
 //Adds purchases when a user buys items
 app.post('/cart/purchase', function(req, res){
-	console.log('/cart/purchase-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		var member = req.user.displayName;
-		console.log("PURCHASE NAME "+member);
 		var query = client.query("INSERT INTO purchases (price,datepurchased,itemname,colour,member) SELECT s.quantity*i.price AS price,NOW(),s.itemname,i.colour,s.member FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE member = '"+member+"'; DELETE FROM shoppingcart WHERE member = '"+member+"';");
 
 		//Error checking for adding to purchases
@@ -483,7 +476,6 @@ app.post('/cart/purchase', function(req, res){
 
 //Gets item recommendation from previous purchases
 app.get('/recommendation', function(req, res){
-	console.log('/recommendation-------------------------------------------');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
 		if(err){
 			console.error('Could not connect to database');
@@ -491,8 +483,6 @@ app.get('/recommendation', function(req, res){
 			return;
 		}
 		var member = req.user.displayName;
-		console.log("RECOMMENDATION NAME "+member);
-		//var query =  client.query("SELECT colour, COUNT(*) AS total FROM purchases WHERE member = '"+member+"' GROUP BY colour ORDER BY total DESC LIMIT 1;",
 		var query = client.query("SELECT colour, COUNT(*) AS total FROM purchases WHERE member = '"+member+"' AND datepurchased > (datepurchased - interval '3 months') GROUP BY colour ORDER BY total DESC LIMIT 1;",
 		function(error, result){
 			if(error){

@@ -16,36 +16,12 @@ $(document).ready(function() {
 		addToCart(itemname);
 		
 		if(include(Arrays,thisID)) {
-		// 	var price 	 = $('#each-'+thisID).children(".shopp-price").find('em').html();
-		// 	var quantity = $('#each-'+thisID).children(".shopp-quantity").html();
-		// 	quantity = parseInt(quantity)+parseInt(1);
-			
-		// 	var total = parseInt(itemprice)*parseInt(quantity);
-			
-		// 	//$('#each-'+thisID).children(".shopp-price").find('em').html(total);
-		// 	//$('#each-'+thisID).children(".shopp-quantity").html(quantity);
-			
-		// 	var prev_charges = $('.cart-total span').html();
-		// 	prev_charges = parseInt(prev_charges)-parseInt(price);
-			
-		// 	prev_charges = parseInt(prev_charges)+parseInt(total);
-		// 	//$('.cart-total span').html(totalPrice);
-			
-		// 	$('#total-hidden-charges').val(prev_charges);
+
 		}
 		else {
-		Arrays.push(thisID);
-			
-		// 	var prev_charges = $('.cart-total span').html();
-		// 	prev_charges = parseInt(prev_charges)+parseInt(itemprice);
-			
-		// 	//$('.cart-total span').html(prev_charges);
-		// 	$('#total-hidden-charges').val(prev_charges);
-			
+		Arrays.push(thisID);		
 			var Height = $('#cart_wrapper').height();
-			$('#cart_wrapper').css({height:Height+parseInt(45)});
-			
-		// 	$('#cart_wrapper .cart-info').append('<div class="shopp" id="each-'+thisID+'"><div class="label">'+itemname+'</div><div class="shopp-price"> $<em>'+itemprice+'</em></div><span class="shopp-quantity">1</span><img src="remove.png" class="remove" /><br class="all" /></div>');
+			$('#cart_wrapper').css({height:Height+parseInt(45)});		
 		}
 		$('.detail-view').slideUp('slow');
 	});	
@@ -57,15 +33,11 @@ $(document).ready(function() {
 		
 		//Remove item from datbase and reload
 		removeFromCart(item);
-		// var prev_charges = $('.cart-total span').html();		
 		
 		var thisID = $(this).parent().attr('id').replace('each-','');
 		var pos = getpos(Arrays,thisID);
 		Arrays.splice(pos,1,"0")
 		
-		// prev_charges = parseInt(prev_charges)-parseInt(deduct);
-		// $('.cart-total span').html(prev_charges);
-		// $('#total-hidden-charges').val(prev_charges);
 		$(this).parent().remove();
 
 		//Decrease size of wrapper
@@ -202,7 +174,6 @@ function refreshList(data, isFirstLoad){
 //Gets the weather data from yahoo to be displayed
 function getWeather(){
 	$.ajax({
-		//https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22Wellington%2C%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys
 		url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%2029344823&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
 		method: "GET",
 		dataType: "jsonp",
@@ -213,7 +184,6 @@ function getWeather(){
 			var condition = data.query.results.channel.item.condition.text;
 			var conditionCode = data.query.results.channel.item.condition.code;
 			var desc = data.query.results.channel.item.description;
-			console.log("Weather code: "+conditionCode);
 			var response = getRecommendation(conditionCode,temp);
 			desc = desc.match(/"[^"]+"/g);
 			$('.footer').children('#weather').append("<b>Current Conditions:</b> <br />"+condition+"<br />"+temp+" Degrees<br /> <img src="+desc+"/> <br /> "+response+ "<br />");
@@ -232,7 +202,6 @@ function removeFromCart(itemName){
 	function success(data, status){
 		$('#cart_wrapper').slideUp('slow');
 		getData();
-		console.log("Successfully removed item from cart");
 	});
 };
 
@@ -242,7 +211,6 @@ function addToCart(itemName){
 	$.post(stringURL, {name: itemName},
 		function success(data, status){
 			getData(false);
-			console.log("Successfully added item to cart");
 		});
 };
 
@@ -251,7 +219,6 @@ function makePurchase(){
 	var stringURL = 'https://nwen304group6.herokuapp.com/cart/purchase';
 		$.post(stringURL, {member: "8"},
 		function success(data, status){
-			console.log("Successfully made purchase");
 		});
 };
 
