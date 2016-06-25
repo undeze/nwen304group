@@ -15,3 +15,6 @@ curl -H "Content-Type: application/json" -X POST -d '{"member":"panther"}' https
 
 //Get your recommendation
 curl -H "Content-Type: application/json" -X GET -d '{"member":"panther"}' https://nwen304group6.herokuapp.com/recommendation
+
+//Use signup to add a member to the members table
+curl -H "Content-Type: application/json" -X POST -d '{"email":"sunday@1.com","password":"sunday","password1":"sunday","username":"sunday"}' https://nwen304group6.herokuapp.com/signup
