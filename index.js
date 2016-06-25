@@ -351,13 +351,12 @@ app.get('/cart', function(req, res){
 			return;
 		}
 		var member;
-		if(req.body.member != ""){
+		if(typeof req.body.member != "undefined"){
 			member = req.body.member;
 		}
 		else{
 			member = req.user.displayName;
 		}
-		console.log("AHFUIAWIFHIAWFHUHFUAF: "+ req.body.member);
 		
 		var query = client.query("SELECT i.Name, i.Price, s.Quantity FROM ShoppingCart s INNER JOIN Items i ON s.itemname = i.name WHERE s.member = '"+member+"';",
 		function(error, result){
