@@ -188,10 +188,10 @@ app.get('/login',
 	});
 
 /* Login without facebook. Local login */
-app.post('/loginLocal', loginPost);
+app.post('/loginLocal', LocalLogin);
 
 /* Login without facebook. Local login */
-function loginPost(req, res, next) {
+function LocalLogin(req, res, next) {
 	console.log('index.js loginPost');
   	// Ask passport to authenticate.
   	// Local authentication. That is, authentication without Facebook 
