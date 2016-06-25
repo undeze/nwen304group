@@ -16,5 +16,14 @@ curl -H "Content-Type: application/json" -X POST -d '{"member":"panther"}' https
 //Get your recommendation
 curl -H "Content-Type: application/json" -X GET -d '{"member":"panther"}' https://nwen304group6.herokuapp.com/recommendation
 
-//Use signup to add a member to the members table
+//Use signup to add a member to the members table - password == password1
 curl -H "Content-Type: application/json" -X POST -d '{"email":"sunday@1.com","password":"sunday","password1":"sunday","username":"sunday"}' https://nwen304group6.herokuapp.com/signup
+
+//Use signup to add a member to the members table - password != password1
+curl -H "Content-Type: application/json" -X POST -d '{"email":"sdunday@1.com","password":"sdunday","password1":"sunday","username":"sdunday"}' https://nwen304group6.herokuapp.com/signup
+
+//Login without Facebook. That is, local login. password is correct.
+curl -H "Content-Type: application/json" -X POST -d '{"username":"sunday","password":"sunday"}' https://nwen304group6.herokuapp.com/loginnew
+
+//Login without Facebook. That is, local login. password is not correct.
+curl -H "Content-Type: application/json" -X POST -d '{"username":"bee","password":"b"}' https://nwen304group6.herokuapp.com/loginnew

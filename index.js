@@ -184,22 +184,22 @@ app.get('/profile',
 
 app.get('/login',
 	function(req, res){
-		res.render('pages/login');
+		res.render('pages/loginlocal');
 	});
 
-
-app.post('/loginnew', loginPost);
+/* Login without facebook. Local login */
+app.post('/loginlocal', loginLocal);
 
 /* Login without facebook. Local login */
-function loginPost(req, res, next) {
+function loginLocal(req, res, next) {
 	console.log('index.js loginPost');
   	// Ask passport to authenticate.
   	// Local authentication. That is, authentication without Facebook 
   	passport.authenticate('local', function(err, username, info) {
-  		console.log('loginPost passport.auth');
+  		console.log('loginLocal passport.auth');
     	if (err) {
       	// if error happens
-      	console.log('loginPost err');
+      	console.log('loginLocal err');
       	return next(err);
     	}    
     	if (!username) {
@@ -207,24 +207,24 @@ function loginPost(req, res, next) {
       	// from previous (info.message) step, assign it into to
       	// req.session and redirect to the login page again to display
       	req.session.messages = info.message;
-      	console.log('loginPost !username');
+      	console.log('loginLocal !username');
       	return res.redirect('/login');
     }
     // If everything's OK
     req.logIn(username, function(err) {
       	if (err) {
         	req.session.messages = "Error";
-        	console.log('loginPost Error');
+        	console.log('loginLocal Error');
         	return next(err);
       	}
       	// Set the message
-      	req.session.messages = "Login successfully";
+      	req.session.messages = "loginLocal successfully";
 
       	// Set the displayName 
       	var nu = { displayName : username };
       	req.session.passport.user = nu;
 
-      	console.log('loginPost successful');
+      	console.log('loginLocal successful');
       	return res.redirect('/index');
     });    
   })(req, res, next);
