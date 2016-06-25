@@ -474,7 +474,13 @@ app.post('/cart/delete', function(req, res){
 //Adds purchases when a user buys items
 app.post('/cart/purchase', function(req, res){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
-		var member = req.user.displayName;
+		var member;
+		if(typeof req.body.member != "undefined"){
+			member = req.body.member;
+		}
+		else{
+			member = req.user.displayName;
+		}
 		var query = client.query("INSERT INTO purchases (price,datepurchased,itemname,colour,member) SELECT s.quantity*i.price AS price,NOW(),s.itemname,i.colour,s.member FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE member = '"+member+"'; DELETE FROM shoppingcart WHERE member = '"+member+"';");
 
 		//Error checking for adding to purchases
@@ -493,7 +499,13 @@ app.get('/recommendation', function(req, res){
 			console.error(err);
 			return;
 		}
-		var member = req.user.displayName;
+		var member;
+		if(typeof req.body.member != "undefined"){
+			member = req.body.member;
+		}
+		else{
+			member = req.user.displayName;
+		}
 		var query = client.query("SELECT colour, COUNT(*) AS total FROM purchases WHERE member = '"+member+"' AND datepurchased > (datepurchased - interval '3 months') GROUP BY colour ORDER BY total DESC LIMIT 1;",
 		function(error, result){
 			if(error){
