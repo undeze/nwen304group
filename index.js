@@ -184,7 +184,7 @@ app.get('/profile',
 
 app.get('/login',
 	function(req, res){
-		res.render('pages/loginnew');
+		res.render('pages/login');
 	});
 
 /* Login without facebook. Local login */
