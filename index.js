@@ -351,6 +351,7 @@ app.get('/cart', function(req, res){
 			return;
 		}
 		var member = req.user.displayName;
+		console.log("AHFUIAWIFHIAWFHUHFUAF: "+ req.body.member);
 		if(req.body.member != ""){
 			member = req.body.member;
 		}
