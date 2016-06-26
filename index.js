@@ -103,12 +103,11 @@ passport.use(new LocalStrategy({
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 
-// time out, timeout
 app.use(require('express-session')({ 
 	secret: 'keyboard cat', 
 	resave: true, 
 	saveUninitialized: true, 
-	cookie: {maxAge : 60000} 
+	cookie: {maxAge : 300000} // time out, timeout
 }));
 
 
