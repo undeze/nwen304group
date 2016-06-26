@@ -327,6 +327,7 @@ app.get('/logout/facebook',fb.ensureLoggedIn(),
 app.get('/logout/facebook',
 	function(req, res){
 		req.logout();
+		req.user = null;
 		res.redirect('/');
 });
 
