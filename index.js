@@ -171,22 +171,12 @@ app.get('/', function(req,res){
 });
 
 
-/*
-app.get('/profile',
-	require('connect-ensure-login').ensureLoggedIn(),
-	function(req, res){
-
-		res.render('pages/profile', { user: req.user });
-});
-*/
-
-
 app.get('/login',
 	function(req, res){
 		res.render('pages/login');
 	});
 
-/* Login without facebook. Local login */
+/* Login without facebook. Local login - caching not required */
 app.post('/loginLocal', LocalLogin);
 
 /* Login without facebook. Local login */
@@ -297,13 +287,14 @@ function insertNewFacebookUserIntoMembers(u){
 }
 
 
-
+// Caching not required
 app.get('/login/local',
 	function(req,res){
 		console.log('/login/local ----------------------------------')
 		res.render('pages/local');
 });
 
+// Caching not required
 app.get('/signup',
 	function(req,res){
 		res.render('pages/signup');
@@ -328,7 +319,8 @@ app.get('/goShopping',
 	require('connect-ensure-login').ensureLoggedIn(),
 	function(req, res){
 			//HTTP CACHE HEADERS
-		res.setHeader('Cache-Control', 'public, max-age=3');
+			// Caching images for 60 days rather than hitting the heroku server again & again
+		res.setHeader('Cache-Control', 'public, max-age=5200000');
 		res.render('pages/shopping', { user: req.user });
 	});
 
@@ -405,7 +397,8 @@ app.get('/store', function(req, res){
 		query.on('end', function(){
 			client.end();
 			//HTTP CACHE HEADERS
-			res.setHeader('Cache-Control', 'public, max-age=3');
+			//Caching items stored in database for 60 days
+			res.setHeader('Cache-Control', 'public, max-age=5200000');
 			res.json(results);
 		});
 	});
