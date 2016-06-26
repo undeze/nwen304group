@@ -317,8 +317,14 @@ app.get('/index',
 		res.render('pages/index', { user: req.user });
 	});
 
-
+/*
 app.get('/logout/facebook',fb.ensureLoggedIn(),
+	function(req, res){
+		req.logout();
+		res.redirect('/');
+}); */
+
+app.get('/logout/facebook',
 	function(req, res){
 		req.logout();
 		res.redirect('/');
