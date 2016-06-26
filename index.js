@@ -328,7 +328,7 @@ app.get('/goShopping',
 	require('connect-ensure-login').ensureLoggedIn(),
 	function(req, res){
 			//HTTP CACHE HEADERS
-		//res.setHeader('Cache-Control', 'public, max-age=3600');
+		res.setHeader('Cache-Control', 'public, max-age=3');
 		res.render('pages/shopping', { user: req.user });
 	});
 
