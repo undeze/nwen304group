@@ -323,13 +323,7 @@ app.get('/logout/facebook',fb.ensureLoggedIn(),
 		req.logout();
 		res.redirect('/');
 }); 
-/*
-app.get('/logout/facebook',
-	function(req, res){
-		req.logout();
-		req.user = null;
-		res.redirect('/');
-});*/
+
 
 app.get('/goShopping',
 	require('connect-ensure-login').ensureLoggedIn(),
