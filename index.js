@@ -474,7 +474,6 @@ app.post('/cart/purchase', function(req, res){
 		else{
 			member = req.user.displayName;
 		}
-		console.log("MEMBERERJIJFIJEWJFJEW: "+member);
 		var query = client.query("INSERT INTO purchases (price,datepurchased,itemname,colour,member) SELECT s.quantity*i.price AS price,NOW(),s.itemname,i.colour,s.member FROM shoppingcart s INNER JOIN items i ON s.itemname = i.name WHERE member = '"+member+"'; DELETE FROM shoppingcart WHERE member = '"+member+"';");
 
 		//Error checking for adding to purchases
